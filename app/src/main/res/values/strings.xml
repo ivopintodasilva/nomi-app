@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">nomi</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="title_activity_nfc">NFCActivity</string>
+
+</resources>
