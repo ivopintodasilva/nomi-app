@@ -23,6 +23,21 @@ public class NFCActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_nfc);
 
+        NFCEnabled();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        NFCEnabled();
+    }
+
+    protected void NFCEnabled() {
+
+        /// TODO: Verificar se tem de se fazer add ou replace do fragment
+
         //  let's check if NFC is enabled!
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
@@ -47,8 +62,5 @@ public class NFCActivity extends AppCompatActivity {
             NFCDownFragment nfc_down_fragment = new NFCDownFragment();
             fm.beginTransaction().add(android.R.id.content, nfc_down_fragment).commit();
         }
-
-
     }
-
 }
