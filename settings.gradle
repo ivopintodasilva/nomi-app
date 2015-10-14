@@ -1,2 +1,1 @@
-include ':app', ':IconEditText'
-project(':IconEditText').projectDir = new File('libs/IconEditText')
+include ':app'
