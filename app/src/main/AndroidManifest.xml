@@ -25,13 +25,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NFCActivity"
+            android:name=".nfc.NFCActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_nfc"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".MenuActivity"
+        <activity android:name=".menu.MenuActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
