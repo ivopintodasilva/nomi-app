@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -47,6 +48,10 @@ public class LoginFragment extends Fragment {
             *   Insert login logic!
             *
             */
+            EditText username = (EditText) getActivity().findViewById(R.id.username);
+            EditText password = (EditText) getActivity().findViewById(R.id.password);
+
+
 
 
             Intent MenuIntent = new Intent(getActivity(), MenuActivity.class);
