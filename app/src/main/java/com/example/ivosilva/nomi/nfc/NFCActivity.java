@@ -1,16 +1,13 @@
-package com.example.ivosilva.nomi;
+package com.example.ivosilva.nomi.nfc;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+
+import com.example.ivosilva.nomi.R;
 
 public class NFCActivity extends AppCompatActivity {
 

@@ -1,15 +1,15 @@
-package com.example.ivosilva.nomi;
+package com.example.ivosilva.nomi.login;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.menu.MenuActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 

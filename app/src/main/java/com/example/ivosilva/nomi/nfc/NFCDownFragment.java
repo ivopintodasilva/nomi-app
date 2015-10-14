@@ -1,4 +1,4 @@
-package com.example.ivosilva.nomi;
+package com.example.ivosilva.nomi.nfc;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ivosilva.nomi.R;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 

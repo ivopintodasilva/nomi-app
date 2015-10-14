@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent" tools:context="com.example.ivosilva.nomi.NFCUpFragment">
+    android:layout_height="match_parent" tools:context="com.example.ivosilva.nomi.nfc.NFCUpFragment">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"

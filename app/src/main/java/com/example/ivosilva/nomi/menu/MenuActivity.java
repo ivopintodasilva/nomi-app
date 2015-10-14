@@ -1,8 +1,10 @@
-package com.example.ivosilva.nomi;
+package com.example.ivosilva.nomi.menu;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.ivosilva.nomi.R;
 
 public class MenuActivity extends AppCompatActivity {
 
