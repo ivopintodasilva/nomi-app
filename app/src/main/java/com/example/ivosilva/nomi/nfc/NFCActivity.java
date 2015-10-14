@@ -4,12 +4,16 @@ import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.ivosilva.nomi.R;
 
 public class NFCActivity extends AppCompatActivity {
+
+    Fragment active_fragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +43,24 @@ public class NFCActivity extends AppCompatActivity {
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
 
+        FragmentManager fm = getSupportFragmentManager();
+
         if (adapter != null && adapter.isEnabled()) {
 
             /*
             *   NFC DOESN'T CARE ABOUT US
             */
 
-            FragmentManager fm = getSupportFragmentManager();
-            NFCUpFragment nfc_up_fragment = new NFCUpFragment();
-            fm.beginTransaction().add(android.R.id.content, nfc_up_fragment).commit();
+            active_fragment = new NFCUpFragment();
+
+            if(active_fragment == null) {
+                fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_true", "add");
+            }
+            else{
+                fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_true", "replace");
+            }
         }
         else{
 
@@ -55,9 +68,16 @@ public class NFCActivity extends AppCompatActivity {
             *   NFC SHOWS LOVE
             */
 
-            FragmentManager fm = getSupportFragmentManager();
-            NFCDownFragment nfc_down_fragment = new NFCDownFragment();
-            fm.beginTransaction().add(android.R.id.content, nfc_down_fragment).commit();
+            active_fragment = new NFCDownFragment();
+
+            if(active_fragment == null){
+                fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_false", "add");
+            }
+            else{
+                fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_false", "replace");
+            }
         }
     }
 }
