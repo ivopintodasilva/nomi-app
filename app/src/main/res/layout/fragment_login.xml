@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +15,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/nomi_condensed_logo_all_white" />
 
 
@@ -25,12 +24,12 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/btn_login"
+        android:layout_above="@+id/password"
         android:layout_alignEnd="@+id/btn_login"
         android:layout_alignLeft="@+id/btn_login"
         android:layout_alignRight="@+id/btn_login"
         android:layout_alignStart="@+id/btn_login"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="5dp"
         android:hint="@string/username"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
@@ -57,9 +56,9 @@
         android:id="@+id/btn_login"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/btn_register"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="125dp"
+        android:layout_marginBottom="25dp"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
