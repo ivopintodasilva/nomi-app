@@ -12,10 +12,10 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:src="@drawable/nomi_condensed_logo_all_white" />
 
 
@@ -55,25 +55,6 @@
 
 
     <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/btn_login"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_register"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="15dp"
-        fancy:fb_borderColor="#ffffff"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="#00000000"
-        fancy:fb_focusColor="#424242"
-        fancy:fb_radius="5dp"
-        fancy:fb_text="LOGIN"
-        fancy:fb_textColor="#FFFFFF" />
-
-    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_register"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -87,10 +68,33 @@
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="#00000000"
-        fancy:fb_focusColor="#424242"
+        fancy:fb_focusColor="#20ffffff"
         fancy:fb_radius="5dp"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_text="REGISTER"
         fancy:fb_textColor="#FFFFFF" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btn_login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_register"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp"
+        fancy:fb_borderColor="#ffffff"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="#00000000"
+        fancy:fb_focusColor="#20ffffff"
+        fancy:fb_radius="5dp"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
+        fancy:fb_text="LOGIN"
+        fancy:fb_textColor="#FFFFFF" />
+
+
 
 
 </RelativeLayout>

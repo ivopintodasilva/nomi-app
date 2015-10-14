@@ -49,8 +49,8 @@ public class LoginFragment extends Fragment {
             */
 
 
-            Intent NFCIntent = new Intent(getActivity(), NFCActivity.class);
-            getActivity().startActivity(NFCIntent);
+            Intent MenuIntent = new Intent(getActivity(), MenuActivity.class);
+            getActivity().startActivity(MenuIntent);
         }
     };
 

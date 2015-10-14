@@ -19,19 +19,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="NFC is Down"
-        android:textAllCaps="true"
-        android:id="@+id/text_nfc_down"
-        android:fontFamily="sans-serif-thin"
-
-        android:layout_above="@id/btn_turn_on_nfc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_turn_on_nfc"
@@ -47,9 +34,25 @@
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="#00000000"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_focusColor="#424242"
         fancy:fb_radius="5dp"
         fancy:fb_text="ENABLE NFC"
         fancy:fb_textColor="#FFFFFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="NFC is Down"
+        android:textAllCaps="true"
+        android:id="@+id/text_nfc_down"
+        android:fontFamily="sans-serif-thin"
+        android:layout_above="@id/btn_turn_on_nfc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
+
+
 
 </RelativeLayout>
