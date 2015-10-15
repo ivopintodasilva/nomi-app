@@ -11,8 +11,8 @@
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/avatar"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:layout_gravity="center"
@@ -34,7 +34,7 @@
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="#00000000"
         fancy:fb_textFont="ProductSans-Regular.ttf"
-        fancy:fb_focusColor="#424242"
+        fancy:fb_focusColor="#40ffffff"
         fancy:fb_radius="5dp"
         fancy:fb_text="GO TO CONTACT"
         fancy:fb_textColor="#FFFFFF" />

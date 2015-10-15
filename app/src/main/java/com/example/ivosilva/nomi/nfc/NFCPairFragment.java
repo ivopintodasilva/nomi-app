@@ -28,7 +28,8 @@ public class NFCPairFragment extends Fragment {
 
         // Settings for user avatar
         CircularImageView circularImageView = (CircularImageView) view.findViewById(R.id.avatar);
-        circularImageView.setBorderWidth(0);
+        circularImageView.setBorderWidth(2);
+        circularImageView.addShadow();
 
         return view;
     }

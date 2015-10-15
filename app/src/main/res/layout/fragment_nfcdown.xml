@@ -35,7 +35,7 @@
         fancy:fb_borderWidth="1dp"
         fancy:fb_defaultColor="#00000000"
         fancy:fb_textFont="ProductSans-Regular.ttf"
-        fancy:fb_focusColor="#424242"
+        fancy:fb_focusColor="#20ffffff"
         fancy:fb_radius="5dp"
         fancy:fb_text="ENABLE NFC"
         fancy:fb_textColor="#FFFFFF" />
