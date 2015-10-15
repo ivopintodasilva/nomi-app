@@ -31,9 +31,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".menu.MenuActivity"
+        <activity
+            android:name=".menu.MenuActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".registration.RegisterActivity" >
+        </activity>
+        <activity android:name=".nfc.NFCConnectedActivity" >
         </activity>
     </application>
 

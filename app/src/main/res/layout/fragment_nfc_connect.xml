@@ -18,9 +18,8 @@
         android:layout_gravity="center"
         android:src="@drawable/gito" />
 
-
     <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/btn_go_to_contact"
+        android:id="@+id/btn_go_to_menu"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -36,8 +35,31 @@
         fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_focusColor="#40ffffff"
         fancy:fb_radius="5dp"
-        fancy:fb_text="GO TO CONTACT"
+        fancy:fb_text="MENU"
         fancy:fb_textColor="#FFFFFF" />
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btn_go_to_contact"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp"
+        android:layout_above="@id/btn_go_to_menu"
+        fancy:fb_borderColor="#ffffff"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="#00000000"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
+        fancy:fb_focusColor="#40ffffff"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="DETAILS"
+        fancy:fb_textColor="#FFFFFF" />
+
+
 
 
     <TextView

@@ -11,15 +11,35 @@
         android:layout_height="match_parent"
         android:src="@drawable/login_background" />
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:id="@+id/fragment_menu_image"
-        android:layout_centerVertical="true"
-        android:src="@drawable/nomi_extended_white_logo"
-        android:layout_marginTop="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btn_contacts"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="35dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="35dp"
+        android:layout_above="@+id/separator2"
+        fancy:fb_textSize="15dp"
+        fancy:fb_borderColor="#ffffff"
+        fancy:fb_borderWidth="0dp"
+        fancy:fb_defaultColor="#00000000"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
+        fancy:fb_focusColor="#20ffffff"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="CONTACTS"
+        fancy:fb_textColor="#FFFFFF" />
+
+
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:background="#40ffffff"
+        android:layout_above="@id/btn_contacts"/>
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_share"
@@ -31,7 +51,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="35dp"
-        android:layout_below="@id/fragment_menu_image"
+        android:layout_above="@id/separator1"
         fancy:fb_textSize="15dp"
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="0dp"
@@ -42,33 +62,21 @@
         fancy:fb_text="SHARE"
         fancy:fb_textColor="#FFFFFF" />
 
-    <View
-        android:id="@+id/separator1"
-        android:layout_width="250dp"
-        android:layout_height="1dp"
-        android:layout_centerHorizontal="true"
-        android:background="#40ffffff"
-        android:layout_below="@id/btn_share"/>
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:id="@+id/fragment_menu_image"
+        android:layout_centerVertical="true"
+        android:src="@drawable/nomi_extended_white_logo"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/btn_contacts"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="35dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="35dp"
-        android:layout_below="@+id/separator1"
-        fancy:fb_textSize="15dp"
-        fancy:fb_borderColor="#ffffff"
-        fancy:fb_borderWidth="0dp"
-        fancy:fb_defaultColor="#00000000"
-        fancy:fb_textFont="ProductSans-Regular.ttf"
-        fancy:fb_focusColor="#20ffffff"
-        fancy:fb_radius="5dp"
-        fancy:fb_text="CONTACTS"
-        fancy:fb_textColor="#FFFFFF" />
+
+
+
+
+
 
     <View
         android:id="@+id/separator2"
@@ -76,7 +84,7 @@
         android:layout_height="1dp"
         android:layout_centerHorizontal="true"
         android:background="#40ffffff"
-        android:layout_below="@id/btn_contacts"/>
+        android:layout_centerVertical="true"/>
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_profiles"

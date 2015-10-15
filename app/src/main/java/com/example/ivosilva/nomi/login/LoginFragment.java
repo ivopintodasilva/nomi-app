@@ -12,7 +12,8 @@ import android.widget.EditText;
 
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.menu.MenuActivity;
-import com.example.ivosilva.nomi.menu.MenuFragment;
+import com.example.ivosilva.nomi.registration.RegisterActivity;
+import com.example.ivosilva.nomi.registration.RegisterFragment;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -57,8 +58,8 @@ public class LoginFragment extends Fragment {
 
 
 
-            Intent MenuIntent = new Intent(getActivity(), MenuActivity.class);
-            getActivity().startActivity(MenuIntent);
+            Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
+            getActivity().startActivity(menu_intent);
         }
     };
 
@@ -72,13 +73,8 @@ public class LoginFragment extends Fragment {
             *
             */
 
-            Fragment registration_fragment = new RegisterFragment();
-
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.add(android.R.id.content, registration_fragment);
-            fragmentTransaction.addToBackStack("login_fragment");
-            fragmentTransaction.commit();
+            Intent register_intent = new Intent(getActivity(), RegisterActivity.class);
+            getActivity().startActivity(register_intent);
 
         }
     };

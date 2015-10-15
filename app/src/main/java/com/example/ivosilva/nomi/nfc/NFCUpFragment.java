@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,8 @@ public class NFCUpFragment extends Fragment {
     View.OnClickListener temporaryHandler = new View.OnClickListener() {
         public void onClick(View v) {
 
-            Fragment gito = new NFCConnectedFragment();
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.nfc_fragment_container, gito).commit();
+            Intent nfc_connected_intent = new Intent(getActivity(), NFCConnectedActivity.class);
+            getActivity().startActivity(nfc_connected_intent);
 
         }
     };
