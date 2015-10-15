@@ -48,10 +48,10 @@ public class NFCActivity extends AppCompatActivity {
         if (adapter != null && adapter.isEnabled()) {
 
             /*
-            *   NFC DOESN'T CARE ABOUT US
+            *   NFC SHOWS LOVE
             */
 
-            active_fragment = new NFCDownFragment();
+            active_fragment = new NFCUpFragment();
 
             if(active_fragment == null) {
                 fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
@@ -65,10 +65,10 @@ public class NFCActivity extends AppCompatActivity {
         else{
 
             /*
-            *   NFC SHOWS LOVE
+            *   NFC DOESN'T CARE ABOUT US
             */
 
-            active_fragment = new NFCUpFragment();
+            active_fragment = new NFCDownFragment();
 
             if(active_fragment == null){
                 fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
