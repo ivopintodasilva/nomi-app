@@ -24,7 +24,7 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/password"
+        android:layout_above="@+id/login_separator"
         android:layout_alignEnd="@+id/btn_login"
         android:layout_alignLeft="@+id/btn_login"
         android:layout_alignRight="@+id/btn_login"
@@ -36,18 +36,25 @@
         android:textColorHighlight="#ffffff"
         android:textColorHint="#dcdcdc" />
 
+    <View
+        android:id="@+id/login_separator"
+        android:layout_width="250dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:background="#00ffffff"
+        android:layout_centerVertical="true"/>
+
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@+id/btn_login"
         android:layout_alignEnd="@+id/btn_login"
         android:layout_alignLeft="@+id/btn_login"
         android:layout_alignRight="@+id/btn_login"
         android:layout_alignStart="@+id/btn_login"
-        android:layout_marginBottom="20dp"
         android:hint="@string/password"
         android:password="true"
+        android:layout_below="@+id/login_separator"
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
