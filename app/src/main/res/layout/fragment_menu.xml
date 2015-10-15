@@ -27,10 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:paddingBottom="25dp"
+        android:paddingBottom="35dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="25dp"
+        android:paddingTop="35dp"
         android:layout_below="@id/fragment_menu_image"
         fancy:fb_textSize="15dp"
         fancy:fb_borderColor="#ffffff"
@@ -47,47 +47,19 @@
         android:layout_width="250dp"
         android:layout_height="1dp"
         android:layout_centerHorizontal="true"
-        android:background="#bababa"
+        android:background="#40ffffff"
         android:layout_below="@id/btn_share"/>
-
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/btn_connect"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="25dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="25dp"
-        android:layout_below="@id/separator1"
-        fancy:fb_textSize="15dp"
-        fancy:fb_borderColor="#ffffff"
-        fancy:fb_borderWidth="0dp"
-        fancy:fb_defaultColor="#00000000"
-        fancy:fb_textFont="ProductSans-Regular.ttf"
-        fancy:fb_focusColor="#20ffffff"
-        fancy:fb_radius="5dp"
-        fancy:fb_text="CONNECT"
-        fancy:fb_textColor="#FFFFFF" />
-
-    <View
-        android:id="@+id/separator2"
-        android:layout_width="250dp"
-        android:layout_height="1dp"
-        android:layout_centerHorizontal="true"
-        android:background="#bababa"
-        android:layout_below="@id/btn_connect"/>
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_contacts"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="25dp"
+        android:paddingBottom="35dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="25dp"
-        android:layout_below="@+id/separator2"
+        android:paddingTop="35dp"
+        android:layout_below="@+id/separator1"
         fancy:fb_textSize="15dp"
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="0dp"
@@ -99,11 +71,11 @@
         fancy:fb_textColor="#FFFFFF" />
 
     <View
-        android:id="@+id/separator3"
+        android:id="@+id/separator2"
         android:layout_width="250dp"
         android:layout_height="1dp"
         android:layout_centerHorizontal="true"
-        android:background="#bababa"
+        android:background="#40ffffff"
         android:layout_below="@id/btn_contacts"/>
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -111,11 +83,11 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="25dp"
+        android:paddingBottom="35dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="25dp"
-        android:layout_below="@+id/separator3"
+        android:paddingTop="35dp"
+        android:layout_below="@+id/separator2"
         fancy:fb_textSize="15dp"
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="0dp"
@@ -127,11 +99,11 @@
         fancy:fb_textColor="#FFFFFF" />
 
     <View
-        android:id="@+id/separator4"
+        android:id="@+id/separator3"
         android:layout_width="250dp"
         android:layout_height="1dp"
         android:layout_centerHorizontal="true"
-        android:background="#bababa"
+        android:background="#40ffffff"
         android:layout_below="@id/btn_profiles"/>
 
     <mehdi.sakout.fancybuttons.FancyButton
@@ -139,11 +111,11 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="25dp"
+        android:paddingBottom="35dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="25dp"
-        android:layout_below="@+id/separator4"
+        android:paddingTop="35dp"
+        android:layout_below="@+id/separator3"
         fancy:fb_textSize="15dp"
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="0dp"

@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".nfc.NFCActivity"
+            android:name=".nfc.NFCShareActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_nfc"
             android:screenOrientation="portrait"

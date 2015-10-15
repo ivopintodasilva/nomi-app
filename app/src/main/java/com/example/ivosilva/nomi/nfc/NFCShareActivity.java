@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.example.ivosilva.nomi.R;
 
-public class NFCActivity extends AppCompatActivity {
+public class NFCShareActivity extends AppCompatActivity {
 
     Fragment active_fragment = null;
 
@@ -51,13 +51,14 @@ public class NFCActivity extends AppCompatActivity {
             *   NFC SHOWS LOVE
             */
 
-            active_fragment = new NFCUpFragment();
 
             if(active_fragment == null) {
+                active_fragment = new NFCUpFragment();
                 fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
                 Log.d("NFCEnabled_true", "add");
             }
             else{
+                active_fragment = new NFCUpFragment();
                 fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
                 Log.d("NFCEnabled_true", "replace");
             }
@@ -68,13 +69,14 @@ public class NFCActivity extends AppCompatActivity {
             *   NFC DOESN'T CARE ABOUT US
             */
 
-            active_fragment = new NFCDownFragment();
 
             if(active_fragment == null){
+                active_fragment = new NFCDownFragment();
                 fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
                 Log.d("NFCEnabled_false", "add");
             }
             else{
+                active_fragment = new NFCDownFragment();
                 fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
                 Log.d("NFCEnabled_false", "replace");
             }

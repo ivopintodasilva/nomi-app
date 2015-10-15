@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.example.ivosilva.nomi.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
-public class NFCConnectFragment extends Fragment {
+public class NFCConnectedFragment extends Fragment {
 
 
 

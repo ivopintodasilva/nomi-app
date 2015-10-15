@@ -1,15 +1,20 @@
 package com.example.ivosilva.nomi.nfc;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.ivosilva.nomi.R;
 
 public class NFCUpFragment extends Fragment {
+    ImageView nfc_up_img;
 
 
     @Override
@@ -20,8 +25,27 @@ public class NFCUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_nfcup, container, false);
+        View view = inflater.inflate(R.layout.fragment_nfcup, container, false);
+
+        nfc_up_img = (ImageView) view.findViewById(R.id.gito_image);
+
+        // only for testing purposes, has to be removed!
+        nfc_up_img.setOnClickListener(temporaryHandler);
+
+        return view;
     }
+
+
+    // to be removed!
+    View.OnClickListener temporaryHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            Fragment gito = new NFCConnectedFragment();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.nfc_fragment_container, gito).commit();
+
+        }
+    };
 
 
 }

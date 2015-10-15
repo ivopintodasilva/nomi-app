@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ivosilva.nomi.R;
-import com.example.ivosilva.nomi.nfc.NFCActivity;
+import com.example.ivosilva.nomi.nfc.NFCShareActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -55,7 +55,7 @@ public class MenuFragment extends Fragment {
             */
 
 
-            Intent NFCIntent = new Intent(getActivity(), NFCActivity.class);
+            Intent NFCIntent = new Intent(getActivity(), NFCShareActivity.class);
             getActivity().startActivity(NFCIntent);
         }
     };
