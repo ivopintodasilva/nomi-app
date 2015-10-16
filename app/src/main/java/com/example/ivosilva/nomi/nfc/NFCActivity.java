@@ -6,6 +6,7 @@ import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.ivosilva.nomi.R;
 
@@ -38,6 +39,13 @@ public class NFCActivity extends AppCompatActivity {
         //  let's check if NFC is enabled!
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
+
+        if (adapter == null) {
+            // Stop here, we definitely need NFC
+            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         if (adapter != null && adapter.isEnabled()) {
 
