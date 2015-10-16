@@ -37,7 +37,6 @@ public class NFCDownFragment extends Fragment {
         public void onClick(View v) {
 
             // Open settings to turn on NFC
-
             startActivityForResult(new Intent(Settings.ACTION_NFC_SETTINGS), 0);
         }
     };

@@ -2,7 +2,9 @@ package com.example.ivosilva.nomi.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.EditText;
 
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.menu.MenuActivity;
+import com.example.ivosilva.nomi.registration.RegisterActivity;
+import com.example.ivosilva.nomi.registration.RegisterFragment;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -54,8 +58,8 @@ public class LoginFragment extends Fragment {
 
 
 
-            Intent MenuIntent = new Intent(getActivity(), MenuActivity.class);
-            getActivity().startActivity(MenuIntent);
+            Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
+            getActivity().startActivity(menu_intent);
         }
     };
 
@@ -68,6 +72,9 @@ public class LoginFragment extends Fragment {
             *   Insert registration logic!
             *
             */
+
+            Intent register_intent = new Intent(getActivity(), RegisterActivity.class);
+            getActivity().startActivity(register_intent);
 
         }
     };
