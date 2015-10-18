@@ -46,6 +46,18 @@ public class ContactListFragment extends Fragment {
         user_profiles.add(new CollectedProfiles("Emma Wilson"));
         user_profiles.add(new CollectedProfiles("Lavery Maiss"));
         user_profiles.add(new CollectedProfiles("Lillie Watts"));
+        user_profiles.add(new CollectedProfiles("Emma Wilson"));
+        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles("Lillie Watts"));
+        user_profiles.add(new CollectedProfiles("Emma Wilson"));
+        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles("Lillie Watts"));
+        user_profiles.add(new CollectedProfiles("Emma Wilson"));
+        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles("Lillie Watts"));
+        user_profiles.add(new CollectedProfiles("Emma Wilson"));
+        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles("Lillie Watts"));
 
 
 
