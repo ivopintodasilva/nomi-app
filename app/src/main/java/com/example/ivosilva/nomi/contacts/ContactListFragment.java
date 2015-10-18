@@ -36,31 +36,26 @@ public class ContactListFragment extends Fragment {
         recycler_view.setLayoutManager(llm);
 
 
-
-
-
         /*  FAKE DATA, REMOVE!  */
         List<CollectedProfiles> user_profiles;
 
         user_profiles = new ArrayList<CollectedProfiles>();
-        user_profiles.add(new CollectedProfiles("Emma Wilson"));
-        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles("Lillie Watts"));
-        user_profiles.add(new CollectedProfiles("Emma Wilson"));
-        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles("Lillie Watts"));
-        user_profiles.add(new CollectedProfiles("Emma Wilson"));
-        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles("Lillie Watts"));
-        user_profiles.add(new CollectedProfiles("Emma Wilson"));
-        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles("Lillie Watts"));
-        user_profiles.add(new CollectedProfiles("Emma Wilson"));
-        user_profiles.add(new CollectedProfiles("Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles("Lillie Watts"));
-
-
-
+        user_profiles.add(new CollectedProfiles(0, "Emma Wilson"));
+        user_profiles.add(new CollectedProfiles(1, "Emma Wilson"));
+        user_profiles.add(new CollectedProfiles(2, "Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles(3, "Lillie Watts"));
+        user_profiles.add(new CollectedProfiles(4, "Emma Wilson"));
+        user_profiles.add(new CollectedProfiles(5, "Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles(6, "Lillie Watts"));
+        user_profiles.add(new CollectedProfiles(7, "Emma Wilson"));
+        user_profiles.add(new CollectedProfiles(8, "Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles(9, "Lillie Watts"));
+        user_profiles.add(new CollectedProfiles(10, "Emma Wilson"));
+        user_profiles.add(new CollectedProfiles(11, "Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles(12, "Lillie Watts"));
+        user_profiles.add(new CollectedProfiles(13, "Emma Wilson"));
+        user_profiles.add(new CollectedProfiles(14, "Lavery Maiss"));
+        user_profiles.add(new CollectedProfiles(15, "Lillie Watts"));
 
 
         RVPContactsAdapter adapter = new RVPContactsAdapter(user_profiles);

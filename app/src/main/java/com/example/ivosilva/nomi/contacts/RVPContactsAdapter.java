@@ -1,5 +1,6 @@
 package com.example.ivosilva.nomi.contacts;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ivosilva.nomi.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -46,16 +49,21 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
         public void onClick(View v) {
             //Log.d("VIEWHOLDER", new Integer(this.getLayoutPosition()).toString());
             mListener.openDetails(v, this.getLayoutPosition());
+
+
         }
 
 
-        public static interface ProfileViewHolderClicks {
-            public void openDetails(View v, int position);
+        public interface ProfileViewHolderClicks {
+            void openDetails(View v, int position);
         }
 
     }
 
 
+    public CollectedProfiles getItem(int position) {
+        return user_profiles.get(position);
+    }
 
     @Override
     public ProfileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,7 +71,25 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
         //ProfileViewHolder pvh = new ProfileViewHolder(v);
 
         ProfileViewHolder vh = new ProfileViewHolder(v, new ProfileViewHolder.ProfileViewHolderClicks() {
-            public void openDetails(View v, int position) { Log.d("sad", new Integer(position).toString()); };
+            public void openDetails(View v, int position) {
+
+                /*  create new activity and display details  */
+                /*  put selected object on intent extras  */
+
+
+                Gson gson = new GsonBuilder().
+                        registerTypeAdapter(CollectedProfiles.class, new CollectedProfilesSerializer())
+                        .create();
+                String profile_json = gson.toJson(user_profiles.get(position));
+
+                Log.d("profile_json", profile_json);
+
+                Intent contact_details = new Intent(v.getContext(), ContactDetailsActivity.class);
+                contact_details.putExtra("PROFILE", profile_json);
+                v.getContext().startActivity(contact_details);
+
+
+            }
         });
         return vh;
     }
@@ -73,12 +99,13 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
         //ProfileViewHolder.personName.setText(user_profiles.get(position).name);
-        holder.personName.setText(user_profiles.get(position).name);
+        holder.personName.setText(user_profiles.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
         return user_profiles.size();
     }
+
 
 }

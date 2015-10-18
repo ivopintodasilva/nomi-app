@@ -22,16 +22,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.github.medyo:fancybuttons:1.5@aar'
     compile 'com.flaviofaria:kenburnsview:1.0.6'
     compile 'com.android.support:design:23.0.1'
-
     compile 'com.mikhaellopez:circularimageview:2.0.1'
-
     compile 'com.android.support:cardview-v7:23.0.+'
     compile 'com.android.support:recyclerview-v7:23.0.+'
-
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
+    compile files('/Users/ivosilva/AndroidStudioProjects/nomi-app/libs/gson-2.4.jar')
+
+    compile files('libs/gson-2.4.jar')
 }

@@ -45,6 +45,11 @@
             android:label="@string/title_activity_profiles"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".contacts.ContactDetailsActivity"
+            android:label="@string/title_activity_contact_details"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
