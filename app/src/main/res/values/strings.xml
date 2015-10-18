@@ -10,6 +10,7 @@
     <string name="last_name">Last Name</string>
     <string name="title_activity_nfc">NFCActivity</string>
     <string name="registration">Let us know you</string>
+    <string name="title_activity_profiles">ProfilesActivity</string>
 
 
 </resources>

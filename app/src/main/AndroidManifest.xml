@@ -40,6 +40,11 @@
         </activity>
         <activity android:name=".nfc.NFCConnectedActivity" >
         </activity>
+        <activity
+            android:name=".contacts.ContactActivity"
+            android:label="@string/title_activity_profiles"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
