@@ -1,6 +1,7 @@
 package com.example.ivosilva.nomi.contacts;
 
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,7 +14,11 @@ import android.widget.TextView;
 import com.example.ivosilva.nomi.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.joanzapata.iconify.widget.IconTextView;
 
+import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +37,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
     public static class ProfileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CardView cv;
         public TextView personName;
+        public IconTextView shared_contacts;
         public ProfileViewHolderClicks mListener;
 
         //ImageView personPhoto;
@@ -41,6 +47,10 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
             mListener = listener;
             cv = (CardView)itemView.findViewById(R.id.profile_card);
             personName = (TextView)itemView.findViewById(R.id.person_name);
+            shared_contacts = (IconTextView) itemView.findViewById(R.id.shared_contacts);
+
+
+
             itemView.setOnClickListener(this);
             //personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
         }
@@ -49,8 +59,6 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
         public void onClick(View v) {
             //Log.d("VIEWHOLDER", new Integer(this.getLayoutPosition()).toString());
             mListener.openDetails(v, this.getLayoutPosition());
-
-
         }
 
 
@@ -83,9 +91,6 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
                 String profile_json = gson.toJson(user_profiles.get(position));
                 String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
 
-                Log.d("profile_json", profile_json);
-                Log.d("contacts_json", contacts_json);
-
                 Intent contact_details = new Intent(v.getContext(), ContactDetailsActivity.class);
                 contact_details.putExtra("PROFILE", profile_json);
                 contact_details.putExtra("CONTACTS", contacts_json);
@@ -101,7 +106,43 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
 
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
-        //ProfileViewHolder.personName.setText(user_profiles.get(position).name);
+        Gson gson = new GsonBuilder().
+                registerTypeAdapter(CollectedProfiles.class, new CollectedProfilesSerializer())
+                .create();
+        String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
+
+        try {
+            JSONObject contacts = new JSONObject(contacts_json);
+            Iterator<String> it = contacts.keys();
+            String key;
+            String setter = "";
+            while(it.hasNext()){
+                key = it.next();
+                if(key.equals("PHONE")){
+                    setter += "{fa-phone}  ";
+                }
+                else if(key.equals("EMAIL")){
+                    setter += "{fa-envelope-o}  ";
+                }
+                else if(key.equals("FACEBOOK")){
+                    setter += "{fa-facebook}  ";
+                }
+                else if(key.equals("INSTAGRAM")){
+                    setter += "{fa-instagram}  ";
+                }
+                else if(key.equals("LINKEDIN")){
+                    setter += "{fa-linkedin}  ";
+                }
+                else if(key.equals("GOOGLE")){
+                    setter += "{fa-google-plus}  ";
+                }
+
+            }
+            holder.shared_contacts.setText(setter);
+        }catch (org.json.JSONException e){
+            Log.d("JSONException", e.toString());
+        }
+
         holder.personName.setText(user_profiles.get(position).getName());
     }
 

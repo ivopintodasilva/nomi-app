@@ -49,6 +49,7 @@
                 android:layout_alignParentTop="true"/>
 
             <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/shared_contacts"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_alignLeft="@id/person_name"

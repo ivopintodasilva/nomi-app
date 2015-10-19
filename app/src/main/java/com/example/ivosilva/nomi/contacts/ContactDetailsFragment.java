@@ -47,9 +47,11 @@ public class ContactDetailsFragment extends Fragment {
             name.setText(profile.getString("name"));
 
             JSONObject contacts = new JSONObject(getArguments().getString("CONTACTS", ""));
-            Iterator<String> it = contacts.keys();
-            String key;
+
+            /*  to organize the contacts in the view  */
             int i = 0;
+            String key;
+            Iterator<String> it = contacts.keys();
             while(it.hasNext()){
                 key = it.next();
                 Log.d("KEYS", key);
