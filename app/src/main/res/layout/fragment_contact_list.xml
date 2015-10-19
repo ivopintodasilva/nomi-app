@@ -13,7 +13,7 @@ android:id="@+id/fragment_profile_list">
 
     <android.support.v7.widget.RecyclerView
         android:layout_height="match_parent"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:id="@+id/recycler_view"
         android:layout_centerHorizontal="true"
         />

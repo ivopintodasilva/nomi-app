@@ -20,11 +20,16 @@ public class ContactDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_details);
 
-        Log.d("DETAILS", getIntent().getSerializableExtra("PROFILE").toString());
+        //Log.d("DETAILS", getIntent().getSerializableExtra("PROFILE").toString());
+        //Log.d("CONTACTS", getIntent().getSerializableExtra("CONTACTS").toString());
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment contact_details = new ContactDetailsFragment();
+        Bundle args = new Bundle();
+        args.putString("PROFILE", getIntent().getSerializableExtra("PROFILE").toString());
+        args.putString("CONTACTS", getIntent().getSerializableExtra("CONTACTS").toString());
+        contact_details.setArguments(args);
         ft.add(android.R.id.content, contact_details).commit();
 
     }

@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -9,15 +10,115 @@
         android:layout_height="match_parent"
         android:src="@drawable/login_background" />
 
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_marginTop="50dp"
+        android:id="@+id/person_photo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        app:border="true"
+        app:border_color="#ffffff"
+        app:border_width="1dp"
+        app:shadow="true"
+        android:src="@drawable/gito" />
+
     <TextView
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="DETAILS"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="210dp" />
+        android:text="Gito Jahsc"
+        android:id="@+id/name"
+        android:fontFamily="sans-serif-thin"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_below="@+id/person_photo"
+        android:layout_marginTop="50dp" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/phone"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="24dp"
+        android:textColor="#FFFFFF"
+        android:layout_alignLeft="@+id/person_photo"
+        android:layout_below="@+id/name"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignStart="@+id/person_photo" />
+
+
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/email"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/person_photo"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignStart="@+id/person_photo" />
+
+
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/facebook"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/person_photo"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignStart="@+id/person_photo" />
+
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/instagram"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/person_photo"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignStart="@+id/person_photo" />
+
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/linkedin"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/person_photo"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignStart="@+id/person_photo" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/googleplus"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/name"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignStart="@+id/person_photo" />
 
 
 </RelativeLayout>

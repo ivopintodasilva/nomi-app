@@ -18,7 +18,6 @@ public class CollectedProfilesSerializer implements JsonSerializer<CollectedProf
         result.add("id", new JsonPrimitive(profile.getId()));
         result.add("name", new JsonPrimitive(profile.getName()));
         result.add("photo_id", new JsonPrimitive(profile.getPhotoId()));
-
         return result;
     }
 }

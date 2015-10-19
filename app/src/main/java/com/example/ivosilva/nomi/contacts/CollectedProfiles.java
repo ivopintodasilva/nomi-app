@@ -14,10 +14,11 @@ public class CollectedProfiles {
     public CollectedProfiles(int id, String name) {
         this.id = id;
         this.name = name;
+        this.contacts = new HashMap<String, String>();
     }
 
     public void addContact(String key, String value){
-        contacts.put(key, value);
+        this.contacts.put(key, value);
     }
 
     public HashMap<String, String> getAllContacts(){
