@@ -121,4 +121,17 @@
         android:layout_alignStart="@+id/person_photo" />
 
 
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/twitter"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/name"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignStart="@+id/person_photo" />
+
 </RelativeLayout>

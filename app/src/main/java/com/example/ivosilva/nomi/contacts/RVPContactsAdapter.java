@@ -136,6 +136,9 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
                 else if(key.equals("GOOGLE")){
                     setter += "{fa-google-plus}  ";
                 }
+                else if(key.equals("TWITTER")){
+                    setter += "{fa-twitter}  ";
+                }
 
             }
             holder.shared_contacts.setText(setter);

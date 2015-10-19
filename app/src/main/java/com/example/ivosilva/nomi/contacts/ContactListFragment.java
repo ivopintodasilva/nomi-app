@@ -54,6 +54,7 @@ public class ContactListFragment extends Fragment {
         user_profiles.get(5).addContact("EMAIL", "ivopintodasilva@gmail.com");
         user_profiles.get(5).addContact("GOOGLE", "ivopintodasilva@gmail.com");
         user_profiles.get(5).addContact("FACEBOOK", "/diogo");
+        user_profiles.get(5).addContact("TWITTER", "diogo");
         user_profiles.add(new CollectedProfiles(6, "Lillie Watts"));
         user_profiles.add(new CollectedProfiles(7, "Emma Wilson"));
         user_profiles.add(new CollectedProfiles(8, "Lavery Maiss"));
