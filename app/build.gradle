@@ -31,6 +31,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.+'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
     compile files('/Users/ivosilva/AndroidStudioProjects/nomi-app/libs/gson-2.4.jar')
-
     compile files('libs/gson-2.4.jar')
+    compile files('/home/silva/StudioProjects/nomi-app/libs/gson-2.4.jar')
 }
