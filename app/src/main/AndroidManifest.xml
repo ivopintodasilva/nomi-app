@@ -43,12 +43,17 @@
         </activity>
         <activity
             android:name=".contacts.ContactActivity"
-            android:label="@string/title_activity_profiles"
+            android:label="@string/title_activity_contacts"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".contacts.ContactDetailsActivity"
             android:label="@string/title_activity_contact_details"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".profiles.ProfileActivity"
+            android:label="@string/title_activity_profiles"
             android:theme="@style/AppTheme" >
         </activity>
     </application>
