@@ -122,6 +122,21 @@
         android:layout_alignLeft="@+id/profile_photo"
         android:layout_alignStart="@+id/profile_photo" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        android:src="@drawable/ic_add_circle_white_18dp"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:rippleColor="@color/colorPrimaryDark"
+        android:layout_alignBottom="@+id/btn_add_profile"
+        android:layout_toRightOf="@+id/profile_name"
+        android:layout_toEndOf="@+id/profile_name">
+    </android.support.design.widget.FloatingActionButton>
+
+
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_add_profile"
         android:layout_width="100sp"
