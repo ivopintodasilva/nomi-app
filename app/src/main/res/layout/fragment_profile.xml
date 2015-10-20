@@ -123,37 +123,13 @@
         android:layout_alignStart="@+id/profile_photo" />
 
 
-    <android.support.design.widget.FloatingActionButton
+
+    <com.getbase.floatingactionbutton.AddFloatingActionButton
+        android:id="@+id/fab_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fab"
-        android:src="@drawable/ic_add_circle_white_18dp"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        app:rippleColor="@color/colorPrimaryDark"
-        android:layout_alignBottom="@+id/btn_add_profile"
-        android:layout_toRightOf="@+id/profile_name"
-        android:layout_toEndOf="@+id/profile_name">
-    </android.support.design.widget.FloatingActionButton>
-
-
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/btn_add_profile"
-        android:layout_width="100sp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="15dp"
-        fancy:fb_borderColor="#ffffff"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="#00000000"
-        fancy:fb_focusColor="#20ffffff"
-        fancy:fb_radius="5dp"
-        fancy:fb_textFont="ProductSans-Regular.ttf"
-        fancy:fb_text="ADD"
-        fancy:fb_textColor="#FFFFFF"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/email"
         android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
