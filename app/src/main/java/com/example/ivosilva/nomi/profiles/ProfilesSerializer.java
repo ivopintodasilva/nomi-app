@@ -17,7 +17,8 @@ public class ProfilesSerializer implements JsonSerializer<Profile> {
         JsonObject result = new JsonObject();
         result.add("id", new JsonPrimitive(profile.getId()));
         result.add("name", new JsonPrimitive(profile.getName()));
-        //result.add("photo_id", new JsonPrimitive(profile.getPhotoId()));
+        result.add("color", new JsonPrimitive(profile.getColor()));
+
         return result;
     }
 }
