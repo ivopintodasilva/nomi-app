@@ -23,7 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment profiles_fragment = new ProfileFragment();
-        fm.beginTransaction().add(android.R.id.content, profiles_fragment).commit();
+        Fragment profiles_list_fragment = new ProfileListFragment();
+        fm.beginTransaction().add(android.R.id.content, profiles_list_fragment).commit();
     }
 }
