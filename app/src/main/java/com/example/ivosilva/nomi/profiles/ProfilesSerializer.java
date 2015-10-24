@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 /**
  * Created by silva on 24-10-2015.
  */
-public class CollectedProfilesSerializer implements JsonSerializer<Profile> {
+public class ProfilesSerializer implements JsonSerializer<Profile> {
     @Override
     public JsonElement serialize(Profile profile, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject result = new JsonObject();

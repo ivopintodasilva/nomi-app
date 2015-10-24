@@ -84,7 +84,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
 
 
                 Gson gson = new GsonBuilder().
-                        registerTypeAdapter(Profile.class, new CollectedProfilesSerializer())
+                        registerTypeAdapter(Profile.class, new ProfilesSerializer())
                         .create();
                 String profile_json = gson.toJson(user_profiles.get(position));
 //                String contacts_json = gson.toJson(user_profiles.get(position).getAllProfiles());
@@ -104,7 +104,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
         Gson gson = new GsonBuilder().
-                registerTypeAdapter(Profile.class, new CollectedProfilesSerializer())
+                registerTypeAdapter(Profile.class, new ProfilesSerializer())
                 .create();
         String contacts_json = gson.toJson(user_profiles.get(position).getAllAttr());
 
