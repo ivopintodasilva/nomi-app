@@ -5,13 +5,13 @@ import java.util.HashMap;
 /**
  * Created by ivosilva on 17/10/15.
  */
-public class CollectedProfiles {
+public class CollectedContacts {
     private int id;
     private int photo_id;
     private String name;
     private HashMap<String, String> contacts;
 
-    public CollectedProfiles(int id, String name) {
+    public CollectedContacts(int id, String name) {
         this.id = id;
         this.name = name;
         this.contacts = new HashMap<String, String>();

@@ -11,9 +11,9 @@ import java.lang.reflect.Type;
 /**
  * Created by ivosilva on 18/10/15.
  */
-public class CollectedProfilesSerializer implements JsonSerializer<CollectedProfiles> {
+public class CollectedContactsSerializer implements JsonSerializer<CollectedContacts> {
     @Override
-    public JsonElement serialize(CollectedProfiles profile, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(CollectedContacts profile, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject result = new JsonObject();
         result.add("id", new JsonPrimitive(profile.getId()));
         result.add("name", new JsonPrimitive(profile.getName()));

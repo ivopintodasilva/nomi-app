@@ -1,14 +1,12 @@
 package com.example.ivosilva.nomi.contacts;
 
 import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ivosilva.nomi.R;
@@ -26,9 +24,9 @@ import java.util.List;
  */
 public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.ProfileViewHolder> {
 
-    List<CollectedProfiles> user_profiles;
+    List<CollectedContacts> user_profiles;
 
-    RVPContactsAdapter(List<CollectedProfiles> user_profiles){
+    RVPContactsAdapter(List<CollectedContacts> user_profiles){
         this.user_profiles = user_profiles;
     }
 
@@ -69,7 +67,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
     }
 
 
-    public CollectedProfiles getItem(int position) {
+    public CollectedContacts getItem(int position) {
         return user_profiles.get(position);
     }
 
@@ -86,7 +84,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
 
 
                 Gson gson = new GsonBuilder().
-                        registerTypeAdapter(CollectedProfiles.class, new CollectedProfilesSerializer())
+                        registerTypeAdapter(CollectedContacts.class, new CollectedContactsSerializer())
                         .create();
                 String profile_json = gson.toJson(user_profiles.get(position));
                 String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
@@ -107,7 +105,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
         Gson gson = new GsonBuilder().
-                registerTypeAdapter(CollectedProfiles.class, new CollectedProfilesSerializer())
+                registerTypeAdapter(CollectedContacts.class, new CollectedContactsSerializer())
                 .create();
         String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
 
