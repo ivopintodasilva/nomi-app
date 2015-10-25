@@ -1,5 +1,7 @@
 package com.example.ivosilva.nomi.profiles;
 
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,8 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.ivosilva.nomi.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -31,6 +36,20 @@ public class ProfileListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profiles, container, false);
+
+
+        /* code for floating button */
+        final View actionA = getActivity().findViewById(R.id.action_a);
+
+        FloatingActionButton actionB = new FloatingActionButton(getActivity().getBaseContext());
+        actionB.setTitle(getContext().getString(R.string.add_profile));
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionA.setVisibility(actionA.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            }
+        });
+        /* end of code for floating button */
 
 
         RecyclerView recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
