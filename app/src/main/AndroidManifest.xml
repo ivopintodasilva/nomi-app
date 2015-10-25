@@ -30,25 +30,38 @@
             android:label="@string/title_activity_nfc"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".menu.MenuActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".registration.RegisterActivity" >
+        <activity android:name=".registration.RegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".nfc.NFCConnectedActivity" >
+        <activity android:name=".nfc.NFCConnectedActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".contacts.ContactActivity"
             android:label="@string/title_activity_profiles"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".contacts.ContactDetailsActivity"
             android:label="@string/title_activity_contact_details"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
