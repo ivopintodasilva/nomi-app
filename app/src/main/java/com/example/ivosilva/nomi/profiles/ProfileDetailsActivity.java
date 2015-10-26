@@ -26,7 +26,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         Fragment profile_details = new ProfileDetailsFragment();
         Bundle args = new Bundle();
         args.putString("PROFILE", getIntent().getSerializableExtra("PROFILE").toString());
-//        args.putString("CONTACTS", getIntent().getSerializableExtra("CONTACTS").toString());
+        args.putString("ATTRIBUTES", getIntent().getSerializableExtra("ATTRIBUTES").toString());
         profile_details.setArguments(args);
         ft.add(android.R.id.content, profile_details).commit();
 
