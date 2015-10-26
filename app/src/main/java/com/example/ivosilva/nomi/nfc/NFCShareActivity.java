@@ -51,74 +51,68 @@ public class NFCShareActivity extends AppCompatActivity {
 
     protected void NFCEnabled() {
 
+        /// TODO: Verificar se tem de se fazer add ou replace do fragment
+
         //  let's check if NFC is enabled!
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
 
-        if (adapter == null) {
-            // Stop here, we definitely need NFC
-            Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-
         FragmentManager fm = getSupportFragmentManager();
 
-        if (adapter.isEnabled()) {
+        if (adapter != null && adapter.isEnabled()) {
+
             /*
             *   NFC SHOWS LOVE
             */
+
+
+            mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+            mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
+
+                /*
+                 * (non-Javadoc)
+                 * @see android.nfc.NfcAdapter.CreateNdefMessageCallback#createNdefMessage(android.nfc.NfcEvent)
+                 */
+                @Override
+                public NdefMessage createNdefMessage(NfcEvent event) {
+                    NdefRecord message = NdefRecord.createMime("text/plain", "5".getBytes());
+                    return new NdefMessage(new NdefRecord[]{message});
+                }
+
+            }, this, this);
+
+            if (resumed) {
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+                mNfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+            }
+
             if (active_fragment == null) {
-
-
-                mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-                mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
-
-                    /*
-                     * (non-Javadoc)
-                     * @see android.nfc.NfcAdapter.CreateNdefMessageCallback#createNdefMessage(android.nfc.NfcEvent)
-                     */
-                    @Override
-                    public NdefMessage createNdefMessage(NfcEvent event) {
-                        NdefRecord message = NdefRecord.createMime("text/plain", "5".getBytes());
-                        return new NdefMessage(new NdefRecord[]{message});
-                    }
-
-                }, this, this);
-
-                if (resumed) {
-                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-                    mNfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
-                }
-
-                if (active_fragment == null) {
-                    active_fragment = new NFCUpFragment();
-                    fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
-                    Log.d("NFCEnabled_true", "add");
-                } else {
-                    active_fragment = new NFCUpFragment();
-                    fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
-                    Log.d("NFCEnabled_true", "replace");
-                }
+                active_fragment = new NFCUpFragment();
+                fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_true", "add");
             } else {
+                active_fragment = new NFCUpFragment();
+                fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_true", "replace");
+            }
+        } else {
+
             /*
             *   NFC DOESN'T CARE ABOUT US
             */
 
 
-                if (active_fragment == null) {
-                    active_fragment = new NFCDownFragment();
-                    fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
-                    Log.d("NFCEnabled_false", "add");
-                } else {
-                    active_fragment = new NFCDownFragment();
-                    fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
-                    Log.d("NFCEnabled_false", "replace");
-                }
+            if(active_fragment == null){
+                active_fragment = new NFCDownFragment();
+                fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_false", "add");
+            }
+            else{
+                active_fragment = new NFCDownFragment();
+                fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
+                Log.d("NFCEnabled_false", "replace");
             }
         }
-
-
     }
 
     @Override
