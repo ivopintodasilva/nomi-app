@@ -13,6 +13,7 @@
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
     <string name="title_activity_profiles">ProfilesActivity</string>
+    <string name="title_activity_profiles_detail">ProfilesDetailsActivity</string>
     <string name="nfc_not_supported">It\'s time to get some NFC.</string>
     <string name="add_profile">Add new profile</string>
 
