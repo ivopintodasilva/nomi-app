@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ivosilva.nomi.R;
-import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,37 +35,38 @@ public class ContactListFragment extends Fragment {
         recycler_view.setLayoutManager(llm);
 
 
-        /*  FAKE DATA, REMOVE!  */
-        List<CollectedProfiles> user_profiles;
+        ///TODO  FAKE DATA, REMOVE!
+        List<CollectedContacts> user_contacts;
 
-        user_profiles = new ArrayList<CollectedProfiles>();
-        user_profiles.add(new CollectedProfiles(0, "Emma Wilson"));
-        user_profiles.get(0).addContact("FACEBOOK", "/swag/sempreaandar");
-        user_profiles.add(new CollectedProfiles(1, "Emma Wilson"));
-        user_profiles.get(1).addContact("INSTAGRAM", "swagger");
-        user_profiles.add(new CollectedProfiles(2, "Lavery Maiss"));
-        user_profiles.get(2).addContact("FACEBOOK", "/venancio");
-        user_profiles.add(new CollectedProfiles(3, "Lillie Watts"));
-        user_profiles.get(3).addContact("NUMBER", "915944584");
-        user_profiles.add(new CollectedProfiles(4, "Emma Wilson"));
-        user_profiles.get(4).addContact("LINKEDIN", "bino_o_trabalhador");
-        user_profiles.add(new CollectedProfiles(5, "Lavery Maiss"));
-        user_profiles.get(5).addContact("EMAIL", "ivopintodasilva@gmail.com");
-        user_profiles.get(5).addContact("GOOGLE", "ivopintodasilva@gmail.com");
-        user_profiles.get(5).addContact("FACEBOOK", "/diogo");
-        user_profiles.add(new CollectedProfiles(6, "Lillie Watts"));
-        user_profiles.add(new CollectedProfiles(7, "Emma Wilson"));
-        user_profiles.add(new CollectedProfiles(8, "Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles(9, "Lillie Watts"));
-        user_profiles.add(new CollectedProfiles(10, "Emma Wilson"));
-        user_profiles.add(new CollectedProfiles(11, "Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles(12, "Lillie Watts"));
-        user_profiles.add(new CollectedProfiles(13, "Emma Wilson"));
-        user_profiles.add(new CollectedProfiles(14, "Lavery Maiss"));
-        user_profiles.add(new CollectedProfiles(15, "Lillie Watts"));
+        user_contacts = new ArrayList<CollectedContacts>();
+        user_contacts.add(new CollectedContacts(0, "Emma Wilson"));
+        user_contacts.get(0).addContact("FACEBOOK", "/swag/sempreaandar");
+        user_contacts.add(new CollectedContacts(1, "Emma Wilson"));
+        user_contacts.get(1).addContact("INSTAGRAM", "swagger");
+        user_contacts.add(new CollectedContacts(2, "Lavery Maiss"));
+        user_contacts.get(2).addContact("FACEBOOK", "/venancio");
+        user_contacts.add(new CollectedContacts(3, "Lillie Watts"));
+        user_contacts.get(3).addContact("NUMBER", "915944584");
+        user_contacts.add(new CollectedContacts(4, "Emma Wilson"));
+        user_contacts.get(4).addContact("LINKEDIN", "bino_o_trabalhador");
+        user_contacts.add(new CollectedContacts(5, "Lavery Maiss"));
+        user_contacts.get(5).addContact("EMAIL", "ivopintodasilva@gmail.com");
+        user_contacts.get(5).addContact("GOOGLE", "ivopintodasilva@gmail.com");
+        user_contacts.get(5).addContact("FACEBOOK", "/diogo");
+        user_contacts.get(5).addContact("TWITTER", "diogo");
+        user_contacts.add(new CollectedContacts(6, "Lillie Watts"));
+        user_contacts.add(new CollectedContacts(7, "Emma Wilson"));
+        user_contacts.add(new CollectedContacts(8, "Lavery Maiss"));
+        user_contacts.add(new CollectedContacts(9, "Lillie Watts"));
+        user_contacts.add(new CollectedContacts(10, "Emma Wilson"));
+        user_contacts.add(new CollectedContacts(11, "Lavery Maiss"));
+        user_contacts.add(new CollectedContacts(12, "Lillie Watts"));
+        user_contacts.add(new CollectedContacts(13, "Emma Wilson"));
+        user_contacts.add(new CollectedContacts(14, "Lavery Maiss"));
+        user_contacts.add(new CollectedContacts(15, "Lillie Watts"));
 
 
-        RVPContactsAdapter adapter = new RVPContactsAdapter(user_profiles);
+        RVPContactsAdapter adapter = new RVPContactsAdapter(user_contacts);
         recycler_view.setAdapter(adapter);
 
         return view;

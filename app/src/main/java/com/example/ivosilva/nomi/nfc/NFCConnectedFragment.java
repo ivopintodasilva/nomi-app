@@ -18,7 +18,6 @@ public class NFCConnectedFragment extends Fragment {
     FancyButton btn_menu;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -68,7 +68,7 @@ public class ContactDetailsFragment extends Fragment {
                             params.topMargin = i*120;
                             number.setLayoutParams(params);
                         }
-                        continue;
+                        break;
                     case "EMAIL":
                         IconTextView email = (IconTextView) view.findViewById(R.id.email);
                         email.setText("{fa-envelope-o}  " + contacts.getString(key));
@@ -80,7 +80,7 @@ public class ContactDetailsFragment extends Fragment {
                             email.setLayoutParams(params);
 
                         }
-                        continue;
+                        break;
                     case "FACEBOOK":
                         IconTextView facebook = (IconTextView) view.findViewById(R.id.facebook);
                         facebook.setText("{fa-facebook}  " + contacts.getString(key));
@@ -91,7 +91,7 @@ public class ContactDetailsFragment extends Fragment {
                             params.topMargin = i*120;
                             facebook.setLayoutParams(params);
                         }
-                        continue;
+                        break;
                     case "INSTAGRAM":
                         IconTextView instagram = (IconTextView) view.findViewById(R.id.instagram);
                         instagram.setText("{fa-instagram}  " + contacts.getString(key));
@@ -102,7 +102,7 @@ public class ContactDetailsFragment extends Fragment {
                             params.topMargin = i*120;
                             instagram.setLayoutParams(params);
                         }
-                        continue;
+                        break;
                     case "LINKEDIN":
                         IconTextView linkedin = (IconTextView) view.findViewById(R.id.linkedin);
                         linkedin.setText("{fa-linkedin}  " + contacts.getString(key));
@@ -113,7 +113,7 @@ public class ContactDetailsFragment extends Fragment {
                             params.topMargin = i*120;
                             linkedin.setLayoutParams(params);
                         }
-                        continue;
+                        break;
                     case "GOOGLE":
                         IconTextView google = (IconTextView) view.findViewById(R.id.googleplus);
                         google.setText("{fa-google-plus}  " + contacts.getString(key));
@@ -124,9 +124,19 @@ public class ContactDetailsFragment extends Fragment {
                             params.topMargin = i*120;
                             google.setLayoutParams(params);
                         }
-                        continue;
+                        break;
+                    case "TWITTER":
+                        IconTextView twitter = (IconTextView) view.findViewById(R.id.twitter);
+                        twitter.setText("{fa-twitter}  @" + contacts.getString(key));
+                        twitter.setVisibility(View.VISIBLE);
+                        i++;
+                        if(i!=0){
+                            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
+                            params.topMargin = i*120;
+                            twitter.setLayoutParams(params);
+                        }
+                        break;
                 }
-
 
             }
         }

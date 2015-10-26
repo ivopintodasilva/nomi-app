@@ -1,4 +1,4 @@
-package com.example.ivosilva.nomi.contacts;
+package com.example.ivosilva.nomi.profiles;
 
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -20,13 +20,13 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by ivosilva on 17/10/15.
+ * Created by silva on 24/10/15.
  */
-public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.ProfileViewHolder> {
+public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.ProfileViewHolder> {
 
-    List<CollectedContacts> user_profiles;
+    List<Profile> user_profiles;
 
-    RVPContactsAdapter(List<CollectedContacts> user_profiles){
+    RVPProfilesAdapter(List<Profile> user_profiles){
         this.user_profiles = user_profiles;
     }
 
@@ -34,7 +34,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
 
     public static class ProfileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CardView cv;
-        public TextView personName;
+        public TextView profileName;
         public IconTextView shared_contacts;
         public ProfileViewHolderClicks mListener;
 
@@ -44,7 +44,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
             super(itemView);
             mListener = listener;
             cv = (CardView)itemView.findViewById(R.id.profile_card);
-            personName = (TextView)itemView.findViewById(R.id.person_name);
+            profileName = (TextView)itemView.findViewById(R.id.profile_name);
             shared_contacts = (IconTextView) itemView.findViewById(R.id.shared_contacts);
 
 
@@ -67,13 +67,13 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
     }
 
 
-    public CollectedContacts getItem(int position) {
+    public Profile getItem(int position) {
         return user_profiles.get(position);
     }
 
     @Override
     public ProfileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_card, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.profiles_card, parent, false);
         //ProfileViewHolder pvh = new ProfileViewHolder(v);
 
         ProfileViewHolder vh = new ProfileViewHolder(v, new ProfileViewHolder.ProfileViewHolderClicks() {
@@ -84,16 +84,15 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
 
 
                 Gson gson = new GsonBuilder().
-                        registerTypeAdapter(CollectedContacts.class, new CollectedContactsSerializer())
+                        registerTypeAdapter(Profile.class, new ProfilesSerializer())
                         .create();
                 String profile_json = gson.toJson(user_profiles.get(position));
-                String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
+//                String contacts_json = gson.toJson(user_profiles.get(position).getAllProfiles());
 
-                Intent contact_details = new Intent(v.getContext(), ContactDetailsActivity.class);
-                contact_details.putExtra("PROFILE", profile_json);
-                contact_details.putExtra("CONTACTS", contacts_json);
-                v.getContext().startActivity(contact_details);
-
+                Intent profile_details = new Intent(v.getContext(), ProfileDetailsActivity.class);
+                profile_details.putExtra("PROFILE", profile_json);
+                //contact_details.putExtra("CONTACTS", contacts_json);
+                v.getContext().startActivity(profile_details);
 
             }
         });
@@ -105,9 +104,9 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
         Gson gson = new GsonBuilder().
-                registerTypeAdapter(CollectedContacts.class, new CollectedContactsSerializer())
+                registerTypeAdapter(Profile.class, new ProfilesSerializer())
                 .create();
-        String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
+        String contacts_json = gson.toJson(user_profiles.get(position).getAllAttr());
 
         try {
             JSONObject contacts = new JSONObject(contacts_json);
@@ -144,7 +143,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
             Log.d("JSONException", e.toString());
         }
 
-        holder.personName.setText(user_profiles.get(position).getName());
+        holder.profileName.setText(user_profiles.get(position).getName());
     }
 
     @Override

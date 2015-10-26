@@ -13,6 +13,7 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 import android.util.Log;
 
 import com.example.ivosilva.nomi.R;
@@ -50,19 +51,24 @@ public class NFCShareActivity extends AppCompatActivity {
 
     protected void NFCEnabled() {
 
-        /// TODO: Verificar se tem de se fazer add ou replace do fragment
-
         //  let's check if NFC is enabled!
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
 
+        if (adapter == null) {
+            // Stop here, we definitely need NFC
+            Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
         FragmentManager fm = getSupportFragmentManager();
 
-        if (adapter != null && adapter.isEnabled()) {
-
+        if (adapter.isEnabled()) {
             /*
             *   NFC SHOWS LOVE
             */
+            if(active_fragment == null) {
 
 
             mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -89,13 +95,14 @@ public class NFCShareActivity extends AppCompatActivity {
                 active_fragment = new NFCUpFragment();
                 fm.beginTransaction().add(R.id.nfc_fragment_container, active_fragment).commit();
                 Log.d("NFCEnabled_true", "add");
-            } else {
+            }
+            else{
                 active_fragment = new NFCUpFragment();
                 fm.beginTransaction().replace(R.id.nfc_fragment_container, active_fragment).commit();
                 Log.d("NFCEnabled_true", "replace");
             }
-        } else {
-
+        }
+        else{
             /*
             *   NFC DOESN'T CARE ABOUT US
             */

@@ -1,4 +1,4 @@
-package com.example.ivosilva.nomi.contacts;
+package com.example.ivosilva.nomi.profiles;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,15 +9,16 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 
 /**
- * Created by ivosilva on 18/10/15.
+ * Created by silva on 24-10-2015.
  */
-public class CollectedProfilesSerializer implements JsonSerializer<CollectedProfiles> {
+public class ProfilesSerializer implements JsonSerializer<Profile> {
     @Override
-    public JsonElement serialize(CollectedProfiles profile, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(Profile profile, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject result = new JsonObject();
         result.add("id", new JsonPrimitive(profile.getId()));
         result.add("name", new JsonPrimitive(profile.getName()));
-        result.add("photo_id", new JsonPrimitive(profile.getPhotoId()));
+        result.add("color", new JsonPrimitive(profile.getColor()));
+
         return result;
     }
 }

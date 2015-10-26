@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.ivosilva.nomi.contacts.ProfileListFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        fancy:cardBackgroundColor="#00ffffff"
+        card_view:cardElevation="0dp"
+        android:id="@+id/profile_card">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_name"
+                android:text="Gito Jahsc"
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-thin"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"
+                android:layout_marginLeft="110dp"
+                android:layout_alignParentTop="true"/>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/shared_contacts"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_alignLeft="@id/profile_name"
+                android:layout_height="25dp"
+                android:layout_below="@id/profile_name"
+                android:fontFamily="sans-serif-thin"
+                android:text="{fa-phone} {fa-envelope-o} {fa-facebook} {fa-instagram} {fa-linkedin} {fa-google-plus}"
+                android:textColor="#FFFFFF"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
