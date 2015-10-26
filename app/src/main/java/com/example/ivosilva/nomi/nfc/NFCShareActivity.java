@@ -1,20 +1,30 @@
 package com.example.ivosilva.nomi.nfc;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
 import android.nfc.NfcManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 import android.util.Log;
 
 import com.example.ivosilva.nomi.R;
 
+import java.io.UnsupportedEncodingException;
+
 public class NFCShareActivity extends AppCompatActivity {
 
     Fragment active_fragment = null;
+    private NfcAdapter mNfcAdapter;
+    private boolean resumed = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +56,10 @@ public class NFCShareActivity extends AppCompatActivity {
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
         NfcAdapter adapter = manager.getDefaultAdapter();
 
-        if (adapter == null) {
-            // Stop here, we definitely need NFC
-            Toast.makeText(this, R.string.nfc_not_supported, Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-
         FragmentManager fm = getSupportFragmentManager();
 
-        if (adapter.isEnabled()) {
+        if (adapter != null && adapter.isEnabled()) {
+
             /*
             *   NFC SHOWS LOVE
             */
