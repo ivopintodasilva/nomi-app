@@ -1,25 +1,52 @@
 package com.example.ivosilva.nomi.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.menu.MenuActivity;
 import com.example.ivosilva.nomi.registration.RegisterActivity;
 import com.example.ivosilva.nomi.registration.RegisterFragment;
+import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
+import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment{
     FancyButton btn_login;
     FancyButton btn_register;
+    private RequestQueue mQueue;
+    public static final String REQUEST_TAG = "LoginFragment";
 
 
     @Override
@@ -39,6 +66,10 @@ public class LoginFragment extends Fragment {
         btn_register = (FancyButton) view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(registerHandler);
 
+
+
+
+
         return view;
     }
 
@@ -56,10 +87,29 @@ public class LoginFragment extends Fragment {
             EditText password = (EditText) getActivity().findViewById(R.id.password);
 
 
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://192.168.160.56:8000/api/user/login/?email=" + username.getText().toString() + "&password=" + password.getText();
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
 
+                            // only if it's a succesful login!
+                            Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
+                            getActivity().startActivity(menu_intent);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Toast.makeText(getActivity(), "Unable to fetch data: " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
 
-            Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
-            getActivity().startActivity(menu_intent);
+            mQueue.add(jsonRequest);
+
         }
     };
 
