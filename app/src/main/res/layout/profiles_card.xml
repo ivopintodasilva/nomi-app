@@ -33,14 +33,13 @@
                 android:layout_alignParentTop="true"/>
 
             <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/shared_contacts"
+                android:id="@+id/shared_profile_contacts"
                 android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_alignLeft="@id/profile_name"
                 android:layout_height="25dp"
                 android:layout_below="@id/profile_name"
                 android:fontFamily="sans-serif-thin"
-                android:text="{fa-phone} {fa-envelope-o} {fa-facebook} {fa-instagram} {fa-linkedin} {fa-google-plus}"
                 android:textColor="#FFFFFF"/>
 
         </RelativeLayout>

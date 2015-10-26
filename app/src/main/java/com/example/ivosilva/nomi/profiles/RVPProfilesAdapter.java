@@ -24,18 +24,10 @@ import java.util.List;
  */
 public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.ProfileViewHolder> {
 
-    List<Profile> user_profiles;
-
-    RVPProfilesAdapter(List<Profile> user_profiles){
-        this.user_profiles = user_profiles;
-    }
-
-
-
     public static class ProfileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CardView cv;
         public TextView profileName;
-        public IconTextView shared_contacts;
+        public IconTextView shared_profile_contacts;
         public ProfileViewHolderClicks mListener;
 
         //ImageView personPhoto;
@@ -45,9 +37,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
             mListener = listener;
             cv = (CardView)itemView.findViewById(R.id.profile_card);
             profileName = (TextView)itemView.findViewById(R.id.profile_name);
-            shared_contacts = (IconTextView) itemView.findViewById(R.id.shared_contacts);
-
-
+            shared_profile_contacts = (IconTextView) itemView.findViewById(R.id.shared_profile_contacts);
 
             itemView.setOnClickListener(this);
             //personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
@@ -59,17 +49,18 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
             mListener.openDetails(v, this.getLayoutPosition());
         }
 
-
         public interface ProfileViewHolderClicks {
             void openDetails(View v, int position);
         }
 
     }
 
+    List<Profile> user_profiles;
 
-    public Profile getItem(int position) {
-        return user_profiles.get(position);
+    RVPProfilesAdapter(List<Profile> user_profiles){
+        this.user_profiles = user_profiles;
     }
+
 
     @Override
     public ProfileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -81,24 +72,21 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
 
                 /*  create new activity and display details  */
                 /*  put selected object on intent extras  */
-
-
                 Gson gson = new GsonBuilder().
                         registerTypeAdapter(Profile.class, new ProfilesSerializer())
                         .create();
                 String profile_json = gson.toJson(user_profiles.get(position));
-//                String contacts_json = gson.toJson(user_profiles.get(position).getAllProfiles());
+                String attributes_json = gson.toJson(user_profiles.get(position).getAllAttr());
 
                 Intent profile_details = new Intent(v.getContext(), ProfileDetailsActivity.class);
                 profile_details.putExtra("PROFILE", profile_json);
-                //contact_details.putExtra("CONTACTS", contacts_json);
+                profile_details.putExtra("ATTRIBUTES", attributes_json);
                 v.getContext().startActivity(profile_details);
 
             }
         });
         return vh;
     }
-
 
 
     @Override
@@ -138,7 +126,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
                 }
 
             }
-            holder.shared_contacts.setText(setter);
+            holder.shared_profile_contacts.setText(setter);
         }catch (org.json.JSONException e){
             Log.d("JSONException", e.toString());
         }

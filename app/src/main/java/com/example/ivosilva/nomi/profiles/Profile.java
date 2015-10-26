@@ -2,6 +2,7 @@ package com.example.ivosilva.nomi.profiles;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,23 +12,23 @@ public class Profile {
     private int id;
     private String name;
     private ColorsEnum color;
-    private List<Atributos> atributos;
-    private HashMap<String, String> connections;
+    private HashMap<String, String> atributos;
+    private List<String> connections;
 
     public Profile(int id, String name, ColorsEnum color) {
         this.id = id;
         this.name = name;
         this.color = color;
-        this.atributos = new ArrayList<>();
-        this.connections = new HashMap<>();
+        this.atributos = new HashMap<>();
+        this.connections = new LinkedList<>();
     }
 
 
-    public void addAttr(Atributos attr) { this.atributos.add(attr); }
+    public void addAttr(String attr, String value) { this.atributos.put(attr,value); }
 
-    public List getAllAttr() { return this.atributos; }
+    public HashMap<String, String> getAllAttr() { return this.atributos; }
 
-    public void addConn(String key, String value) { this.connections.put(key, value); }
+    public void addConn(String value) { this.connections.add(value); }
 
     public int getId() { return id; }
 
