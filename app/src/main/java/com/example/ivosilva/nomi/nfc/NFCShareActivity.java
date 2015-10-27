@@ -68,8 +68,6 @@ public class NFCShareActivity extends AppCompatActivity {
             /*
             *   NFC SHOWS LOVE
             */
-<<<<<<< Temporary merge branch 1
-
 
             mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
             mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
