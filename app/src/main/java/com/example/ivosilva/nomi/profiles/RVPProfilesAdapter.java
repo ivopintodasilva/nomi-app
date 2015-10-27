@@ -102,7 +102,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
             String setter = "";
             while(it.hasNext()){
                 key = it.next();
-                if(key.equals("PHONE")){
+                if(key.equals("NUMBER")){
                     setter += "{fa-phone}  ";
                 }
                 else if(key.equals("EMAIL")){

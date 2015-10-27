@@ -172,7 +172,6 @@ public class ProfileDetailsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Log.i("DIALOG","YES");
-
                         Log.i("DIALOG", value.getText().toString());
                         /// TODO making change the value
                     }
