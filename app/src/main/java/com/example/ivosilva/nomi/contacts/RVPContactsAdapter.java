@@ -116,7 +116,7 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
             String setter = "";
             while(it.hasNext()){
                 key = it.next();
-                if(key.equals("PHONE")){
+                if(key.equals("NUMBER")){
                     setter += "{fa-phone}  ";
                 }
                 else if(key.equals("EMAIL")){

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ivosilva.nomi" >
 
+
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -60,13 +61,18 @@
         <activity
             android:name=".contacts.ContactDetailsActivity"
             android:label="@string/title_activity_contact_details"
+            android:theme="@style/AppTheme"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
-            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".profiles.ProfileActivity"
             android:label="@string/title_activity_profiles"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".profiles.ProfileDetailsActivity"
+            android:label="@string/title_activity_profiles_detail"
             android:theme="@style/AppTheme" >
         </activity>
     </application>

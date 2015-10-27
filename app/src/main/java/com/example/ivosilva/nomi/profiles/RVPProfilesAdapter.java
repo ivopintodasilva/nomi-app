@@ -45,7 +45,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
 
         @Override
         public void onClick(View v) {
-            //Log.d("VIEWHOLDER", new Integer(this.getLayoutPosition()).toString());
+//            Log.d("VIEWHOLDER", new Integer(this.getLayoutPosition()).toString());
             mListener.openDetails(v, this.getLayoutPosition());
         }
 
@@ -82,7 +82,6 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
                 profile_details.putExtra("PROFILE", profile_json);
                 profile_details.putExtra("ATTRIBUTES", attributes_json);
                 v.getContext().startActivity(profile_details);
-
             }
         });
         return vh;
@@ -103,7 +102,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
             String setter = "";
             while(it.hasNext()){
                 key = it.next();
-                if(key.equals("PHONE")){
+                if(key.equals("NUMBER")){
                     setter += "{fa-phone}  ";
                 }
                 else if(key.equals("EMAIL")){

@@ -40,7 +40,21 @@
 
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/email"
+        android:id="@+id/profile_phone"
+        android:visibility="invisible"
+        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_alignLeft="@+id/profile_photo"
+        android:layout_below="@+id/profile_name"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignStart="@+id/profile_photo" />
+
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/profile_email"
         android:visibility="invisible"
         android:layout_height="70dp"
         android:layout_width="300dp"
@@ -55,7 +69,7 @@
 
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/facebook"
+        android:id="@+id/profile_facebook"
         android:visibility="invisible"
         android:layout_height="70dp"
         android:layout_width="300dp"
@@ -69,7 +83,7 @@
 
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/instagram"
+        android:id="@+id/profile_instagram"
         android:visibility="invisible"
         android:layout_height="70dp"
         android:layout_width="300dp"
@@ -83,7 +97,7 @@
 
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/linkedin"
+        android:id="@+id/profile_linkedin"
         android:visibility="invisible"
         android:layout_height="70dp"
         android:layout_width="300dp"
@@ -96,7 +110,7 @@
         android:layout_alignStart="@+id/profile_photo" />
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/googleplus"
+        android:id="@+id/profile_googleplus"
         android:visibility="invisible"
         android:layout_height="70dp"
         android:layout_width="300dp"
@@ -110,7 +124,7 @@
 
 
     <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/twitter"
+        android:id="@+id/profile_twitter"
         android:visibility="invisible"
         android:layout_height="70dp"
         android:layout_width="300dp"
