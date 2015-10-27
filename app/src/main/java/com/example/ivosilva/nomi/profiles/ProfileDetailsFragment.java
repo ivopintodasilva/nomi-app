@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ivosilva.nomi.R;
@@ -156,16 +157,23 @@ public class ProfileDetailsFragment extends Fragment {
 //            builder.setTitle(getContext().getString(R.string.attribute_dialog_title));
 
             // Get the layout inflater
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+            LayoutInflater linf = LayoutInflater.from(getActivity());
+            final View inflator = linf.inflate(R.layout.dialog_profile_detail_edit,null);
+//            final LayoutInflater inflater = getActivity().getLayoutInflater();
+
+            final EditText value = (EditText) inflator.findViewById(R.id.attribute_value);
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.dialog_profile_detail_edit, null))
+//            builder.setView(inflater.inflate(R.layout.dialog_profile_detail_edit, null))
+            builder.setView(inflator)
                 // Add action buttons
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Log.i("DIALOG","YES");
+
+                        Log.i("DIALOG", value.getText().toString());
                         /// TODO making change the value
                     }
                 })
