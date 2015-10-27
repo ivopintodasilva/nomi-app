@@ -31,6 +31,7 @@ import com.example.ivosilva.nomi.registration.RegisterActivity;
 import com.example.ivosilva.nomi.registration.RegisterFragment;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
+import com.flaviofaria.kenburnsview.KenBurnsView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +50,8 @@ public class LoginFragment extends Fragment{
     public static final String REQUEST_TAG = "LoginFragment";
 
 
+    KenBurnsView kbv;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,8 @@ public class LoginFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        kbv = (KenBurnsView) view.findViewById(R.id.image);
 
         btn_login = (FancyButton) view.findViewById(R.id.btn_login);
         btn_login.setOnClickListener(loginHandler);
@@ -83,7 +88,7 @@ public class LoginFragment extends Fragment{
             *   Insert login logic!
             *
             */
-            EditText username = (EditText) getActivity().findViewById(R.id.username);
+            EditText username = (EditText) getActivity().findViewById(R.id.email);
             EditText password = (EditText) getActivity().findViewById(R.id.password);
 
 
@@ -95,6 +100,7 @@ public class LoginFragment extends Fragment{
                         public void onResponse(JSONObject jsonObject) {
                             Log.d("onResponse", jsonObject.toString());
 
+                            kbv.setImageDrawable(getResources().getDrawable(R.drawable.login_background));
                             // only if it's a succesful login!
                             Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
                             getActivity().startActivity(menu_intent);
@@ -103,7 +109,8 @@ public class LoginFragment extends Fragment{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            Toast.makeText(getActivity(), "Unable to fetch data: " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                            kbv.setImageDrawable(getResources().getDrawable(R.drawable.new_bg));
+                            Toast.makeText(getActivity(), "You shall not pass!", Toast.LENGTH_SHORT).show();
                         }
                     });
             jsonRequest.setTag(REQUEST_TAG);

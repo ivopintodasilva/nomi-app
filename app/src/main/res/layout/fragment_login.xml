@@ -21,7 +21,7 @@
 
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_above="@+id/login_separator"
@@ -30,7 +30,7 @@
         android:layout_alignRight="@+id/btn_login"
         android:layout_alignStart="@+id/btn_login"
         android:layout_marginBottom="5dp"
-        android:hint="@string/username"
+        android:hint="@string/email"
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
