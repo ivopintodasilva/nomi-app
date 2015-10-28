@@ -28,6 +28,8 @@ import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class RegisterFragment extends Fragment {
@@ -46,6 +48,12 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy(){
+        Crouton.cancelAllCroutons();
+        super.onDestroy();
     }
 
     @Override
@@ -110,6 +118,7 @@ public class RegisterFragment extends Fragment {
                 if(!password1.getText().toString().trim().equals(password2.getText().toString().trim())){
                     password1.setError("Passwords do not match");
                     password2.setError("Passwords do not match");
+                    Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
                     return;
                 }
                 else{
@@ -121,6 +130,7 @@ public class RegisterFragment extends Fragment {
 
             if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
                 email.setError("E-mail is not valid");
+                Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
                 return;
             }
             else{
@@ -128,6 +138,7 @@ public class RegisterFragment extends Fragment {
             }
 
             if(!valid){
+                Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
                 return;
             }
 
@@ -168,11 +179,9 @@ public class RegisterFragment extends Fragment {
                             public void onErrorResponse(VolleyError volleyError) {
                                 NetworkResponse networkResponse = volleyError.networkResponse;
                                 if (networkResponse != null && networkResponse.statusCode == 401) {
-                                    Toast.makeText(getActivity(), "E-mail is already registered.",
-                                            Toast.LENGTH_LONG).show();
+                                    Crouton.makeText(getActivity(), "E-mail is already registered.", Style.ALERT).show();
                                 }else{
-                                    Toast.makeText(getActivity(), "You shall not pass!",
-                                        Toast.LENGTH_SHORT).show();
+                                    Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
                                 }
                             }
                         });

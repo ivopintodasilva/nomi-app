@@ -41,7 +41,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
-
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LoginFragment extends Fragment{
@@ -51,7 +52,6 @@ public class LoginFragment extends Fragment{
     public static final String LOGINPREFS = "LoginPrefs" ;
     public static final String USERID = "idKey";
     public static final String REQUEST_TAG = "LoginFragment";
-    KenBurnsView kbv;
     SharedPreferences shared_preferences;
 
 
@@ -61,12 +61,17 @@ public class LoginFragment extends Fragment{
     }
 
     @Override
+    public void onDestroy(){
+        Crouton.cancelAllCroutons();
+        super.onDestroy();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        kbv = (KenBurnsView) view.findViewById(R.id.image);
 
         btn_login = (FancyButton) view.findViewById(R.id.btn_login);
         btn_login.setOnClickListener(loginHandler);
@@ -81,12 +86,6 @@ public class LoginFragment extends Fragment{
     View.OnClickListener loginHandler = new View.OnClickListener() {
         public void onClick(View v) {
 
-
-            /*
-            *
-            *   Insert login logic!
-            *
-            */
             EditText username = (EditText) getActivity().findViewById(R.id.email);
             EditText password = (EditText) getActivity().findViewById(R.id.password);
 
@@ -109,7 +108,6 @@ public class LoginFragment extends Fragment{
                                 Log.d("LoginOnResponse", e.toString());
                             }
 
-                            kbv.setImageDrawable(getResources().getDrawable(R.drawable.login_background));
                             Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
                             getActivity().startActivity(menu_intent);
                             getActivity().finish();
@@ -118,8 +116,7 @@ public class LoginFragment extends Fragment{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            kbv.setImageDrawable(getResources().getDrawable(R.drawable.new_bg));
-                            Toast.makeText(getActivity(), "You shall not pass!", Toast.LENGTH_SHORT).show();
+                            Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
                         }
                     });
             jsonRequest.setTag(REQUEST_TAG);

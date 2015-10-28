@@ -12,6 +12,16 @@ buildscript {
     }
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 allprojects {
     repositories {
         jcenter()
