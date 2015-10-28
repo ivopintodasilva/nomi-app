@@ -11,6 +11,7 @@ import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.nfc.NFCShareActivity;
 import com.example.ivosilva.nomi.contacts.ContactActivity;
 import com.example.ivosilva.nomi.profiles.ProfileActivity;
+import com.example.ivosilva.nomi.settings.SettingsActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -19,7 +20,6 @@ public class MenuFragment extends Fragment {
     FancyButton btn_contacts;
     FancyButton btn_profiles;
     FancyButton btn_settings;
-
 
 
     @Override
@@ -103,6 +103,9 @@ public class MenuFragment extends Fragment {
             *   Connect to settings activity
             *
             */
+
+            Intent settings_intent = new Intent(getActivity(), SettingsActivity.class);
+            getActivity().startActivity(settings_intent);
 
         }
     };
