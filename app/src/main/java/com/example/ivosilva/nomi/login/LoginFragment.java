@@ -3,11 +3,8 @@ package com.example.ivosilva.nomi.login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,31 +12,19 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.menu.MenuActivity;
 import com.example.ivosilva.nomi.registration.RegisterActivity;
-import com.example.ivosilva.nomi.registration.RegisterFragment;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
 
 
 import mehdi.sakout.fancybuttons.FancyButton;

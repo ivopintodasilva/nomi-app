@@ -22,7 +22,6 @@ public class MenuFragment extends Fragment {
     FancyButton btn_settings;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

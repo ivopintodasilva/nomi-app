@@ -26,9 +26,10 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
-        android:textColorHint="#dcdcdc" />
+        android:textColorHint="#dcdcdc"
+        android:inputType="textCapSentences" />
 
-        <EditText
+    <EditText
         android:id="@+id/register_last_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -42,7 +43,8 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
-        android:textColorHint="#dcdcdc" />
+        android:textColorHint="#dcdcdc"
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/register_email"
