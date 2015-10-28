@@ -2,6 +2,7 @@ package com.example.ivosilva.nomi.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,10 +48,12 @@ public class LoginFragment extends Fragment{
     FancyButton btn_login;
     FancyButton btn_register;
     private RequestQueue mQueue;
+    public static final String LOGINPREFS = "LoginPrefs" ;
+    public static final String USERID = "idKey";
     public static final String REQUEST_TAG = "LoginFragment";
-
-
     KenBurnsView kbv;
+    SharedPreferences shared_preferences;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,10 +73,6 @@ public class LoginFragment extends Fragment{
 
         btn_register = (FancyButton) view.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(registerHandler);
-
-
-
-
 
         return view;
     }
@@ -100,10 +99,20 @@ public class LoginFragment extends Fragment{
                         public void onResponse(JSONObject jsonObject) {
                             Log.d("onResponse", jsonObject.toString());
 
+                            shared_preferences = getActivity().getSharedPreferences(LOGINPREFS, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = shared_preferences.edit();
+                            try {
+                                editor.putInt(USERID, jsonObject.getInt("id"));
+                                editor.commit();
+                            }
+                            catch (JSONException e){
+                                Log.d("LoginOnResponse", e.toString());
+                            }
+
                             kbv.setImageDrawable(getResources().getDrawable(R.drawable.login_background));
-                            // only if it's a succesful login!
                             Intent menu_intent = new Intent(getActivity(), MenuActivity.class);
                             getActivity().startActivity(menu_intent);
+                            getActivity().finish();
                         }
                     },
                     new Response.ErrorListener() {
@@ -123,12 +132,6 @@ public class LoginFragment extends Fragment{
 
     View.OnClickListener registerHandler = new View.OnClickListener() {
         public void onClick(View v) {
-
-            /*
-            *
-            *   Insert registration logic!
-            *
-            */
 
             Intent register_intent = new Intent(getActivity(), RegisterActivity.class);
             getActivity().startActivity(register_intent);
