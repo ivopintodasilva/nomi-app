@@ -60,7 +60,8 @@
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
         android:textColorHint="#dcdcdc"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/register_password1"
@@ -76,7 +77,8 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
-        android:textColorHint="#dcdcdc" />
+        android:textColorHint="#dcdcdc"
+        android:inputType="textPassword"/>
 
     <EditText
         android:id="@+id/register_password2"
@@ -93,7 +95,8 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
-        android:textColorHint="#dcdcdc" />
+        android:textColorHint="#dcdcdc"
+        android:inputType="textPassword"/>
 
 
     <mehdi.sakout.fancybuttons.FancyButton
