@@ -20,12 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
-import com.example.ivosilva.nomi.menu.MenuActivity;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.victor.loading.rotate.RotateLoading;
 
-import org.buraktamturk.loadingview.LoadingView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,10 +75,6 @@ public class ContactListFragment extends Fragment {
                         // do the Json parsing in a different thread
                         new LongOperation().execute(jsonObject);
 
-
-
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -92,8 +86,6 @@ public class ContactListFragment extends Fragment {
 
         jsonRequest.setTag(REQUEST_TAG);
         mQueue.add(jsonRequest);
-
-
 
     }
 
@@ -167,39 +159,6 @@ public class ContactListFragment extends Fragment {
         // get the loading wheel and start it
         rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading);
         rotateLoading.start();
-
-
-
-        //load = (LoadingView) view.findViewById(R.id.loading);
-//
-//
-//
-//
-//        user_contacts.get(0).addContact("FACEBOOK", "/swag/sempreaandar");
-//        user_contacts.add(new CollectedContacts(1, "Emma Wilson"));
-//        user_contacts.get(1).addContact("INSTAGRAM", "swagger");
-//        user_contacts.add(new CollectedContacts(2, "Lavery Maiss"));
-//        user_contacts.get(2).addContact("FACEBOOK", "/venancio");
-//        user_contacts.add(new CollectedContacts(3, "Lillie Watts"));
-//        user_contacts.get(3).addContact("NUMBER", "915944584");
-//        user_contacts.add(new CollectedContacts(4, "Emma Wilson"));
-//        user_contacts.get(4).addContact("LINKEDIN", "bino_o_trabalhador");
-//        user_contacts.add(new CollectedContacts(5, "Lavery Maiss"));
-//        user_contacts.get(5).addContact("EMAIL", "ivopintodasilva@gmail.com");
-//        user_contacts.get(5).addContact("GOOGLE", "ivopintodasilva@gmail.com");
-//        user_contacts.get(5).addContact("FACEBOOK", "/diogo");
-//        user_contacts.get(5).addContact("TWITTER", "diogo");
-//        user_contacts.add(new CollectedContacts(6, "Lillie Watts"));
-//        user_contacts.add(new CollectedContacts(7, "Emma Wilson"));
-//        user_contacts.add(new CollectedContacts(8, "Lavery Maiss"));
-//        user_contacts.add(new CollectedContacts(9, "Lillie Watts"));
-//        user_contacts.add(new CollectedContacts(10, "Emma Wilson"));
-//        user_contacts.add(new CollectedContacts(11, "Lavery Maiss"));
-//        user_contacts.add(new CollectedContacts(12, "Lillie Watts"));
-//        user_contacts.add(new CollectedContacts(13, "Emma Wilson"));
-//        user_contacts.add(new CollectedContacts(14, "Lavery Maiss"));
-//        user_contacts.add(new CollectedContacts(15, "Lillie Watts"));
-
 
         return view;
     }
