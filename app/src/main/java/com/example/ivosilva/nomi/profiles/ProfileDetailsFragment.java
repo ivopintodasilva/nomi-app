@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.R;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.json.JSONObject;
 
@@ -47,6 +49,11 @@ public class ProfileDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile_details, container, false);
+
+        // substitute by real user image url
+        CircularImageView imageView = (CircularImageView) view.findViewById(R.id.profile_photo);
+        Glide.with(this).load("https://scontent-mxp1-1.xx.fbcdn.net/hphotos-xfl1/t31.0-8/1268990_10200674928977262_714053855_o.jpg").into(imageView);
+
 
         Log.d("ProfileDetailsFragmentP", getArguments().getString("PROFILE", ""));
         Log.d("ProfileDetailsFragmentA", getArguments().getString("ATTRIBUTES", ""));

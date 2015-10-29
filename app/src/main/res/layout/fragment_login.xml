@@ -32,6 +32,7 @@
         android:layout_marginBottom="5dp"
         android:hint="@string/email"
         android:fontFamily="sans-serif-thin"
+        android:inputType="textEmailAddress"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
         android:textColorHint="#dcdcdc" />
@@ -54,6 +55,7 @@
         android:layout_alignStart="@+id/btn_login"
         android:hint="@string/password"
         android:password="true"
+        android:inputType="textPassword"
         android:layout_below="@+id/login_separator"
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
