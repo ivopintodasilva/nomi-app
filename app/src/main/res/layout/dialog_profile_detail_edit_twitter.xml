@@ -17,7 +17,7 @@
         android:textColor="#FFFFFF"/>
 
     <EditText
-        android:id="@+id/attribute_value"
+        android:id="@+id/attribute_twitter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -30,5 +30,7 @@
         android:cursorVisible="true"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
-        android:textColorHint="#dcdcdc"/>
+        android:textColorHint="#dcdcdc"
+        android:inputType="text" />
+
 </RelativeLayout>

@@ -16,7 +16,7 @@
     <string name="nfc_not_supported">It\'s time to get some NFC.</string>
     <string name="add_profile">Add new profile</string>
     <string name="attribute_type">Attribute</string>
-    <string name="attribute_value">Contact</string>
+    <string name="attribute_value">Write a new value</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="username">Username</string>

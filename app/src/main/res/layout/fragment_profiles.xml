@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             fab:fab_title="@string/add_profile"
             fab:fab_colorPressed="@color/white_pressed"/>
+
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 

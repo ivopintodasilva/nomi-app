@@ -1,6 +1,5 @@
 package com.example.ivosilva.nomi.profiles;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
