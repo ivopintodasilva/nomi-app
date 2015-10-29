@@ -16,6 +16,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.ProfileViewHolder> {
 
-    List<CollectedContacts> user_profiles;
+    List<CollectedContacts> user_profiles = new ArrayList<>();
 
     RVPContactsAdapter(List<CollectedContacts> user_profiles){
         this.user_profiles = user_profiles;
@@ -149,7 +150,10 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
 
     @Override
     public int getItemCount() {
-        return user_profiles.size();
+        if(user_profiles != null){
+            return user_profiles.size();
+        }
+        return 0;
     }
 
 

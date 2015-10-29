@@ -5,12 +5,6 @@
     tools:context="com.example.ivosilva.nomi.contacts.ContactListFragment"
     android:id="@+id/fragment_profile_list">
 
-    <org.buraktamturk.loadingview.LoadingView
-        android:id="@+id/loading"
-        android:layout_centerInParent="true"
-        android:layout_height="150dp"
-        android:layout_width="150dp">
-    </org.buraktamturk.loadingview.LoadingView>
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -24,6 +18,14 @@
         android:id="@+id/recycler_view"
         android:layout_centerHorizontal="true"
         />
+
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateloading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:loading_width="5dp"
+        app:loading_color="#ffffff"
+        android:layout_centerInParent="true"/>
 
 
 
