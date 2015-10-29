@@ -13,8 +13,8 @@
         android:src="@drawable/login_background" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:layout_marginTop="25dp"
         android:id="@+id/profile_photo"
+        android:layout_marginTop="25dp"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
@@ -25,27 +25,27 @@
         android:src="@drawable/gito" />
 
     <TextView
+        android:id="@+id/profile_name"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Gito's Work Profile"
-        android:id="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_below="@+id/profile_photo"
-        android:layout_marginTop="30dp"
-        android:paddingBottom="20dp"/>
+        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"/>
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_phone"
         android:visibility="invisible"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_alignLeft="@+id/profile_photo"
@@ -57,9 +57,9 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_email"
         android:visibility="invisible"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
@@ -72,9 +72,9 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_facebook"
         android:visibility="invisible"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
@@ -86,9 +86,9 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_instagram"
         android:visibility="invisible"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
@@ -100,9 +100,9 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_linkedin"
         android:visibility="invisible"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
@@ -113,9 +113,9 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_googleplus"
         android:visibility="invisible"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
@@ -127,16 +127,15 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_twitter"
         android:visibility="invisible"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
         android:layout_alignLeft="@+id/profile_photo"
         android:layout_alignStart="@+id/profile_photo" />
-
 
 
 </RelativeLayout>

@@ -67,6 +67,7 @@ public class ProfileDetailsFragment extends Fragment {
 
             /*  to organize the profile contacts in the view  */
             int i = 0;
+            int padding = 110;
             int amountPadding = 0;
             String key;
             Iterator<String> it = contacts.keys();
@@ -74,7 +75,6 @@ public class ProfileDetailsFragment extends Fragment {
                 key = it.next();
                 Log.d("KEYS", key);
 
-                int margin = 100;
                 switch (key){
                     case "NUMBER":
                         number = (IconTextView) view.findViewById(R.id.profile_phone);
@@ -83,7 +83,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                            params.topMargin = amountPadding; //i*margin;
+                            params.topMargin = amountPadding; //i*padding;
                             number.setLayoutParams(params);
                         }
                         number.setOnClickListener(numberHandler);
@@ -161,7 +161,7 @@ public class ProfileDetailsFragment extends Fragment {
                         twitter.setOnClickListener(twitterHandler);
                         break;
                 }
-                amountPadding += margin;
+                amountPadding += padding;
             }
         }
         catch (org.json.JSONException e){
