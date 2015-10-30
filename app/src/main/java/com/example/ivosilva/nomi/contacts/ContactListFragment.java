@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.victor.loading.rotate.RotateLoading;
@@ -36,9 +39,6 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class ContactListFragment extends Fragment {
 
-    public static final String REQUEST_TAG = "ContactListFragment";
-    public static final String LOGINPREFS = "LoginPrefs" ;
-    public static final String USERID = "idKey";
     private RequestQueue mQueue;
     SharedPreferences shared_preferences;
 
@@ -53,9 +53,12 @@ public class ContactListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        shared_preferences = getActivity().getSharedPreferences(LOGINPREFS, Context.MODE_PRIVATE);
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
 
-        if (shared_preferences.getInt(USERID, -1) == -1){
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
+
+        if (shared_preferences.getInt(LoginFragment.USERID, -1) == -1){
             Log.d("onCreate", "Não tem shared preferences wtf");
             Toast.makeText(getActivity(), "Please login before using this functionality.",
                     Toast.LENGTH_LONG).show();
@@ -65,7 +68,7 @@ public class ContactListFragment extends Fragment {
         }
 
         mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-        String url = "http://192.168.160.56:8000/api/profile/relation/user/" + shared_preferences.getInt(USERID, -1) + "/";
+        String url = "http://"+serverIp+"/api/profile/relation/user/" + shared_preferences.getInt(LoginFragment.USERID, -1) + "/";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
                 new Response.Listener<JSONObject>() {
@@ -84,7 +87,7 @@ public class ContactListFragment extends Fragment {
                     }
                 });
 
-        jsonRequest.setTag(REQUEST_TAG);
+        jsonRequest.setTag(LoginFragment.REQUEST_TAG);
         mQueue.add(jsonRequest);
 
     }
@@ -134,12 +137,23 @@ public class ContactListFragment extends Fragment {
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycler_view.setLayoutManager(mLayoutManager);
 
+            if (user_contacts.size() == 0) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        TextView textView = (TextView) getActivity().findViewById(R.id.contacts_empty_label);
+                        textView.setVisibility(1);
+
+                        if(rotateLoading.isStart()){
+                            rotateLoading.stop();
+                        }
+                    }
+                }, 2000);
+            }
+
             RVPContactsAdapter adapter = new RVPContactsAdapter(user_contacts);
             recycler_view.setAdapter(adapter);
-
-            if(rotateLoading.isStart()){
-                rotateLoading.stop();
-            }
+            
         }
 
         @Override

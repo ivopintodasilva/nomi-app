@@ -8,6 +8,9 @@ import android.os.Bundle;
 
 import com.example.ivosilva.nomi.menu.MenuActivity;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 public class MainActivity extends AppCompatActivity {
     public static final String LOGINPREFS = "LoginPrefs";
     public static final String USERID = "idKey";
@@ -30,4 +33,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
 }

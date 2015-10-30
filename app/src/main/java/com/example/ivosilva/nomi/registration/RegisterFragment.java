@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
 import com.example.ivosilva.nomi.menu.MenuActivity;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
@@ -35,6 +36,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class RegisterFragment extends Fragment {
 
     public static final String REQUEST_TAG = "RegisterFragment";
+
     FancyButton btn_register;
     private RequestQueue mQueue;
     private EditText first_name;
@@ -42,7 +44,6 @@ public class RegisterFragment extends Fragment {
     private EditText email;
     private EditText password1;
     private EditText password2;
-
 
 
     @Override
@@ -154,9 +155,11 @@ public class RegisterFragment extends Fragment {
 
                 Log.d("JSON", jsonBody.toString());
 
+                SharedPreferences shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+                String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
 
                 mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-                String url = "http://192.168.160.56:8000/api/user/";
+                String url = "http://"+serverIp+"/api/user/";
 
                 final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
                         Request.Method.POST, url, jsonBody,
@@ -167,9 +170,11 @@ public class RegisterFragment extends Fragment {
 
                                 Toast.makeText(getActivity(), "User registered!",
                                         Toast.LENGTH_LONG).show();
+//                                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
 
                                 Intent register_intent = new Intent(getActivity(),
                                         MainActivity.class);
+                                register_intent.putExtra("event","userRegistered");
                                 getActivity().startActivity(register_intent);
                                 getActivity().finish();
                             }
