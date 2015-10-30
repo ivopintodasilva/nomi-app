@@ -20,6 +20,29 @@
         android:layout_centerHorizontal="true"
     />
 
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateloading_profiles"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:loading_width="5dp"
+        app:loading_color="#ffffff"
+        android:layout_centerInParent="true"/>
+
+
+    <TextView
+        android:id="@+id/profiles_empty_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Maybe you should create one"
+        android:fontFamily="sans-serif-thin"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:paddingBottom="10dp"
+        android:visibility="invisible"
+        android:layout_above="@+id/rotateloading_profiles"
+        android:layout_centerHorizontal="true" />
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -40,8 +63,10 @@
             android:id="@+id/action_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
             fab:fab_title="@string/add_profile"
-            fab:fab_colorPressed="@color/white_pressed"/>
+            fab:fab_colorPressed="@color/white_pressed" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

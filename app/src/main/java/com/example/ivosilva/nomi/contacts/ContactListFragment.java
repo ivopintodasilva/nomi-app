@@ -40,6 +40,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class ContactListFragment extends Fragment {
 
     private RequestQueue mQueue;
+
     SharedPreferences shared_preferences;
 
     private RotateLoading rotateLoading;
@@ -137,23 +138,24 @@ public class ContactListFragment extends Fragment {
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycler_view.setLayoutManager(mLayoutManager);
 
-            if (user_contacts.size() == 0) {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    if (user_contacts.size() == 0) {
                         TextView textView = (TextView) getActivity().findViewById(R.id.contacts_empty_label);
                         textView.setVisibility(1);
-
-                        if(rotateLoading.isStart()){
+                    }
+                        if (rotateLoading.isStart()) {
                             rotateLoading.stop();
                         }
                     }
-                }, 2000);
-            }
+            }, 2000);
+
 
             RVPContactsAdapter adapter = new RVPContactsAdapter(user_contacts);
             recycler_view.setAdapter(adapter);
-            
+
         }
 
         @Override
@@ -171,7 +173,7 @@ public class ContactListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
 
         // get the loading wheel and start it
-        rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading);
+        rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading_contacts);
         rotateLoading.start();
 
         return view;
