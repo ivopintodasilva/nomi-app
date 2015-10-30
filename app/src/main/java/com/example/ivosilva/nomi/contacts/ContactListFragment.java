@@ -36,6 +36,12 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class ContactListFragment extends Fragment {
 
+    // UA
+    // public static final String base_url = "http://192.168.160.56:8000/";
+
+    // CASA
+    public static final String base_url = "http://192.168.0.24:8000/";
+
     public static final String REQUEST_TAG = "ContactListFragment";
     public static final String LOGINPREFS = "LoginPrefs" ;
     public static final String USERID = "idKey";
@@ -64,7 +70,7 @@ public class ContactListFragment extends Fragment {
         }
 
         mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-        String url = "http://192.168.160.56:8000/api/profile/relation/user/" + shared_preferences.getInt(USERID, -1) + "/";
+        String url = base_url + "api/profile/relation/user/" + shared_preferences.getInt(USERID, -1) + "/";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
                 new Response.Listener<JSONObject>() {

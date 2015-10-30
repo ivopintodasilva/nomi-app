@@ -46,6 +46,12 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LoginFragment extends Fragment{
+    // UA
+    // public static final String base_url = "http://192.168.160.56:8000/";
+
+    // CASA
+    public static final String base_url = "http://192.168.0.24:8000/";
+
     FancyButton btn_login;
     FancyButton btn_register;
     private RequestQueue mQueue;
@@ -91,7 +97,7 @@ public class LoginFragment extends Fragment{
 
 
             mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-            String url = "http://192.168.160.56:8000/api/user/login/?email=" + username.getText().toString() + "&password=" + password.getText();
+            String url = base_url + "api/user/login/?email=" + username.getText().toString() + "&password=" + password.getText();
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
                     new Response.Listener<JSONObject>() {
                         @Override
