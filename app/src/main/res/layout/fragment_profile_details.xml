@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -137,5 +137,93 @@
         android:layout_alignLeft="@+id/profile_photo"
         android:layout_alignStart="@+id/profile_photo" />
 
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonColorPressed="@color/colorPrimary"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp" >
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_twitter"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_googleplus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_googleplus"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_linkedin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_linkedin"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_instagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_instagram"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_facebook"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_email"
+            fab:fab_colorPressed="@color/white_pressed" />
+
+        <com.getbase.floatingactionbutton.AddFloatingActionButton
+            android:id="@+id/action_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.80"
+            android:scaleY="0.80"
+            fab:fab_size="mini"
+            fab:fab_title="@string/add_phone"
+            fab:fab_colorPressed="@color/white_pressed"
+            android:onClick="profile_add_phone"/>
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </RelativeLayout>

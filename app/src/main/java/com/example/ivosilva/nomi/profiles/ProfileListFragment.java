@@ -114,7 +114,7 @@ public class ProfileListFragment extends Fragment {
                 profiles_list = new ArrayList<Profile>();
 
                 for(int i = 0; i < results.length(); i++){
-                    profile = results.getJSONObject(i); // obter profile
+                    profile = results.getJSONObject(i); // get profile
 
                     int profile_id = profile.getInt("id");
                     String name = profile.getString("name");
@@ -122,7 +122,7 @@ public class ProfileListFragment extends Fragment {
 
                     profiles_list.add(new Profile(profile_id, name, color));
 
-                    attributes = profile.getJSONArray("attributes"); // obter attributes do profile
+                    attributes = profile.getJSONArray("attributes"); // get attributes profile
                     for(int j=0; j<attributes.length(); j++) {
                         Log.d("PROFILEATTR",attributes.getJSONObject(j).getString("name"));
                         String attrName = attributes.getJSONObject(j).getString("name");
@@ -187,20 +187,13 @@ public class ProfileListFragment extends Fragment {
 
 
         /****** code for floating button ******/
-        final View actionA = getActivity().findViewById(R.id.action_a);
-
-        FloatingActionButton actionB = new FloatingActionButton(getActivity().getBaseContext());
-        actionB.setTitle(getContext().getString(R.string.add_profile));
-        actionB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionA.setVisibility(actionA.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-            }
-        });
+//        FloatingActionButton actionB = new FloatingActionButton(getActivity().getBaseContext());
+//        actionB.setTitle(getContext().getString(R.string.add_profile));
         /****** end of code for floating button ******/
 
 
         return view;
     }
+
 
 }

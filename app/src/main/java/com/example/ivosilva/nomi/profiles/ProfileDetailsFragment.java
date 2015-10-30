@@ -1,6 +1,7 @@
 package com.example.ivosilva.nomi.profiles;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -57,6 +59,12 @@ public class ProfileDetailsFragment extends Fragment {
 
         Log.d("ProfileDetailsFragmentP", getArguments().getString("PROFILE", ""));
         Log.d("ProfileDetailsFragmentA", getArguments().getString("ATTRIBUTES", ""));
+
+        /****** code for floating button ******/
+        FloatingActionButton multipleActions = new FloatingActionButton(getActivity().getBaseContext());
+//        multipleActions.setTitle(getContext().getString(R.string.add_profile));
+        multipleActions.setOnClickListener(multipleActionsHandler);
+        /****** end of code for floating button ******/
 
         try {
             JSONObject profile = new JSONObject(getArguments().getString("PROFILE", ""));
@@ -284,5 +292,19 @@ public class ProfileDetailsFragment extends Fragment {
         builder.create();
         builder.show();
     }
+
+    View.OnClickListener multipleActionsHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final View action_phone = getActivity().findViewById(R.id.action_phone);
+            action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+            Log.d("FLOTINGACTION","action_phone");
+
+            ///TODO change the target of the intent. Just for testing
+            Intent new_profile_intent = new Intent(getActivity(), NewProfileActivity.class);
+            getActivity().startActivity(new_profile_intent);
+        }
+    };
 
 }
