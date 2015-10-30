@@ -59,9 +59,13 @@ public class ContactListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        shared_preferences = getActivity().getSharedPreferences(LOGINPREFS, Context.MODE_PRIVATE);
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
 
-        if (shared_preferences.getInt(USERID, -1) == -1){
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
+
+        if (shared_preferences.getInt(LoginFragment.USERID, -1) == -1){
+            Log.d("onCreate", "Não tem shared preferences wtf");
             Toast.makeText(getActivity(), "Please login before using this functionality.",
                     Toast.LENGTH_LONG).show();
             Intent login_intent = new Intent(getActivity(), MainActivity.class);
@@ -70,7 +74,7 @@ public class ContactListFragment extends Fragment {
         }
 
         mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-        String url = base_url + "api/profile/relation/user/" + shared_preferences.getInt(USERID, -1) + "/";
+        String url = "http://"+serverIp+"/api/profile/relation/user/" + shared_preferences.getInt(LoginFragment.USERID, -1) + "/";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(),
                 new Response.Listener<JSONObject>() {
@@ -139,6 +143,21 @@ public class ContactListFragment extends Fragment {
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycler_view.setLayoutManager(mLayoutManager);
 
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    if (user_contacts.size() == 0) {
+                        TextView textView = (TextView) getActivity().findViewById(R.id.contacts_empty_label);
+                        textView.setVisibility(1);
+                    }
+                        if (rotateLoading.isStart()) {
+                            rotateLoading.stop();
+                        }
+                    }
+            }, 2000);
+
+
             RVPContactsAdapter adapter = new RVPContactsAdapter(user_contacts);
             recycler_view.setAdapter(adapter);
 
@@ -162,7 +181,7 @@ public class ContactListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
 
         // get the loading wheel and start it
-        rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading);
+        rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading_contacts);
         rotateLoading.start();
 
         return view;

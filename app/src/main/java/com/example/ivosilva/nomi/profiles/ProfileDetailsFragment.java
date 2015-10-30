@@ -1,7 +1,7 @@
 package com.example.ivosilva.nomi.profiles;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -9,12 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -30,6 +30,14 @@ import java.util.Iterator;
 public class ProfileDetailsFragment extends Fragment {
 
     TextView profile_name;
+    private IconTextView number;
+    private IconTextView email;
+    private IconTextView facebook;
+    private IconTextView instagram;
+    private IconTextView linkedin;
+    private IconTextView googleplus;
+    private IconTextView twitter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +60,12 @@ public class ProfileDetailsFragment extends Fragment {
         Log.d("ProfileDetailsFragmentP", getArguments().getString("PROFILE", ""));
         Log.d("ProfileDetailsFragmentA", getArguments().getString("ATTRIBUTES", ""));
 
+        /****** code for floating button ******/
+        FloatingActionButton multipleActions = new FloatingActionButton(getActivity().getBaseContext());
+//        multipleActions.setTitle(getContext().getString(R.string.add_profile));
+        multipleActions.setOnClickListener(multipleActionsHandler);
+        /****** end of code for floating button ******/
+
         try {
             JSONObject profile = new JSONObject(getArguments().getString("PROFILE", ""));
             profile_name = (TextView) view.findViewById(R.id.profile_name);
@@ -61,94 +75,101 @@ public class ProfileDetailsFragment extends Fragment {
 
             /*  to organize the profile contacts in the view  */
             int i = 0;
+            int padding = 110;
+            int amountPadding = 0;
             String key;
             Iterator<String> it = contacts.keys();
             while(it.hasNext()){
                 key = it.next();
                 Log.d("KEYS", key);
-//                Log.d("i", Integer.toString(i));
 
                 switch (key){
                     case "NUMBER":
-                        IconTextView number = (IconTextView) view.findViewById(R.id.profile_phone);
+                        number = (IconTextView) view.findViewById(R.id.profile_phone);
                         number.setText("{fa-phone}  " + contacts.getString(key));
                         number.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = amountPadding; //i*padding;
                             number.setLayoutParams(params);
                         }
                         number.setOnClickListener(numberHandler);
                         break;
                     case "EMAIL":
-                        IconTextView email = (IconTextView) view.findViewById(R.id.profile_email);
+                        email = (IconTextView) view.findViewById(R.id.profile_email);
                         email.setText("{fa-envelope-o}  " + contacts.getString(key));
                         email.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) email.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = amountPadding;
                             email.setLayoutParams(params);
                         }
+                        email.setOnClickListener(emailHandler);
                         break;
                     case "FACEBOOK":
-                        IconTextView facebook = (IconTextView) view.findViewById(R.id.profile_facebook);
-                        facebook.setText("{fa-facebook}  " + contacts.getString(key));
+                        facebook = (IconTextView) view.findViewById(R.id.profile_facebook);
+                        facebook.setText("{fa-facebook}   /" + contacts.getString(key));
                         facebook.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) facebook.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = amountPadding;
                             facebook.setLayoutParams(params);
                         }
+                        facebook.setOnClickListener(facebookHandler);
                         break;
                     case "INSTAGRAM":
-                        IconTextView instagram = (IconTextView) view.findViewById(R.id.profile_instagram);
-                        instagram.setText("{fa-instagram}  " + contacts.getString(key));
+                        instagram = (IconTextView) view.findViewById(R.id.profile_instagram);
+                        instagram.setText("{fa-instagram}  @" + contacts.getString(key));
                         instagram.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) instagram.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = amountPadding;
                             instagram.setLayoutParams(params);
                         }
+                        instagram.setOnClickListener(instagramHandler);
                         break;
                     case "LINKEDIN":
-                        IconTextView linkedin = (IconTextView) view.findViewById(R.id.profile_linkedin);
-                        linkedin.setText("{fa-linkedin}  " + contacts.getString(key));
+                        linkedin = (IconTextView) view.findViewById(R.id.profile_linkedin);
+                        linkedin.setText("{fa-linkedin}  /" + contacts.getString(key));
                         linkedin.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linkedin.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = amountPadding;
                             linkedin.setLayoutParams(params);
                         }
+                        linkedin.setOnClickListener(linkedinHandler);
                         break;
-                    case "GOOGLE":
-                        IconTextView google = (IconTextView) view.findViewById(R.id.profile_googleplus);
-                        google.setText("{fa-google-plus}  " + contacts.getString(key));
-                        google.setVisibility(View.VISIBLE);
+                    case "GOOGLEPLUS":
+                        googleplus = (IconTextView) view.findViewById(R.id.profile_googleplus);
+                        googleplus.setText("{fa-google-plus}  +" + contacts.getString(key));
+                        googleplus.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
-                            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) google.getLayoutParams();
-                            params.topMargin = i*120;
-                            google.setLayoutParams(params);
+                            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) googleplus.getLayoutParams();
+                            params.topMargin = amountPadding;
+                            googleplus.setLayoutParams(params);
                         }
+                        googleplus.setOnClickListener(googleplusHandler);
                         break;
                     case "TWITTER":
-                        IconTextView twitter = (IconTextView) view.findViewById(R.id.profile_twitter);
+                        twitter = (IconTextView) view.findViewById(R.id.profile_twitter);
                         twitter.setText("{fa-twitter}  @" + contacts.getString(key));
                         twitter.setVisibility(View.VISIBLE);
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = amountPadding;
                             twitter.setLayoutParams(params);
                         }
+                        twitter.setOnClickListener(twitterHandler);
                         break;
                 }
-
+                amountPadding += padding;
             }
         }
         catch (org.json.JSONException e){
@@ -158,43 +179,131 @@ public class ProfileDetailsFragment extends Fragment {
         return view;
     }
 
+
     View.OnClickListener numberHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//            builder.setTitle(getContext().getString(R.string.attribute_dialog_title));
+            showEditDialog(R.layout.dialog_profile_detail_edit_number, R.id.attribute_number, "{fa-phone}  ", "number");
+        }
+    };
 
-            // Get the layout inflater
-            LayoutInflater linf = LayoutInflater.from(getActivity());
-            final View inflator = linf.inflate(R.layout.dialog_profile_detail_edit,null);
-//            final LayoutInflater inflater = getActivity().getLayoutInflater();
 
-            final EditText value = (EditText) inflator.findViewById(R.id.attribute_value);
+    View.OnClickListener emailHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            showEditDialog(R.layout.dialog_profile_detail_edit_email, R.id.attribute_email, "{fa-envelope-o}  ", "email");
+        }
+    };
 
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-//            builder.setView(inflater.inflate(R.layout.dialog_profile_detail_edit, null))
-            builder.setView(inflator)
-                // Add action buttons
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.i("DIALOG","YES");
-                        Log.i("DIALOG", value.getText().toString());
-                        /// TODO making change the value
-                    }
-                })
-                .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.i("DIALOG", "CANCEL");
-                        dialog.cancel();
-                    }
-                });
 
-            builder.create();
-//            alert.getButton(DialogInterface.BUTTON_POSITIVE).setBackgroundColor(getContext().getColor(R.color.colorPrimaryDark));
-//            alert.getButton(DialogInterface.BUTTON_NEUTRAL).setBackgroundColor(getContext().getColor(R.color.colorPrimaryDark));
+    View.OnClickListener facebookHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            showEditDialog(R.layout.dialog_profile_detail_edit_facebook, R.id.attribute_facebook, "{fa-facebook}   /", "facebook");
+        }
+    };
 
-            builder.show();
+
+    View.OnClickListener instagramHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            showEditDialog(R.layout.dialog_profile_detail_edit_instagram, R.id.attribute_instagram, "{fa-instagram}  @", "instagram");
+        }
+    };
+
+
+    View.OnClickListener linkedinHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            showEditDialog(R.layout.dialog_profile_detail_edit_linkedin, R.id.attribute_linkedin, "{fa-linkedin}  /", "linkedin");
+        }
+    };
+
+
+    View.OnClickListener googleplusHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            showEditDialog(R.layout.dialog_profile_detail_edit_googleplus, R.id.attribute_googleplus, "{fa-google-plus}  +", "googleplus");
+        }
+    };
+
+
+    View.OnClickListener twitterHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            showEditDialog(R.layout.dialog_profile_detail_edit_twitter, R.id.attribute_twitter, "{fa-twitter}  @", "twitter");
+        }
+    };
+
+
+    private void showEditDialog(int dialog_layout, int editText, final String icon, String attrType) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //builder.setTitle(getContext().getString(R.string.attribute_dialog_title));
+
+        // Get the layout inflater
+        LayoutInflater linf = LayoutInflater.from(getActivity());
+
+        // Pass null as the parent view because its going in the dialog layout
+        final View inflator = linf.inflate(dialog_layout, null);
+
+        final IconTextView oldValue;
+        switch (attrType) {
+            case "number":
+                oldValue = number;
+                break;
+            case "email":
+                oldValue = email;
+                break;
+            case "facebook":
+                oldValue = facebook;
+                break;
+            case "instagram":
+                oldValue = instagram;
+                break;
+            case "linkedin":
+                oldValue = linkedin;
+                break;
+            case "googleplus":
+                oldValue = googleplus;
+                break;
+            case "twitter":
+                oldValue = twitter;
+                break;
+            default:
+                oldValue = email;
+                break;
+        }
+
+        final EditText newValue = (EditText) inflator.findViewById(editText);
+
+        // Inflate and set the layout for the dialog
+        builder.setView(inflator)
+            // Add action buttons
+            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    Log.i("DIALOG", "YES");
+                    Log.i("DIALOG", newValue.getText().toString());
+                    Log.i("DIALOG",oldValue.getText().toString());
+
+                    oldValue.setText(icon + newValue.getText());
+                }
+            })
+            .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Log.i("DIALOG", "CANCEL");
+                    dialog.cancel();
+                }
+            });
+
+        builder.create();
+        builder.show();
+    }
+
+    View.OnClickListener multipleActionsHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final View action_phone = getActivity().findViewById(R.id.action_phone);
+            action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+            Log.d("FLOTINGACTION","action_phone");
+
+            ///TODO change the target of the intent. Just for testing
+            Intent new_profile_intent = new Intent(getActivity(), NewProfileActivity.class);
+            getActivity().startActivity(new_profile_intent);
         }
     };
 

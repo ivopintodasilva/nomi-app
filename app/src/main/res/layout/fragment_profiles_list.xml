@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    tools:context="com.example.ivosilva.nomi.contacts.ContactListFragment"
-    android:id="@+id/fragment_profile_list">
-
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -17,10 +17,10 @@
         android:layout_width="match_parent"
         android:id="@+id/recycler_view"
         android:layout_centerHorizontal="true"
-        />
+    />
 
     <com.victor.loading.rotate.RotateLoading
-        android:id="@+id/rotateloading_contacts"
+        android:id="@+id/rotateloading_profiles"
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:loading_width="5dp"
@@ -29,19 +29,32 @@
 
 
     <TextView
-        android:id="@+id/contacts_empty_label"
+        android:id="@+id/profiles_empty_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You need to get some friends"
+        android:text="Maybe you should create one"
         android:fontFamily="sans-serif-thin"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:paddingBottom="10dp"
         android:visibility="invisible"
-        android:layout_above="@+id/rotateloading_contacts"
+        android:layout_above="@+id/rotateloading_profiles"
         android:layout_centerHorizontal="true" />
+
+
+    <com.getbase.floatingactionbutton.AddFloatingActionButton
+        android:id="@+id/action_new_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_colorPressed="@color/white_pressed"
+        fab:fab_addButtonColorPressed="@color/colorPrimary"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/profiles_empty_label"
+        android:layout_alignEnd="@+id/profiles_empty_label" />
 
 
 

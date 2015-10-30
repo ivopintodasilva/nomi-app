@@ -12,15 +12,23 @@
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
     <string name="title_activity_profiles">ProfilesActivity</string>
     <string name="title_activity_profiles_detail">ProfilesDetailsActivity</string>
+    <string name="title_activity_profiles_new">NewProfileActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="nfc_not_supported">It\'s time to get some NFC.</string>
     <string name="add_profile">Add new profile</string>
     <string name="attribute_type">Attribute</string>
-    <string name="attribute_value">Contact</string>
+    <string name="attribute_value">Write a new value</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="attribute_dialog_title">Change attribute</string>
+    <string name="add_phone">Phone number</string>
+    <string name="add_facebook">Facebook</string>
+    <string name="add_email">Email</string>
+    <string name="add_instagram">Instagram</string>
+    <string name="add_linkedin">Linkedin</string>
+    <string name="add_googleplus">Google plus</string>
+    <string name="add_twitter">Twitter</string>
 
 </resources>

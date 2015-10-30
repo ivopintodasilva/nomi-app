@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
 import com.example.ivosilva.nomi.menu.MenuActivity;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
@@ -158,9 +159,11 @@ public class RegisterFragment extends Fragment {
 
                 Log.d("JSON", jsonBody.toString());
 
+                SharedPreferences shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+                String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
 
                 mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-                String url = base_url + "api/user/";
+                String url = "http://"+serverIp+"/api/user/";
 
                 final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
                         Request.Method.POST, url, jsonBody,
@@ -171,9 +174,11 @@ public class RegisterFragment extends Fragment {
 
                                 Toast.makeText(getActivity(), "User registered!",
                                         Toast.LENGTH_LONG).show();
+//                                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
 
                                 Intent register_intent = new Intent(getActivity(),
                                         MainActivity.class);
+                                register_intent.putExtra("event","userRegistered");
                                 getActivity().startActivity(register_intent);
                                 getActivity().finish();
                             }

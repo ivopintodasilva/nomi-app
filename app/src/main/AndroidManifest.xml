@@ -19,7 +19,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,6 +73,11 @@
         <activity
             android:name=".profiles.ProfileDetailsActivity"
             android:label="@string/title_activity_profiles_detail"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".profiles.NewProfileActivity"
+            android:label="@string/title_activity_profiles_new"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

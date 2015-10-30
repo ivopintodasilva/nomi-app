@@ -1,10 +1,13 @@
 package com.example.ivosilva.nomi.profiles;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import com.example.ivosilva.nomi.R;
 
@@ -30,5 +33,14 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         profile_details.setArguments(args);
         ft.add(android.R.id.content, profile_details).commit();
 
+    }
+
+    public void profile_add_phone(View view) {
+        final View action_phone = (View) findViewById(R.id.action_phone);
+        action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+        Log.d("FLOTINGACTION", "profile_add_phone");
+        Intent new_profile_intent = new Intent(this, NewProfileActivity.class);
+        this.startActivity(new_profile_intent);
     }
 }
