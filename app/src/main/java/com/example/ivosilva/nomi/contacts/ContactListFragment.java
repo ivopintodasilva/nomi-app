@@ -77,7 +77,7 @@ public class ContactListFragment extends Fragment {
                     public void onResponse(JSONObject jsonObject) {
 
                         // do the Json parsing in a different thread
-                        new LongOperation().execute(jsonObject);
+                        new ParseJSON().execute(jsonObject);
 
                     }
                 },
@@ -95,7 +95,7 @@ public class ContactListFragment extends Fragment {
 
 
     // Async task in order no to parse the JSON response in the UI thread
-    class LongOperation extends AsyncTask<JSONObject, Void, String> {
+    class ParseJSON extends AsyncTask<JSONObject, Void, String> {
 
         @Override
         protected String doInBackground(JSONObject... params) {
@@ -113,7 +113,7 @@ public class ContactListFragment extends Fragment {
                     contact = results.getJSONObject(i);
                     user_info = contact.getJSONObject("user");
                     Log.d("results", contact.toString());
-                    user_contacts.add(new CollectedContacts(user_info.getInt("id"), user_info.getString("first_name") + " " + user_info.getString("last_name")));
+                    user_contacts.add(new CollectedContacts(user_info.getInt("id"), user_info.getString("first_name") + " " + user_info.getString("last_name"), user_info.getString("email")));
 
                     attributes = contact.getJSONArray("attributes");
                     for(int j = 0; j < attributes.length(); j++){

@@ -12,7 +12,7 @@
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_marginTop="50dp"
-        android:id="@+id/person_photo"
+        android:id="@+id/details_photo"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
@@ -33,7 +33,7 @@
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:layout_below="@+id/person_photo"
+        android:layout_below="@+id/details_photo"
         android:layout_marginTop="50dp" />
 
     <com.joanzapata.iconify.widget.IconTextView
@@ -44,10 +44,10 @@
         android:layout_marginTop="50dp"
         android:textSize="24dp"
         android:textColor="#FFFFFF"
-        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignLeft="@+id/details_photo"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignStart="@+id/details_photo" />
 
 
 
@@ -60,9 +60,9 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignStart="@+id/details_photo" />
 
 
 
@@ -75,9 +75,9 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignStart="@+id/details_photo" />
 
 
     <com.joanzapata.iconify.widget.IconTextView
@@ -89,9 +89,9 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignStart="@+id/details_photo" />
 
 
     <com.joanzapata.iconify.widget.IconTextView
@@ -103,9 +103,9 @@
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/person_photo"
+        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignStart="@+id/details_photo" />
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/googleplus"
@@ -117,8 +117,8 @@
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/person_photo"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignLeft="@+id/details_photo"
+        android:layout_alignStart="@+id/details_photo" />
 
 
     <com.joanzapata.iconify.widget.IconTextView
@@ -131,7 +131,7 @@
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/person_photo"
-        android:layout_alignStart="@+id/person_photo" />
+        android:layout_alignLeft="@+id/details_photo"
+        android:layout_alignStart="@+id/details_photo" />
 
 </RelativeLayout>

@@ -17,7 +17,7 @@ public class CollectedContactsSerializer implements JsonSerializer<CollectedCont
         JsonObject result = new JsonObject();
         result.add("id", new JsonPrimitive(profile.getId()));
         result.add("name", new JsonPrimitive(profile.getName()));
-        result.add("photo_id", new JsonPrimitive(profile.getPhotoId()));
+        result.add("email", new JsonPrimitive(profile.getEmail()));
         return result;
     }
 }
