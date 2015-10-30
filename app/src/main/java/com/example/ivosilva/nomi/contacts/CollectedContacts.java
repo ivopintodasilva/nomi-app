@@ -7,14 +7,15 @@ import java.util.HashMap;
  */
 public class CollectedContacts {
     private int id;
-    private int photo_id;
     private String name;
+    private String email;
     private HashMap<String, String> contacts;
 
-    public CollectedContacts(int id, String name) {
+    public CollectedContacts(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.contacts = new HashMap<String, String>();
+        this.email = email;
     }
 
     public void addContact(String key, String value){
@@ -33,13 +34,14 @@ public class CollectedContacts {
         return this.name;
     }
 
+    public String getEmail(){
+        return this.email;
+    }
+
     public int getId(){
         return this.id;
     }
 
-    public int getPhotoId(){
-        return this.photo_id;
-    }
 
     @Override
     public String toString(){

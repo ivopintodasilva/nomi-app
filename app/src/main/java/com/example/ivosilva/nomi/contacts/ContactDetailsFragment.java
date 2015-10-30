@@ -10,14 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.R;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.json.JSONObject;
 
 import java.util.Iterator;
+
+import fr.tkeunebr.gravatar.Gravatar;
 
 public class ContactDetailsFragment extends Fragment {
 
@@ -41,10 +45,20 @@ public class ContactDetailsFragment extends Fragment {
         Log.d("ContactDetailsFragment", getArguments().getString("PROFILE", ""));
         Log.d("ContactDetailsFragment", getArguments().getString("CONTACTS", ""));
 
+
         try {
             JSONObject profile = new JSONObject(getArguments().getString("PROFILE", ""));
             name = (TextView) view.findViewById(R.id.name);
             name.setText(profile.getString("name"));
+
+
+            String gravatar_url = Gravatar.init().with(profile.getString("email")).force404().size(250).build();
+            Log.d("ContactDetailsFragment", gravatar_url);
+
+            // put gravatar image in details
+            Glide.with(getContext())
+                    .load(gravatar_url)
+                    .into((CircularImageView) view.findViewById(R.id.details_photo));
 
             JSONObject contacts = new JSONObject(getArguments().getString("CONTACTS", ""));
 
