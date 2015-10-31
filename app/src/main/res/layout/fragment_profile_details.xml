@@ -221,6 +221,10 @@
             fab:fab_size="mini"
             fab:fab_title="@string/add_phone"
             fab:fab_colorPressed="@color/white_pressed"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:onClick="profile_add_phone"/>
 
 

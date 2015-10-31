@@ -50,7 +50,7 @@ public class LoginFragment extends Fragment{
     // public static final String base_url = "http://192.168.160.56:8000/";
 
     // CASA
-    public static final String base_url = "http://192.168.0.24:8000/";
+    //public static final String base_url = "http://192.168.0.24:8000/";
 
     FancyButton btn_login;
     FancyButton btn_register;
@@ -60,7 +60,9 @@ public class LoginFragment extends Fragment{
     public static final String REQUEST_TAG = "LoginFragment";
     public static final String SERVER = "ServerPrefs";
     public static final String SERVERIP = "ServerIP";
-    public static final String IP = "192.168.1.102:8000"; //"192.168.160.56:8000";
+    //public static final String IP = "192.168.1.102:8000"; //"192.168.160.56:8000";
+    public static final String IP = "192.168.0.24:8000"; //"192.168.160.56:8000";
+
 
     SharedPreferences shared_preferences;
 
@@ -80,7 +82,7 @@ public class LoginFragment extends Fragment{
     public void onResume() {
         super.onResume();
 
-        Log.i("ONRESUME","YES");
+        Log.i("ONRESUME", "YES");
         Intent intent = getActivity().getIntent();
         if(intent.hasExtra("event")){
             if(intent.hasExtra("event") && intent.getStringExtra("event").equals("userRegistered")) {

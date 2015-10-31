@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.victor.loading.rotate.RotateLoading;
@@ -40,7 +43,7 @@ public class ContactListFragment extends Fragment {
     // public static final String base_url = "http://192.168.160.56:8000/";
 
     // CASA
-    public static final String base_url = "http://192.168.0.24:8000/";
+    //public static final String base_url = "http://192.168.0.24:8000/";
 
     public static final String REQUEST_TAG = "ContactListFragment";
     public static final String LOGINPREFS = "LoginPrefs" ;
@@ -143,26 +146,16 @@ public class ContactListFragment extends Fragment {
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycler_view.setLayoutManager(mLayoutManager);
 
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    if (user_contacts.size() == 0) {
-                        TextView textView = (TextView) getActivity().findViewById(R.id.contacts_empty_label);
-                        textView.setVisibility(1);
-                    }
-                        if (rotateLoading.isStart()) {
-                            rotateLoading.stop();
-                        }
-                    }
-            }, 2000);
-
-
             RVPContactsAdapter adapter = new RVPContactsAdapter(user_contacts);
             recycler_view.setAdapter(adapter);
 
             if(rotateLoading.isStart()){
                 rotateLoading.stop();
+            }
+
+            if (user_contacts.size() == 0) {
+                TextView textView = (TextView) getActivity().findViewById(R.id.contacts_empty_label);
+                textView.setVisibility(View.VISIBLE);
             }
         }
 

@@ -90,7 +90,7 @@ public class ProfileListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Crouton.makeText(getActivity(), "Error fetching profiles data.", Style.ALERT).show();
+                        Crouton.makeText(getActivity(), "Error fetching profiles.", Style.ALERT).show();
                     }
                 });
 
@@ -147,23 +147,19 @@ public class ProfileListFragment extends Fragment {
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycler_view.setLayoutManager(mLayoutManager);
 
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    if (profiles_list.size() == 0) {
-                        TextView textView = (TextView) getActivity().findViewById(R.id.profiles_empty_label);
-                        textView.setVisibility(1);
-                    }
-                    if (rotateLoading.isStart()) {
-                        rotateLoading.stop();
-                    }
-                }
-            }, 2000);
+            if (profiles_list.size() == 0) {
+                TextView textView = (TextView) getActivity().findViewById(R.id.profiles_empty_label);
+                textView.setVisibility(View.VISIBLE);
+            }
 
 
             RVPProfilesAdapter adapter = new RVPProfilesAdapter(profiles_list);
             recycler_view.setAdapter(adapter);
+
+            if (rotateLoading.isStart()) {
+                rotateLoading.stop();
+            }
+
 
         }
 

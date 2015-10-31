@@ -33,15 +33,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Maybe you should create one"
+        android:text="@string/create_profile"
         android:fontFamily="sans-serif-thin"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:paddingBottom="10dp"
         android:visibility="invisible"
-        android:layout_above="@+id/rotateloading_profiles"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"/>
 
 
     <com.getbase.floatingactionbutton.AddFloatingActionButton
@@ -53,8 +52,9 @@
         fab:fab_addButtonPlusIconColor="@color/white"
         fab:fab_labelStyle="@style/menu_labels_style"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/profiles_empty_label"
-        android:layout_alignEnd="@+id/profiles_empty_label" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"/>
 
 
 
