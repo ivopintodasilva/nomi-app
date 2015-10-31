@@ -90,7 +90,7 @@ public class LoginFragment extends Fragment{
         if(intent.hasExtra("event")){
             if(intent.hasExtra("event") && intent.getStringExtra("event").equals("userRegistered")) {
                 Log.i("ONRESUME","Has event with user registered");
-                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
+                Crouton.makeText(getActivity(), R.string.user_registered, Style.CONFIRM).show();
             }
 
         }
@@ -155,7 +155,7 @@ public class LoginFragment extends Fragment{
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
+                            Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
                         }
                     });
             jsonRequest.setTag(REQUEST_TAG);

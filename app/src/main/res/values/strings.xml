@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">nomi</string>
 
+    <string name="contacts">CONTACTS</string>
+    <string name="share">SHARE</string>
+    <string name="profiles">PROFILES</string>
+    <string name="settings">SETTINGS</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirm_password">Confirm password</string>
     <string name="email">E-mail</string>
@@ -39,6 +44,24 @@
     <string name="update_number">Updated phone number</string>
     <string name="update_twitter">Updated Twitter</string>
     <string name="no_contacts">No shared contacts yet</string>
+    <string name="nfc_enabled">NFC is Enabled</string>
+    <string name="error_json_profiles">Error fetching profiles</string>
+    <string name="error_json_contacts">Error fetching contacts</string>
+    <string name="please_login_toast">Please login before using this functionality</string>
+    <string name="user_registered">User registered</string>
+    <string name="you_shall_not_pass">You shall not pass!</string>
+    <string name="empty_email">E-mail cannot be empty</string>
+    <string name="empty_last_name">Last name cannot be empty</string>
+    <string name="empty_first_name">First name cannot be empty</string>
+    <string name="empty_password">Password cannot be empty</string>
+    <string name="empty_password_confirmation">Password confirmation cannot be empty</string>
+    <string name="passwords_not_match">Passwords do not match</string>
+    <string name="invalid_email">E-mail is not valid</string>
+    <string name="already_registered_email">E-mail is already registered</string>
+
+
+
+
 
 
 

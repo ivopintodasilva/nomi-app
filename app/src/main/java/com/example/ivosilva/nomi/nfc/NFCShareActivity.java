@@ -20,6 +20,8 @@ import com.example.ivosilva.nomi.R;
 
 import java.io.UnsupportedEncodingException;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+
 public class NFCShareActivity extends AppCompatActivity {
 
     Fragment active_fragment = null;
@@ -38,6 +40,12 @@ public class NFCShareActivity extends AppCompatActivity {
 
         NFCEnabled();
 
+    }
+
+    @Override
+    public void onDestroy(){
+        Crouton.cancelAllCroutons();
+        super.onDestroy();
     }
 
     @Override

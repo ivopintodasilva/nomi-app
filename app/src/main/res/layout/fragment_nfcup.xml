@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context="com.example.ivosilva.nomi.nfc.NFCUpFragment"
     android:id="@+id/nfc_up_fragment">
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="NFC is Enabled"
+        android:text="@string/nfc_enabled"
         android:textAllCaps="true"
         android:id="@+id/text_nfc_up"
         android:fontFamily="sans-serif-thin"
@@ -35,7 +35,23 @@
         android:layout_marginBottom="80dp"
         android:layout_alignParentBottom="true"
         />
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateloading_nfc"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/gito_image"
+        app:loading_width="5dp"
+        app:loading_color="#ffffff"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"/>
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_profile"
+        android:layout_below="@+id/gito_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp" />
 
 
 </RelativeLayout>

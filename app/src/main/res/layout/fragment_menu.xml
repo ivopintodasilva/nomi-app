@@ -29,7 +29,7 @@
         fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_focusColor="#20ffffff"
         fancy:fb_radius="5dp"
-        fancy:fb_text="CONTACTS"
+        fancy:fb_text="@string/contacts"
         fancy:fb_textColor="#FFFFFF" />
 
 
@@ -59,7 +59,7 @@
         fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_focusColor="#20ffffff"
         fancy:fb_radius="5dp"
-        fancy:fb_text="SHARE"
+        fancy:fb_text="@string/share"
         fancy:fb_textColor="#FFFFFF" />
 
     <ImageView
@@ -103,7 +103,7 @@
         fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_focusColor="#20ffffff"
         fancy:fb_radius="5dp"
-        fancy:fb_text="PROFILES"
+        fancy:fb_text="@string/profiles"
         fancy:fb_textColor="#FFFFFF" />
 
     <View
@@ -131,7 +131,7 @@
         fancy:fb_textFont="ProductSans-Regular.ttf"
         fancy:fb_focusColor="#20ffffff"
         fancy:fb_radius="5dp"
-        fancy:fb_text="SETTINGS"
+        fancy:fb_text="@string/settings"
         fancy:fb_textColor="#FFFFFF" />
 
 
