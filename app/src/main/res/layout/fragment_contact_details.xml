@@ -13,21 +13,19 @@
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_marginTop="50dp"
         android:id="@+id/details_photo"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         app:border="true"
         app:border_color="#ffffff"
         app:border_width="1dp"
-        app:shadow="true"
-        android:src="@drawable/gito" />
+        app:shadow="true" />
 
     <TextView
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Gito Jahsc"
         android:id="@+id/name"
         android:fontFamily="sans-serif-thin"
         android:textAllCaps="true"
@@ -39,99 +37,99 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/phone"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="24dp"
         android:textColor="#FFFFFF"
-        android:layout_alignLeft="@+id/details_photo"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+        />
 
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/email"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+        />
 
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/facebook"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+         />
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/instagram"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+         />
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/linkedin"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
-        android:layout_alignLeft="@+id/details_photo"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+         />
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/googleplus"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/details_photo"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+         />
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/twitter"
         android:visibility="invisible"
-        android:layout_height="70dp"
-        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/details_photo"
-        android:layout_alignStart="@+id/details_photo" />
+        android:layout_centerHorizontal="true"
+         />
 
 </RelativeLayout>

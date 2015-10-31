@@ -57,7 +57,7 @@ public class ContactDetailsFragment extends Fragment {
 
             // put gravatar image in details
             Glide.with(getContext())
-                    .load(gravatar_url)
+                    .load(gravatar_url).error(R.drawable.user_placeholder)
                     .into((CircularImageView) view.findViewById(R.id.details_photo));
 
             JSONObject contacts = new JSONObject(getArguments().getString("CONTACTS", ""));
@@ -79,7 +79,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             number.setLayoutParams(params);
                         }
                         break;
@@ -90,7 +90,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) email.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             email.setLayoutParams(params);
 
                         }
@@ -102,7 +102,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) facebook.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             facebook.setLayoutParams(params);
                         }
                         break;
@@ -113,7 +113,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) instagram.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             instagram.setLayoutParams(params);
                         }
                         break;
@@ -124,7 +124,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linkedin.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             linkedin.setLayoutParams(params);
                         }
                         break;
@@ -135,7 +135,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) google.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             google.setLayoutParams(params);
                         }
                         break;
@@ -146,7 +146,7 @@ public class ContactDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
-                            params.topMargin = i*120;
+                            params.topMargin = i*60;
                             twitter.setLayoutParams(params);
                         }
                         break;

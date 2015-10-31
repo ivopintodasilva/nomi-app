@@ -162,7 +162,8 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
         gravatarUrl = Gravatar.init().with(user_profiles.get(position).getEmail()).force404().size(60).build();
         Log.d("gravatarUrl", gravatarUrl);
         // substitute by real user image url
-        Glide.with(holder.context).load(gravatarUrl).into(holder.mPhoto);
+        Glide.with(holder.context).load(gravatarUrl)
+                .error(R.drawable.user_placeholder).into(holder.mPhoto);
     }
 
     @Override

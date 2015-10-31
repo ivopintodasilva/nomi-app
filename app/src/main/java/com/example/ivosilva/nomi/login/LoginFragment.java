@@ -54,9 +54,12 @@ public class LoginFragment extends Fragment{
 
     FancyButton btn_login;
     FancyButton btn_register;
+    EditText username;
+    EditText password;
     private RequestQueue mQueue;
     public static final String LOGINPREFS = "LoginPrefs" ;
     public static final String USERID = "idKey";
+    public static final String USEREMAIL = "emailKey";
     public static final String REQUEST_TAG = "LoginFragment";
     public static final String SERVER = "ServerPrefs";
     public static final String SERVERIP = "ServerIP";
@@ -118,8 +121,8 @@ public class LoginFragment extends Fragment{
     View.OnClickListener loginHandler = new View.OnClickListener() {
         public void onClick(View v) {
 
-            EditText username = (EditText) getActivity().findViewById(R.id.email);
-            EditText password = (EditText) getActivity().findViewById(R.id.password);
+            username = (EditText) getActivity().findViewById(R.id.email);
+            password = (EditText) getActivity().findViewById(R.id.password);
 
             shared_preferences = getActivity().getSharedPreferences(SERVER, Context.MODE_PRIVATE);
             String serverIp = shared_preferences.getString(SERVERIP, "localhost");
@@ -137,6 +140,7 @@ public class LoginFragment extends Fragment{
                             SharedPreferences.Editor editor = shared_preferences.edit();
                             try {
                                 editor.putInt(USERID, jsonObject.getInt("id"));
+                                editor.putString(USEREMAIL, username.getText().toString());
                                 editor.commit();
                             }
                             catch (JSONException e){

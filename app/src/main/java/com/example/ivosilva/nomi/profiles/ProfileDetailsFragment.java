@@ -1,7 +1,9 @@
 package com.example.ivosilva.nomi.profiles;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -23,6 +26,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+
+import fr.tkeunebr.gravatar.Gravatar;
 
 /**
  * Created by silva on 19-10-2015.
@@ -38,10 +43,22 @@ public class ProfileDetailsFragment extends Fragment {
     private IconTextView googleplus;
     private IconTextView twitter;
 
+    SharedPreferences shared_preferences;
+    String gravatar_url;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
+        String user_email = shared_preferences.getString(LoginFragment.USEREMAIL, "");
+
+        Log.d("ProfileDetailsFragment", user_email);
+
+        if(!user_email.equals("")){
+            gravatar_url = Gravatar.init().with(user_email).force404().size(250).build();
+        }
 
         Iconify.with(new FontAwesomeModule());
     }
@@ -54,7 +71,8 @@ public class ProfileDetailsFragment extends Fragment {
 
         // substitute by real user image url
         CircularImageView imageView = (CircularImageView) view.findViewById(R.id.profile_photo);
-        Glide.with(this).load("https://scontent-mxp1-1.xx.fbcdn.net/hphotos-xfl1/t31.0-8/1268990_10200674928977262_714053855_o.jpg").into(imageView);
+        Glide.with(getContext()).load(gravatar_url)
+                .error(R.drawable.user_placeholder).into(imageView);
 
 
         Log.d("ProfileDetailsFragmentP", getArguments().getString("PROFILE", ""));
@@ -73,9 +91,11 @@ public class ProfileDetailsFragment extends Fragment {
 
             JSONObject contacts = new JSONObject(getArguments().getString("ATTRIBUTES", ""));
 
+
+
             /*  to organize the profile contacts in the view  */
             int i = 0;
-            int padding = 110;
+            int padding = 50;
             int amountPadding = 0;
             String key;
             Iterator<String> it = contacts.keys();
@@ -91,7 +111,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                            params.topMargin = amountPadding; //i*padding;
+                            params.topMargin = i*60; //i*padding;
                             number.setLayoutParams(params);
                         }
                         number.setOnClickListener(numberHandler);
@@ -103,7 +123,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) email.getLayoutParams();
-                            params.topMargin = amountPadding;
+                            params.topMargin = i*60;
                             email.setLayoutParams(params);
                         }
                         email.setOnClickListener(emailHandler);
@@ -115,7 +135,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) facebook.getLayoutParams();
-                            params.topMargin = amountPadding;
+                            params.topMargin = i*60;
                             facebook.setLayoutParams(params);
                         }
                         facebook.setOnClickListener(facebookHandler);
@@ -127,7 +147,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) instagram.getLayoutParams();
-                            params.topMargin = amountPadding;
+                            params.topMargin = i*60;
                             instagram.setLayoutParams(params);
                         }
                         instagram.setOnClickListener(instagramHandler);
@@ -139,7 +159,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linkedin.getLayoutParams();
-                            params.topMargin = amountPadding;
+                            params.topMargin = i*60;
                             linkedin.setLayoutParams(params);
                         }
                         linkedin.setOnClickListener(linkedinHandler);
@@ -151,7 +171,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) googleplus.getLayoutParams();
-                            params.topMargin = amountPadding;
+                            params.topMargin = i*60;
                             googleplus.setLayoutParams(params);
                         }
                         googleplus.setOnClickListener(googleplusHandler);
@@ -163,7 +183,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
-                            params.topMargin = amountPadding;
+                            params.topMargin = i*60;
                             twitter.setLayoutParams(params);
                         }
                         twitter.setOnClickListener(twitterHandler);

@@ -32,8 +32,7 @@
                 app:border="true"
                 app:border_color="#ffffff"
                 app:border_width="1dp"
-                app:shadow="true"
-                android:src="@drawable/gito" />
+                app:shadow="true" />
 
             <TextView
                 android:layout_marginTop="15dp"
