@@ -69,7 +69,7 @@ public class ContactListFragment extends Fragment {
 
         if (shared_preferences.getInt(LoginFragment.USERID, -1) == -1){
             Log.d("onCreate", "Não tem shared preferences wtf");
-            Toast.makeText(getActivity(), "Please login before using this functionality.",
+            Toast.makeText(getActivity(), R.string.please_login_toast,
                     Toast.LENGTH_LONG).show();
             Intent login_intent = new Intent(getActivity(), MainActivity.class);
             startActivity(login_intent);
@@ -92,7 +92,7 @@ public class ContactListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Crouton.makeText(getActivity(), "Error fetching contact data.", Style.ALERT).show();
+                        Crouton.makeText(getActivity(), R.string.error_json_contacts, Style.ALERT).show();
                     }
                 });
 
