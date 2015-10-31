@@ -3,6 +3,7 @@ package com.example.ivosilva.nomi.nfc;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import android.util.Log;
 
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
 
 import java.io.UnsupportedEncodingException;
 
@@ -27,6 +29,12 @@ public class NFCShareActivity extends AppCompatActivity {
     Fragment active_fragment = null;
     private NfcAdapter mNfcAdapter;
     private boolean resumed = false;
+
+    private static final String PROFILETOSHARE = "profilekey";
+    private static final String PROFILEID = "profileID";
+    String profile_id;
+
+    SharedPreferences shared_preferences;
 
 
     @Override
@@ -51,6 +59,10 @@ public class NFCShareActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //shared_preferences = getSharedPreferences(PROFILETOSHARE, Context.MODE_PRIVATE);
+        //profile_id = shared_preferences.getString(PROFILEID, "-1");
+
         resumed = true;
         NFCEnabled();
         resumed = false;
@@ -58,6 +70,21 @@ public class NFCShareActivity extends AppCompatActivity {
     }
 
     protected void NFCEnabled() {
+
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
+
+            /*
+             * (non-Javadoc)
+             * @see android.nfc.NfcAdapter.CreateNdefMessageCallback#createNdefMessage(android.nfc.NfcEvent)
+             */
+            @Override
+            public NdefMessage createNdefMessage(NfcEvent event) {
+                NdefRecord message = NdefRecord.createMime("text/plain", profile_id.getBytes());
+                return new NdefMessage(new NdefRecord[]{message});
+            }
+
+        }, this, this);
 
         //  let's check if NFC is enabled!
         NfcManager manager = (NfcManager) getApplicationContext().getSystemService(Context.NFC_SERVICE);
@@ -77,20 +104,7 @@ public class NFCShareActivity extends AppCompatActivity {
             *   NFC SHOWS LOVE
             */
 
-            mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-            mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
 
-                /*
-                 * (non-Javadoc)
-                 * @see android.nfc.NfcAdapter.CreateNdefMessageCallback#createNdefMessage(android.nfc.NfcEvent)
-                 */
-                @Override
-                public NdefMessage createNdefMessage(NfcEvent event) {
-                    NdefRecord message = NdefRecord.createMime("text/plain", "5".getBytes());
-                    return new NdefMessage(new NdefRecord[]{message});
-                }
-
-            }, this, this);
 
             if (resumed) {
                 PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);

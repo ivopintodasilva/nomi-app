@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
 import android.nfc.Tag;
 import android.nfc.tech.NfcF;
 import android.os.AsyncTask;
@@ -56,6 +57,9 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class NFCUpFragment extends Fragment {
 
     private static final String REQUEST_TAG = "NFCUpFragment";
+    private static final String PROFILETOSHARE = "profilekey";
+    private static final String PROFILEID = "profileID";
+
     SharedPreferences shared_preferences;
     private RequestQueue mQueue;
     List<Profile> profiles_list = new ArrayList<Profile>();
@@ -64,6 +68,10 @@ public class NFCUpFragment extends Fragment {
     Context context;
     ArrayAdapter<Profile> adapter;
     Activity activity;
+
+    String profile_id;
+    private NfcAdapter mNfcAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -178,7 +186,34 @@ public class NFCUpFragment extends Fragment {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    Log.d("PROFILE_SELECTED", parentView.getItemAtPosition(position).toString());
+
+                    // put profile to share id in shared preferences to send in the nfc share
+                    //shared_preferences = getActivity().getSharedPreferences(PROFILETOSHARE, Context.MODE_PRIVATE);
+                    //SharedPreferences.Editor editor = shared_preferences.edit();
+                    //editor.putString(PROFILEID, String.valueOf( ((Profile) parentView.getItemAtPosition(position) ).getId()) );
+                    //editor.commit();
+
+                    //shared_preferences = getSharedPreferences(PROFILETOSHARE, Context.MODE_PRIVATE);
+                    //profile_id = shared_preferences.getString(PROFILEID, "-1");
+
+                    //Log.d("PROFILEID NFC", profile_id);
+
+                    profile_id = String.valueOf( ((Profile) parentView.getItemAtPosition(position) ).getId());
+
+                    mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
+                    mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
+
+                        /*
+                         * (non-Javadoc)
+                         * @see android.nfc.NfcAdapter.CreateNdefMessageCallback#createNdefMessage(android.nfc.NfcEvent)
+                         */
+                        @Override
+                        public NdefMessage createNdefMessage(NfcEvent event) {
+                            NdefRecord message = NdefRecord.createMime("text/plain", profile_id.getBytes());
+                            return new NdefMessage(new NdefRecord[]{message});
+                        }
+
+                    }, activity, activity);
                 }
 
                 @Override
