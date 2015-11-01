@@ -1,6 +1,10 @@
 package com.example.ivosilva.nomi.contacts;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,22 +14,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.R;
+import com.example.ivosilva.nomi.login.LoginFragment;
+import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
+import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import fr.tkeunebr.gravatar.Gravatar;
 
 public class ContactDetailsFragment extends Fragment {
 
     TextView name;
+    private RequestQueue mQueue;
+    SharedPreferences shared_preferences;
+    public static final String REQUEST_TAG = "ContactDetailsFragment";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +94,12 @@ public class ContactDetailsFragment extends Fragment {
                         IconTextView number = (IconTextView) view.findViewById(R.id.phone);
                         number.setText("{fa-phone}  " + contacts.getString(key));
                         number.setVisibility(View.VISIBLE);
+                        number.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
@@ -96,9 +120,16 @@ public class ContactDetailsFragment extends Fragment {
                         }
                         break;
                     case "FACEBOOK":
-                        IconTextView facebook = (IconTextView) view.findViewById(R.id.facebook);
+                        final IconTextView facebook = (IconTextView) view.findViewById(R.id.facebook);
                         facebook.setText("{fa-facebook}  " + contacts.getString(key));
                         facebook.setVisibility(View.VISIBLE);
+                        facebook.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // Open facebook on browser
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/" + facebook.getText().toString().split("  ")[1])));
+                            }
+                        });
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) facebook.getLayoutParams();
@@ -107,9 +138,24 @@ public class ContactDetailsFragment extends Fragment {
                         }
                         break;
                     case "INSTAGRAM":
-                        IconTextView instagram = (IconTextView) view.findViewById(R.id.instagram);
+                        final IconTextView instagram = (IconTextView) view.findViewById(R.id.instagram);
                         instagram.setText("{fa-instagram}  " + contacts.getString(key));
                         instagram.setVisibility(View.VISIBLE);
+                        instagram.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Uri uri = Uri.parse("http://instagram.com/_u/" + instagram.getText().toString().split("  ")[1]);
+                                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                                likeIng.setPackage("com.instagram.android");
+
+                                try {
+                                    startActivity(likeIng);
+                                } catch (ActivityNotFoundException e) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW,
+                                            Uri.parse("http://instagram.com/"+instagram.getText().toString().split("  ")[1])));
+                                }                            }
+                        });
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) instagram.getLayoutParams();
