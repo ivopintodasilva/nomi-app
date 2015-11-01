@@ -188,10 +188,10 @@ public class NFCUpFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
                     // put profile to share id in shared preferences to send in the nfc share
-                    //shared_preferences = getActivity().getSharedPreferences(PROFILETOSHARE, Context.MODE_PRIVATE);
-                    //SharedPreferences.Editor editor = shared_preferences.edit();
-                    //editor.putString(PROFILEID, String.valueOf( ((Profile) parentView.getItemAtPosition(position) ).getId()) );
-                    //editor.commit();
+                    shared_preferences = getActivity().getSharedPreferences(PROFILETOSHARE, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shared_preferences.edit();
+                    editor.putString(PROFILEID, String.valueOf( ((Profile) parentView.getItemAtPosition(position) ).getId()) );
+                    editor.commit();
 
                     //shared_preferences = getSharedPreferences(PROFILETOSHARE, Context.MODE_PRIVATE);
                     //profile_id = shared_preferences.getString(PROFILEID, "-1");

@@ -15,8 +15,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:layout_gravity="center"
-        android:src="@drawable/gito" />
+        android:layout_gravity="center" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_go_to_menu"
@@ -67,9 +66,8 @@
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You just met Gito Jahsc!"
         android:textAllCaps="true"
-        android:id="@+id/text_nfc_down"
+        android:id="@+id/text_nfc_connected"
         android:fontFamily="sans-serif-thin"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"

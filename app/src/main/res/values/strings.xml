@@ -58,6 +58,8 @@
     <string name="passwords_not_match">Passwords do not match</string>
     <string name="invalid_email">E-mail is not valid</string>
     <string name="already_registered_email">E-mail is already registered</string>
+    <string name="error_sharing">An error occurred. Contacts not shared.</string>
+    <string name="you_just_met">You just met</string>
 
 
 
