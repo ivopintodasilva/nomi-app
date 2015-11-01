@@ -41,6 +41,7 @@ public class NFCShareActivity extends AppCompatActivity {
     Fragment active_fragment = null;
     private NfcAdapter mNfcAdapter;
     private boolean resumed = false;
+    private String new_profile;
 
     private static final String PROFILETOSHARE = "profilekey";
     private static final String PROFILEID = "profileID";
@@ -195,8 +196,10 @@ public class NFCShareActivity extends AppCompatActivity {
             String url = "http://"+serverIp+"/api/profile/relation/";
 
             try {
+
+                new_profile = new String(payload, 0, payload.length, "UTF-8");
                 JSONObject jsonBody = new JSONObject("{" +
-                        "\"profileId2\": " + new String(payload, 0, payload.length, "UTF-8") + " ," +
+                        "\"profileId2\": " + new_profile + " ," +
                         "\"profileId1\": " + profile_id +
                         "}");
 
@@ -208,7 +211,8 @@ public class NFCShareActivity extends AppCompatActivity {
 
                                 Intent connected_intent = new Intent(activity, NFCConnectedActivity.class);
                                 Bundle b = new Bundle();
-                                b.putString("new_connection", jsonObject.toString()); //Your id
+                                b.putString("new_connection", jsonObject.toString());
+                                b.putString("new_profile", new_profile);
                                 connected_intent.putExtras(b);
                                 startActivity(connected_intent);
                                 finish();

@@ -63,8 +63,9 @@ public class LoginFragment extends Fragment{
     public static final String REQUEST_TAG = "LoginFragment";
     public static final String SERVER = "ServerPrefs";
     public static final String SERVERIP = "ServerIP";
+    public static final String IP = "192.168.160.56:8000";
     //public static final String IP = "192.168.1.102:8000"; //"192.168.160.56:8000";
-    public static final String IP = "192.168.0.20:8000"; //"192.168.160.56:8000";
+    //public static final String IP = "192.168.0.20:8000"; //"192.168.160.56:8000";
 
 
     SharedPreferences shared_preferences;

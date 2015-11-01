@@ -5,6 +5,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.List;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -91,13 +94,15 @@ public class ContactDetailsFragment extends Fragment {
 
                 switch (key){
                     case "NUMBER":
-                        IconTextView number = (IconTextView) view.findViewById(R.id.phone);
+                        final IconTextView number = (IconTextView) view.findViewById(R.id.phone);
                         number.setText("{fa-phone}  " + contacts.getString(key));
                         number.setVisibility(View.VISIBLE);
                         number.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                callIntent.setData(Uri.parse("tel:" + number.getText().toString().split("  ")[1]));
+                                startActivity(callIntent);
                             }
                         });
                         i++;
@@ -108,10 +113,19 @@ public class ContactDetailsFragment extends Fragment {
                         }
                         break;
                     case "EMAIL":
-                        IconTextView email = (IconTextView) view.findViewById(R.id.email);
+                        final IconTextView email = (IconTextView) view.findViewById(R.id.email);
                         email.setText("{fa-envelope-o}  " + contacts.getString(key));
                         email.setVisibility(View.VISIBLE);
                         i++;
+                        email.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                Uri data = Uri.parse("mailto:" + email.getText().toString().split("  ")[1]);
+                                intent.setData(data);
+                                startActivity(intent);
+                            }
+                        });
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) email.getLayoutParams();
                             params.topMargin = i*60;
@@ -164,10 +178,22 @@ public class ContactDetailsFragment extends Fragment {
                         }
                         break;
                     case "LINKEDIN":
-                        IconTextView linkedin = (IconTextView) view.findViewById(R.id.linkedin);
+                        final IconTextView linkedin = (IconTextView) view.findViewById(R.id.linkedin);
                         linkedin.setText("{fa-linkedin}  " + contacts.getString(key));
                         linkedin.setVisibility(View.VISIBLE);
                         i++;
+                        linkedin.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("linkedin://" + linkedin.getText().toString().split("  ")[1]));
+                                final PackageManager packageManager = getContext().getPackageManager();
+                                final List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                                if (list.isEmpty()) {
+                                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/profile/view?id=you"));
+                                }
+                                startActivity(intent);
+                            }
+                        });
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linkedin.getLayoutParams();
                             params.topMargin = i*60;
@@ -175,10 +201,16 @@ public class ContactDetailsFragment extends Fragment {
                         }
                         break;
                     case "GOOGLE":
-                        IconTextView google = (IconTextView) view.findViewById(R.id.googleplus);
+                        final IconTextView google = (IconTextView) view.findViewById(R.id.googleplus);
                         google.setText("{fa-google-plus}  " + contacts.getString(key));
                         google.setVisibility(View.VISIBLE);
                         i++;
+                        google.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/"+ google.getText().toString().split("  ")[1] +"/posts")));
+                            }
+                        });
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) google.getLayoutParams();
                             params.topMargin = i*60;
@@ -186,10 +218,19 @@ public class ContactDetailsFragment extends Fragment {
                         }
                         break;
                     case "TWITTER":
-                        IconTextView twitter = (IconTextView) view.findViewById(R.id.twitter);
+                        final IconTextView twitter = (IconTextView) view.findViewById(R.id.twitter);
                         twitter.setText("{fa-twitter}  @" + contacts.getString(key));
                         twitter.setVisibility(View.VISIBLE);
                         i++;
+                        twitter.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + twitter.getText().toString().split("  ")[1])));
+                                }catch (Exception e) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + twitter.getText().toString().split("  ")[1])));
+                                }                            }
+                        });
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
                             params.topMargin = i*60;

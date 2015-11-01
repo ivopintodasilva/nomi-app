@@ -66,6 +66,8 @@ public class NFCConnectedFragment extends Fragment {
 
     Activity activity = getActivity();
 
+    String new_profile;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class NFCConnectedFragment extends Fragment {
 
         Bundle b = getActivity().getIntent().getExtras();
         String new_conn_str = b.getString("new_connection");
+        new_profile = b.getString("new_profile");
 
         try{
             JSONObject new_conn = new JSONObject(new_conn_str);
@@ -145,7 +148,9 @@ public class NFCConnectedFragment extends Fragment {
                     "localhost:8000");
 
             mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-            String url = "http://"+serverIp+"/api/profile/" + conn_id;
+            String url = "http://"+serverIp+"/api/profile/" + new_profile;
+
+            Log.d("NFCConnectedFragment", url);
 
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
                     Request.Method.GET, url, new JSONObject(),
