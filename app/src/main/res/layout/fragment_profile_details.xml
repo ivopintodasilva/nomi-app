@@ -14,15 +14,14 @@
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/profile_photo"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         app:border="true"
         app:border_color="#ffffff"
         app:border_width="1dp"
-        app:shadow="true"
-        android:src="@drawable/gito" />
+        app:shadow="true" />
 
     <TextView
         android:id="@+id/profile_name"
@@ -30,112 +29,104 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Gito's Work Profile"
         android:fontFamily="sans-serif-thin"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_below="@+id/profile_photo"
-        android:layout_marginTop="20dp"
-        android:paddingBottom="10dp"/>
+        android:layout_marginTop="35dp"
+/>
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_phone"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
-        android:layout_alignLeft="@+id/profile_photo"
         android:fontFamily="sans-serif-thin"
         android:layout_below="@+id/profile_name"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true"/>
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_email"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true" />
 
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_facebook"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true" />
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_instagram"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true" />
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_linkedin"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true" />
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_googleplus"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true" />
 
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/profile_twitter"
         android:visibility="invisible"
-        android:layout_height="40dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="35dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
         android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/profile_name"
         android:fontFamily="sans-serif-thin"
-        android:layout_alignLeft="@+id/profile_photo"
-        android:layout_alignStart="@+id/profile_photo" />
+        android:layout_centerHorizontal="true" />
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -221,6 +212,10 @@
             fab:fab_size="mini"
             fab:fab_title="@string/add_phone"
             fab:fab_colorPressed="@color/white_pressed"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
             android:onClick="profile_add_phone"/>
 
 

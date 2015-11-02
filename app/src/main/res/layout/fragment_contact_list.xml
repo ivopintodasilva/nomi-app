@@ -33,15 +33,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You need to get some friends"
+        android:text="@string/no_contacts"
         android:fontFamily="sans-serif-thin"
         android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:paddingBottom="10dp"
         android:visibility="invisible"
-        android:layout_above="@+id/rotateloading_contacts"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true" />
 
 
 

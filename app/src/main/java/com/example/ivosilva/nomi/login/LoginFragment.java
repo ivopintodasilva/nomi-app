@@ -30,18 +30,27 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment{
+    // UA
+    // public static final String base_url = "http://192.168.160.56:8000/";
+
+    // CASA
+    //public static final String base_url = "http://192.168.0.24:8000/";
+
     FancyButton btn_login;
     FancyButton btn_register;
+    EditText username;
+    EditText password;
     private RequestQueue mQueue;
 
     public static final String LOGINPREFS = "LoginPrefs" ;
     public static final String USERID = "idKey";
+    public static final String USEREMAIL = "emailKey";
     public static final String REQUEST_TAG = "LoginFragment";
     public static final String SERVER = "ServerPrefs";
     public static final String SERVERIP = "ServerIP";
-//    public static final String IP = "192.168.1.102:8000"; // Daniel
-    public static final String IP = "192.168.160.56:8000"; // UA
+    public static final String IP = "192.168.1.102:8000"; //"192.168.160.56:8000";
+
 
     SharedPreferences shared_preferences;
 
@@ -61,12 +70,12 @@ public class LoginFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.i("ONRESUME","YES");
+        Log.i("ONRESUME", "YES");
         Intent intent = getActivity().getIntent();
         if(intent.hasExtra("event")){
             if(intent.hasExtra("event") && intent.getStringExtra("event").equals("userRegistered")) {
                 Log.i("ONRESUME","Has event with user registered");
-                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
+                Crouton.makeText(getActivity(), R.string.user_registered, Style.CONFIRM).show();
             }
 
         }
@@ -97,8 +106,8 @@ public class LoginFragment extends Fragment {
     View.OnClickListener loginHandler = new View.OnClickListener() {
         public void onClick(View v) {
 
-            EditText username = (EditText) getActivity().findViewById(R.id.email);
-            EditText password = (EditText) getActivity().findViewById(R.id.password);
+            username = (EditText) getActivity().findViewById(R.id.email);
+            password = (EditText) getActivity().findViewById(R.id.password);
 
             shared_preferences = getActivity().getSharedPreferences(SERVER, Context.MODE_PRIVATE);
             String serverIp = shared_preferences.getString(SERVERIP, "localhost");
@@ -116,6 +125,7 @@ public class LoginFragment extends Fragment {
                             SharedPreferences.Editor editor = shared_preferences.edit();
                             try {
                                 editor.putInt(USERID, jsonObject.getInt("id"));
+                                editor.putString(USEREMAIL, username.getText().toString());
                                 editor.commit();
                             }
                             catch (JSONException e){
@@ -130,7 +140,7 @@ public class LoginFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
-                            Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
+                            Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
                         }
                     });
             jsonRequest.setTag(REQUEST_TAG);

@@ -34,9 +34,12 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class RegisterFragment extends Fragment {
+    // UA
+    // public static final String base_url = "http://192.168.160.56:8000/";
+    // CASA
+    public static final String base_url = "http://192.168.0.24:8000/";
 
     public static final String REQUEST_TAG = "RegisterFragment";
-
     FancyButton btn_register;
     private RequestQueue mQueue;
     private EditText first_name;
@@ -44,6 +47,7 @@ public class RegisterFragment extends Fragment {
     private EditText email;
     private EditText password1;
     private EditText password2;
+
 
 
     @Override
@@ -81,7 +85,7 @@ public class RegisterFragment extends Fragment {
             boolean valid = true;
 
             if (email.getText().toString().trim().equals("")){
-                email.setError("E-mail cannot be empty");
+                email.setError(getResources().getString(R.string.empty_email));
                 valid = false;
             }
             else{
@@ -89,7 +93,7 @@ public class RegisterFragment extends Fragment {
             }
 
             if (last_name.getText().toString().trim().equals("")){
-                last_name.setError("Last name cannot be empty");
+                last_name.setError(getResources().getString(R.string.empty_last_name));
                 valid = false;
             }
             else{
@@ -97,7 +101,7 @@ public class RegisterFragment extends Fragment {
             }
 
             if (first_name.getText().toString().trim().equals("")){
-                first_name.setError("First name cannot be empty");
+                first_name.setError(getResources().getString(R.string.empty_first_name));
                 valid = false;
             }
             else{
@@ -105,21 +109,21 @@ public class RegisterFragment extends Fragment {
             }
 
             if (password1.getText().toString().trim().equals("")){
-                password1.setError("Password cannot be empty");
+                password1.setError(getResources().getString(R.string.empty_password));
                 valid = false;
             }else{
                 password1.setError(null);
             }
 
             if (password2.getText().toString().trim().equals("")){
-                password2.setError("Password confirmation cannot be empty");
+                password2.setError(getResources().getString(R.string.empty_password));
                 valid = false;
             }
             else{
                 if(!password1.getText().toString().trim().equals(password2.getText().toString().trim())){
-                    password1.setError("Passwords do not match");
-                    password2.setError("Passwords do not match");
-                    Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
+                    password1.setError(getResources().getString(R.string.passwords_not_match));
+                    password2.setError(getResources().getString(R.string.passwords_not_match));
+                    Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
                     return;
                 }
                 else{
@@ -130,8 +134,8 @@ public class RegisterFragment extends Fragment {
             }
 
             if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-                email.setError("E-mail is not valid");
-                Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
+                email.setError(getResources().getString(R.string.invalid_email));
+                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
                 return;
             }
             else{
@@ -139,7 +143,7 @@ public class RegisterFragment extends Fragment {
             }
 
             if(!valid){
-                Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
+                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
                 return;
             }
 
@@ -168,7 +172,7 @@ public class RegisterFragment extends Fragment {
                             public void onResponse(JSONObject jsonObject) {
                                 Log.d("onResponse", jsonObject.toString());
 
-                                Toast.makeText(getActivity(), "User registered!",
+                                Toast.makeText(getActivity(), R.string.user_registered,
                                         Toast.LENGTH_LONG).show();
 //                                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
 
@@ -184,9 +188,9 @@ public class RegisterFragment extends Fragment {
                             public void onErrorResponse(VolleyError volleyError) {
                                 NetworkResponse networkResponse = volleyError.networkResponse;
                                 if (networkResponse != null && networkResponse.statusCode == 401) {
-                                    Crouton.makeText(getActivity(), "E-mail is already registered.", Style.ALERT).show();
+                                    Crouton.makeText(getActivity(), R.string.already_registered_email, Style.ALERT).show();
                                 }else{
-                                    Crouton.makeText(getActivity(), "You shall not pass!", Style.ALERT).show();
+                                    Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
                                 }
                             }
                         });
