@@ -32,10 +32,10 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LoginFragment extends Fragment{
     // UA
-    // public static final String base_url = "http://192.168.160.56:8000/";
+    public static final String base_url = "192.168.160.56:8000";
 
     // CASA
-    //public static final String base_url = "http://192.168.0.24:8000/";
+    //public static final String base_url = "192.168.0.24:8000";
 
     FancyButton btn_login;
     FancyButton btn_register;
@@ -49,7 +49,7 @@ public class LoginFragment extends Fragment{
     public static final String REQUEST_TAG = "LoginFragment";
     public static final String SERVER = "ServerPrefs";
     public static final String SERVERIP = "ServerIP";
-    public static final String IP = "192.168.1.102:8000"; //"192.168.160.56:8000";
+    public static final String IP = base_url;
 
 
     SharedPreferences shared_preferences;

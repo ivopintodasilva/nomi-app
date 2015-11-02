@@ -202,7 +202,7 @@ public class ContactDetailsFragment extends Fragment {
                         break;
                     case "GOOGLE":
                         final IconTextView google = (IconTextView) view.findViewById(R.id.googleplus);
-                        google.setText("{fa-google-plus}  " + contacts.getString(key));
+                        google.setText("{fa-google-plus}  +" + contacts.getString(key));
                         google.setVisibility(View.VISIBLE);
                         i++;
                         google.setOnClickListener(new View.OnClickListener() {
