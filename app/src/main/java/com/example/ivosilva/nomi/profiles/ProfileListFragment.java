@@ -185,6 +185,16 @@ public class ProfileListFragment extends Fragment {
         /****** code for floating button ******/
 //        FloatingActionButton actionB = new FloatingActionButton(getActivity().getBaseContext());
 //        actionB.setTitle(getContext().getString(R.string.add_profile));
+//
+//        actionB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final View action_phone = getActivity().findViewById(R.id.action_new_profile);
+//
+//                Intent new_profile_intent = new Intent(getActivity(), NewProfileActivity.class);
+//                getActivity().startActivity(new_profile_intent);
+//            }
+//        });
         /****** end of code for floating button ******/
 
 

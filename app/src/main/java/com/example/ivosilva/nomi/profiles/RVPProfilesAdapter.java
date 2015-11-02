@@ -117,7 +117,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
                 else if(key.equals("LINKEDIN")){
                     setter += "{fa-linkedin}  ";
                 }
-                else if(key.equals("GOOGLEPLUS")){
+                else if(key.equals("GOOGLE")){
                     setter += "{fa-google-plus}  ";
                 }
                 else if(key.equals("TWITTER")){

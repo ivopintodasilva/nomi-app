@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.login.LoginFragment;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -164,7 +165,7 @@ public class ProfileDetailsFragment extends Fragment {
                         }
                         linkedin.setOnClickListener(linkedinHandler);
                         break;
-                    case "GOOGLEPLUS":
+                    case "GOOGLE":
                         googleplus = (IconTextView) view.findViewById(R.id.profile_googleplus);
                         googleplus.setText("{fa-google-plus}  +" + contacts.getString(key));
                         googleplus.setVisibility(View.VISIBLE);
@@ -322,7 +323,7 @@ public class ProfileDetailsFragment extends Fragment {
             Log.d("FLOTINGACTION","action_phone");
 
             ///TODO change the target of the intent. Just for testing
-            Intent new_profile_intent = new Intent(getActivity(), NewProfileActivity.class);
+            Intent new_profile_intent = new Intent(getActivity(), MainActivity.class);
             getActivity().startActivity(new_profile_intent);
         }
     };

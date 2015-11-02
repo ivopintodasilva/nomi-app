@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context="com.example.ivosilva.nomi.profiles.NewProfileFragment">
+
+
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_background" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/create_profile_title"
+        android:id="@+id/new_profile_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-thin"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginTop="41dp" />
+
+    <EditText
+        android:id="@+id/new_profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/new_profile_name"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#ffffff"
+        android:textColorHint="#dcdcdc"
+        android:inputType="textCapSentences"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/new_profile_title"
+        android:layout_alignLeft="@+id/new_profile_title"
+        android:layout_alignStart="@+id/new_profile_title"
+        android:layout_alignRight="@+id/btn_create_new_profile"
+        android:layout_alignEnd="@+id/btn_create_new_profile" />
+
+
+    <Spinner
+        android:id="@+id/new_profile_listColors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_profile_name"
+        android:layout_alignLeft="@+id/new_profile_name"
+        android:layout_alignStart="@+id/new_profile_name"
+        android:layout_marginTop="44dp"
+        android:layout_alignRight="@+id/new_profile_name"
+        android:layout_alignEnd="@+id/new_profile_name"
+        android:focusable="false" />
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btn_create_new_profile"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp"
+        fancy:fb_borderColor="#ffffff"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="#00000000"
+        fancy:fb_focusColor="#20ffffff"
+        fancy:fb_radius="5dp"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
+        fancy:fb_text="@string/create_new_profile"
+        fancy:fb_textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

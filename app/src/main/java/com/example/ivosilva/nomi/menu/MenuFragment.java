@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.nfc.NFCShareActivity;
 import com.example.ivosilva.nomi.contacts.ContactActivity;
-import com.example.ivosilva.nomi.profiles.ProfileActivity;
+import com.example.ivosilva.nomi.profiles.ProfileListActivity;
 import com.example.ivosilva.nomi.settings.SettingsActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -88,7 +88,7 @@ public class MenuFragment extends Fragment {
             *
             */
 
-            Intent profile_intent = new Intent(getActivity(), ProfileActivity.class);
+            Intent profile_intent = new Intent(getActivity(), ProfileListActivity.class);
             getActivity().startActivity(profile_intent);
 
         }

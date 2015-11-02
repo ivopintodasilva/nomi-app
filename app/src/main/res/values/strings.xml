@@ -35,7 +35,6 @@
     <string name="add_linkedin">Linkedin</string>
     <string name="add_googleplus">Google plus</string>
     <string name="add_twitter">Twitter</string>
-    <string name="create_profile">Create a Profile!</string>
     <string name="update_email">Updated E-mail</string>
     <string name="update_fb">Updated Facebook URL</string>
     <string name="update_gplus">Updated Google Plus</string>
@@ -60,11 +59,10 @@
     <string name="already_registered_email">E-mail is already registered</string>
     <string name="error_sharing">An error occurred. Contacts not shared.</string>
     <string name="you_just_met">You just met</string>
-
-
-
-
-
+    <string name="create_profile">Create a Profile!</string>
+    <string name="create_new_profile">CREATE</string>
+    <string name="create_profile_title">Creating new profile</string>
+    <string name="new_profile_name">Profile name</string>
 
 
 </resources>
