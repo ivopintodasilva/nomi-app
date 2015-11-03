@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.MainActivity;
@@ -80,9 +81,13 @@ public class ProfileDetailsFragment extends Fragment {
         Log.d("ProfileDetailsFragmentA", getArguments().getString("ATTRIBUTES", ""));
 
         /****** code for floating button ******/
-        FloatingActionButton multipleActions = new FloatingActionButton(getActivity().getBaseContext());
-//        multipleActions.setTitle(getContext().getString(R.string.add_profile));
-        multipleActions.setOnClickListener(multipleActionsHandler);
+        view.findViewById(R.id.action_phone).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_email).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_facebook).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_instagram).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_linkedin).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_googleplus).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_twitter).setOnClickListener(newPhoneHandler);
         /****** end of code for floating button ******/
 
         try {
@@ -92,12 +97,10 @@ public class ProfileDetailsFragment extends Fragment {
 
             JSONObject contacts = new JSONObject(getArguments().getString("ATTRIBUTES", ""));
 
-
-
             /*  to organize the profile contacts in the view  */
             int i = 0;
             int padding = 50;
-            int amountPadding = 0;
+            int countAttributes = 0;
             String key;
             Iterator<String> it = contacts.keys();
             while(it.hasNext()){
@@ -116,6 +119,9 @@ public class ProfileDetailsFragment extends Fragment {
                             number.setLayoutParams(params);
                         }
                         number.setOnClickListener(numberHandler);
+                        number.setOnLongClickListener(numberLongHandler);
+                        view.findViewById(R.id.action_phone).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "EMAIL":
                         email = (IconTextView) view.findViewById(R.id.profile_email);
@@ -128,6 +134,8 @@ public class ProfileDetailsFragment extends Fragment {
                             email.setLayoutParams(params);
                         }
                         email.setOnClickListener(emailHandler);
+                        view.findViewById(R.id.action_email).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "FACEBOOK":
                         facebook = (IconTextView) view.findViewById(R.id.profile_facebook);
@@ -140,6 +148,8 @@ public class ProfileDetailsFragment extends Fragment {
                             facebook.setLayoutParams(params);
                         }
                         facebook.setOnClickListener(facebookHandler);
+                        view.findViewById(R.id.action_facebook).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "INSTAGRAM":
                         instagram = (IconTextView) view.findViewById(R.id.profile_instagram);
@@ -152,6 +162,8 @@ public class ProfileDetailsFragment extends Fragment {
                             instagram.setLayoutParams(params);
                         }
                         instagram.setOnClickListener(instagramHandler);
+                        view.findViewById(R.id.action_instagram).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "LINKEDIN":
                         linkedin = (IconTextView) view.findViewById(R.id.profile_linkedin);
@@ -164,6 +176,8 @@ public class ProfileDetailsFragment extends Fragment {
                             linkedin.setLayoutParams(params);
                         }
                         linkedin.setOnClickListener(linkedinHandler);
+                        view.findViewById(R.id.action_linkedin).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "GOOGLE":
                         googleplus = (IconTextView) view.findViewById(R.id.profile_googleplus);
@@ -176,6 +190,8 @@ public class ProfileDetailsFragment extends Fragment {
                             googleplus.setLayoutParams(params);
                         }
                         googleplus.setOnClickListener(googleplusHandler);
+                        view.findViewById(R.id.action_googleplus).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "TWITTER":
                         twitter = (IconTextView) view.findViewById(R.id.profile_twitter);
@@ -188,9 +204,12 @@ public class ProfileDetailsFragment extends Fragment {
                             twitter.setLayoutParams(params);
                         }
                         twitter.setOnClickListener(twitterHandler);
+                        view.findViewById(R.id.action_twitter).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                 }
-                amountPadding += padding;
+                if (countAttributes == 7)
+                    view.findViewById(R.id.multiple_actions).setVisibility(View.GONE);
             }
         }
         catch (org.json.JSONException e){
@@ -296,7 +315,6 @@ public class ProfileDetailsFragment extends Fragment {
             .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    Log.i("DIALOG", "YES");
                     Log.i("DIALOG", newValue.getText().toString());
                     Log.i("DIALOG",oldValue.getText().toString());
 
@@ -315,18 +333,21 @@ public class ProfileDetailsFragment extends Fragment {
     }
 
 
-    View.OnClickListener multipleActionsHandler = new View.OnClickListener() {
+    View.OnClickListener newPhoneHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            final View action_phone = getActivity().findViewById(R.id.action_phone);
-//            action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-
-            Log.d("FLOTINGACTION","action_phone");
-
-            ///TODO change the target of the intent. Just for testing
-            Intent new_profile_intent = new Intent(getActivity(), MainActivity.class);
-            getActivity().startActivity(new_profile_intent);
+            Log.d("FLOATINGACTION","Add new number");
         }
     };
 
+    View.OnLongClickListener numberLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+
+            ///TODO do the code to delete attribute
+
+            Toast.makeText(getContext(), "Apagado", Toast.LENGTH_LONG).show();
+
+            return true;
+        }
+    };
 }

@@ -214,10 +214,11 @@
             fab:fab_colorPressed="@color/white_pressed"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:onClick="profile_add_phone"/>
-
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="-15dp" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
