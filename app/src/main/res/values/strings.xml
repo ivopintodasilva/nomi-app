@@ -71,6 +71,7 @@
     <string name="edited_attribute">Edited attribute with success</string>
     <string name="add_attr_number">Add a number</string>
     <string name="added_attribute">Added new attribute</string>
+    <string name="add_attr_text">Write a value</string>
 
 
 </resources>

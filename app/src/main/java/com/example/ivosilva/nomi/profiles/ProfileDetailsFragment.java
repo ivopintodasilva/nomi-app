@@ -97,12 +97,12 @@ public class ProfileDetailsFragment extends Fragment {
 
         /****** code for floating button ******/
         view.findViewById(R.id.action_phone).setOnClickListener(newPhoneHandler);
-        view.findViewById(R.id.action_email).setOnClickListener(newPhoneHandler);
-        view.findViewById(R.id.action_facebook).setOnClickListener(newPhoneHandler);
-        view.findViewById(R.id.action_instagram).setOnClickListener(newPhoneHandler);
-        view.findViewById(R.id.action_linkedin).setOnClickListener(newPhoneHandler);
-        view.findViewById(R.id.action_googleplus).setOnClickListener(newPhoneHandler);
-        view.findViewById(R.id.action_twitter).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_email).setOnClickListener(newEmailHandler);
+        view.findViewById(R.id.action_facebook).setOnClickListener(newFacebookHandler);
+        view.findViewById(R.id.action_instagram).setOnClickListener(newInstagramHandler);
+        view.findViewById(R.id.action_linkedin).setOnClickListener(newLinkedinHandler);
+        view.findViewById(R.id.action_googleplus).setOnClickListener(newGoogleplusHandler);
+        view.findViewById(R.id.action_twitter).setOnClickListener(newTwitterHandler);
         /****** end of code for floating button ******/
 
         try {
@@ -113,6 +113,7 @@ public class ProfileDetailsFragment extends Fragment {
             profile_id = profile.getInt("id");
 
             JSONObject contacts = new JSONObject(getArguments().getString("ATTRIBUTES", ""));
+//            Log.d("PROFILEDETAILS", contacts.toString());
 
             /*  to organize the profile contacts in the view  */
             int i = 0;
@@ -368,9 +369,6 @@ public class ProfileDetailsFragment extends Fragment {
         shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
         String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
 
-        shared_preferences = getActivity().getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
-        int userId = shared_preferences.getInt(LoginFragment.USERID, -1);
-
         try {
             JSONObject jsonBody = new JSONObject("{" +
                     "\"name\":" + "\"" + attrType.toUpperCase() + "\"," +
@@ -379,7 +377,7 @@ public class ProfileDetailsFragment extends Fragment {
             Log.d("EDITATTRIBUTE", jsonBody.toString());
 
             mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-            String url = "http://"+serverIp+"/api/attribute/"+ userId +"/";
+            String url = "http://"+serverIp+"/api/attribute/profile/"+ String.valueOf(profile_id) +"/";
 
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
                     Request.Method.PUT, url, jsonBody,
@@ -414,26 +412,82 @@ public class ProfileDetailsFragment extends Fragment {
     }
 
 
+
+
     View.OnClickListener newPhoneHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            showAddDialog(R.layout.dialog_add_attr_phone, R.id.add_attribute_number, "NUMBER", "{fa-phone}");
+        }
+    };
 
-            // Get the layout inflater
-            LayoutInflater linf = LayoutInflater.from(getActivity());
+    View.OnClickListener newEmailHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_email, R.id.add_attribute_email, "EMAIL", "{fa-envelope-o}");
+        }
+    };
 
-            // Pass null as the parent view because its going in the dialog layout
-            final View inflator = linf.inflate(R.layout.dialog_add_attr_phone, null);
+    View.OnClickListener newFacebookHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "FACEBOOK", "{fa-facebook}");
+        }
+    };
 
-            final EditText newValue = (EditText) inflator.findViewById(R.id.add_attribute_number);
+    View.OnClickListener newInstagramHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "INSTAGRAM", "{fa-instagram}");
+        }
+    };
 
-            // Inflate and set the layout for the dialog
-            builder.setView(inflator)
+    View.OnClickListener newLinkedinHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "LINKEDIN", "{fa-linkedin}");
+        }
+    };
+
+    View.OnClickListener newGoogleplusHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_email, R.id.add_attribute_email, "GOOGLE", "{fa-google-plus}");
+        }
+    };
+
+    View.OnClickListener newTwitterHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "TWITTER", "{fa-twitter}");
+        }
+    };
+
+    private void showAddDialog(int dialog_layout, int editText, final String attrType, String iconText) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        // Get the layout inflater
+        LayoutInflater linf = LayoutInflater.from(getActivity());
+
+        // Pass null as the parent view because its going in the dialog layout
+        final View inflator = linf.inflate(dialog_layout, null);
+
+        final IconTextView dialogText = (IconTextView) inflator.findViewById(R.id.dialog_image);
+        dialogText.setText(iconText);
+
+        final EditText newValue = (EditText) inflator.findViewById(editText);
+
+        // Inflate and set the layout for the dialog
+        builder.setView(inflator)
                 // Add action buttons
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        addAttribute(newValue, "NUMBER");
+                        addAttribute(newValue, attrType);
+
+                        Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
+                        getActivity().startActivity(profilelist_intent);
+                        getActivity().finish();
                     }
                 })
                 .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -443,10 +497,9 @@ public class ProfileDetailsFragment extends Fragment {
                     }
                 });
 
-            builder.create();
-            builder.show();
-        }
-    };
+        builder.create();
+        builder.show();
+    }
 
     private void addAttribute(EditText newValue, String attrType) {
         shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
@@ -494,6 +547,8 @@ public class ProfileDetailsFragment extends Fragment {
             Log.e("ADDATTREXCEPTION", e.toString());
         }
     }
+
+
 
 
     View.OnLongClickListener numberLongHandler = new View.OnLongClickListener() {
