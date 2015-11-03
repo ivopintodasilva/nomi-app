@@ -112,9 +112,9 @@ public class RegistrationIntentService extends IntentService {
                 JSONObject jsonBody = new JSONObject("{" +
                         "\"name\": \"" + Integer.toString(shared_preferences.getInt(LoginFragment.USERID, -1)) + "\"," +
                         "\"registration_id\": \"" + token + "\"," +
-                        "\"device_id\": \"" + device_id + "\"," +
+                        //"\"device_id\": \"" + device_id + "\"," +
                         "\"active\": true," +
-                        "\"user\": \"" + Integer.toString(shared_preferences.getInt(LoginFragment.USERID, -1)) + "\"," +
+                        "\"user\": \"" + Integer.toString(shared_preferences.getInt(LoginFragment.USERID, -1)) + "\"" +
                         "}");
 
                 Log.d("JSONREG", jsonBody.toString());
@@ -147,8 +147,8 @@ public class RegistrationIntentService extends IntentService {
     public void onCreate() {
         super.onCreate();
 
-        tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = tm.getDeviceId();
+        //tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        //device_id = tm.getDeviceId();
 //        gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 //        try {
 //            Log.d("SENDERID", getResources().getString(R.string.gcm_defaultSenderId));
