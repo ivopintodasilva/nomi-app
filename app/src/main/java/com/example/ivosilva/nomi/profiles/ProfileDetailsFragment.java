@@ -117,7 +117,7 @@ public class ProfileDetailsFragment extends Fragment {
 
             /*  to organize the profile contacts in the view  */
             int i = 0;
-            int padding = 50;
+            int padding = 80;
             int countAttributes = 0;
             String key;
             Iterator<String> it = contacts.keys();
@@ -133,7 +133,7 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                            params.topMargin = i*60; //i*padding;
+                            params.topMargin = i*padding; //i*padding;
                             number.setLayoutParams(params);
                         }
                         number.setOnClickListener(numberHandler);
@@ -148,10 +148,11 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) email.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             email.setLayoutParams(params);
                         }
                         email.setOnClickListener(emailHandler);
+                        email.setOnLongClickListener(emailLongHandler);
                         view.findViewById(R.id.action_email).setVisibility(View.GONE);
                         countAttributes++;
                         break;
@@ -162,10 +163,11 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) facebook.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             facebook.setLayoutParams(params);
                         }
                         facebook.setOnClickListener(facebookHandler);
+                        facebook.setOnLongClickListener(facebookLongHandler);
                         view.findViewById(R.id.action_facebook).setVisibility(View.GONE);
                         countAttributes++;
                         break;
@@ -176,10 +178,11 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) instagram.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             instagram.setLayoutParams(params);
                         }
                         instagram.setOnClickListener(instagramHandler);
+                        instagram.setOnLongClickListener(instagramLongHandler);
                         view.findViewById(R.id.action_instagram).setVisibility(View.GONE);
                         countAttributes++;
                         break;
@@ -190,10 +193,11 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linkedin.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             linkedin.setLayoutParams(params);
                         }
                         linkedin.setOnClickListener(linkedinHandler);
+                        linkedin.setOnLongClickListener(linkedinLongHandler);
                         view.findViewById(R.id.action_linkedin).setVisibility(View.GONE);
                         countAttributes++;
                         break;
@@ -204,10 +208,11 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) googleplus.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             googleplus.setLayoutParams(params);
                         }
                         googleplus.setOnClickListener(googleplusHandler);
+                        googleplus.setOnLongClickListener(googleplusLongHandler);
                         view.findViewById(R.id.action_googleplus).setVisibility(View.GONE);
                         countAttributes++;
                         break;
@@ -218,10 +223,11 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             twitter.setLayoutParams(params);
                         }
                         twitter.setOnClickListener(twitterHandler);
+                        twitter.setOnLongClickListener(twitterLongHandler);
                         view.findViewById(R.id.action_twitter).setVisibility(View.GONE);
                         countAttributes++;
                         break;
@@ -553,12 +559,99 @@ public class ProfileDetailsFragment extends Fragment {
 
     View.OnLongClickListener numberLongHandler = new View.OnLongClickListener() {
         public boolean onLongClick(View v) {
-
-            ///TODO do the code to delete attribute
-
-            Toast.makeText(getContext(), "Apagado", Toast.LENGTH_LONG).show();
-
+            deleteAttribute("NUMBER");
             return true;
         }
     };
+
+    View.OnLongClickListener emailLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("EMAIL");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener facebookLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("FACEBOOK");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener instagramLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("INSTAGRAM");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener linkedinLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("LINKEDIN");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener googleplusLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("GOOGLE");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener twitterLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("TWITTER");
+            return true;
+        }
+    };
+
+    private void deleteAttribute(String attrType) {
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+        try {
+            JSONObject jsonBody = new JSONObject("{" +
+                    "\"name\":" + "\"" + attrType + "\"" +
+                    "}");
+            Log.d("DELETEATTRIBUTE", jsonBody.toString());
+
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://"+serverIp+"/api/attribute/profile/"+ String.valueOf(profile_id) +"/";
+
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                    Request.Method.DELETE, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
+
+                            Toast.makeText(getActivity(), R.string.deleted_attribute,
+                                    Toast.LENGTH_LONG).show();
+
+                            Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
+                            getActivity().startActivity(profilelist_intent);
+                            getActivity().finish();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            NetworkResponse networkResponse = volleyError.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Crouton.makeText(getActivity(), R.string.delete_attribute_error, Style.ALERT).show();
+                            }else{
+                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                            }
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
+
+            mQueue.add(jsonRequest);
+
+        } catch (JSONException e) {
+            Log.e("DELETEATTREXCEPTION", e.toString());
+        }
+    }
+
 }

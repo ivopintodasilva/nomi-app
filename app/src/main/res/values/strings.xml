@@ -67,11 +67,13 @@
     <string name="empty_profile_name">Profile name cannot be empty</string>
     <string name="empty_attribute_detail">Attribute value cannot be empty</string>
     <string name="edit_attribute_error">Error editing attribute</string>
+    <string name="delete_attribute_error">Error deleting attribute</string>
     <string name="add_attribute_error">Error adding new attribute</string>
     <string name="edited_attribute">Edited attribute with success</string>
     <string name="add_attr_number">Add a number</string>
     <string name="added_attribute">Added new attribute</string>
     <string name="add_attr_text">Write a value</string>
+    <string name="deleted_attribute">Attribute deleted with success</string>
 
 
 </resources>
