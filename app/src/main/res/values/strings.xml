@@ -61,8 +61,9 @@
     <string name="you_just_met">You just met</string>
     <string name="create_profile">Create a Profile!</string>
     <string name="create_new_profile">CREATE</string>
-    <string name="create_profile_title">Creating new profile</string>
+    <string name="create_profile_title">Create profile</string>
     <string name="new_profile_name">Profile name</string>
+    <string name="gcm_defaultSenderId">989010463284</string>
 
 
 </resources>
