@@ -94,6 +94,8 @@ public class NFCUpFragment extends Fragment {
             getActivity().finish();
         }
 
+        ///TODO check if exists any profile to share first
+
         mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
         String url = "http://"+serverIp+"/api/profile/user/" + shared_preferences.getInt(LoginFragment.USERID, -1);
 

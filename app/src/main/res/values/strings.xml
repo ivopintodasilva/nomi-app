@@ -74,6 +74,8 @@
     <string name="added_attribute">Added new attribute</string>
     <string name="add_attr_text">Write a value</string>
     <string name="deleted_attribute">Attribute deleted with success</string>
+    <string name="deleted_profile">Deleted profile with success</string>
+    <string name="deleted_profile_error">Error deleting profile</string>
 
 
 </resources>

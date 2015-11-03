@@ -38,5 +38,6 @@ public class ProfileListActivity extends AppCompatActivity {
         Log.d("NEWPROFILEACTION", "new_profile_button");
         Intent new_profile_intent = new Intent(this, NewProfileActivity.class);
         this.startActivity(new_profile_intent);
+        this.finish();
     }
 }

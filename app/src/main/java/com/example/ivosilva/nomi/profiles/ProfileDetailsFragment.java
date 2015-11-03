@@ -117,7 +117,7 @@ public class ProfileDetailsFragment extends Fragment {
 
             /*  to organize the profile contacts in the view  */
             int i = 0;
-            int padding = 80;
+            int padding = 60;
             int countAttributes = 0;
             String key;
             Iterator<String> it = contacts.keys();
