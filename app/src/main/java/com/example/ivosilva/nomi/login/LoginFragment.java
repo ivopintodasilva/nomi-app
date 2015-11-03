@@ -18,9 +18,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.menu.MenuActivity;
+import com.example.ivosilva.nomi.push_notifications.RegistrationIntentService;
 import com.example.ivosilva.nomi.registration.RegisterActivity;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +54,9 @@ public class LoginFragment extends Fragment{
     public static final String SERVERIP = "ServerIP";
     public static final String IP = base_url;
 
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
+
 
     SharedPreferences shared_preferences;
 
@@ -58,6 +64,29 @@ public class LoginFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(getActivity(), RegistrationIntentService.class);
+            getActivity().startService(intent);
+        }
+    }
+
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(getActivity());
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(getActivity(), resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(REQUEST_TAG, "This device is not supported.");
+                getActivity().finish();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override

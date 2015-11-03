@@ -101,6 +101,9 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
                 String profile_json = gson.toJson(user_profiles.get(position));
                 String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
 
+                Log.d("profile_json", profile_json);
+                Log.d("contacts_json", contacts_json);
+
                 Intent contact_details = new Intent(v.getContext(), ContactDetailsActivity.class);
                 contact_details.putExtra("PROFILE", profile_json);
                 contact_details.putExtra("CONTACTS", contacts_json);
