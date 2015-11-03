@@ -29,8 +29,8 @@
 
     <EditText
         android:id="@+id/new_profile_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:hint="@string/new_profile_name"
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
@@ -39,22 +39,17 @@
         android:inputType="textCapSentences"
         android:layout_marginTop="49dp"
         android:layout_below="@+id/new_profile_title"
-        android:layout_alignLeft="@+id/new_profile_title"
-        android:layout_alignStart="@+id/new_profile_title"
-        android:layout_alignRight="@+id/btn_create_new_profile"
-        android:layout_alignEnd="@+id/btn_create_new_profile" />
+        android:layout_centerHorizontal="true"
+        />
 
 
     <Spinner
         android:id="@+id/new_profile_listColors"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_below="@+id/new_profile_name"
-        android:layout_alignLeft="@+id/new_profile_name"
-        android:layout_alignStart="@+id/new_profile_name"
         android:layout_marginTop="44dp"
-        android:layout_alignRight="@+id/new_profile_name"
-        android:layout_alignEnd="@+id/new_profile_name"
         android:focusable="false" />
 
 
