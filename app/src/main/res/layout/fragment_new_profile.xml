@@ -14,11 +14,11 @@
 
 
     <TextView
+        android:id="@+id/new_profile_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/create_profile_title"
-        android:id="@+id/new_profile_title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-thin"

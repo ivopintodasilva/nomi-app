@@ -314,11 +314,12 @@ public class ProfileDetailsFragment extends Fragment {
         builder.show();
     }
 
+
     View.OnClickListener multipleActionsHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final View action_phone = getActivity().findViewById(R.id.action_phone);
-            action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+//            final View action_phone = getActivity().findViewById(R.id.action_phone);
+//            action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
 
             Log.d("FLOTINGACTION","action_phone");
 

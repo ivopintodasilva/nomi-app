@@ -63,6 +63,7 @@
     <string name="create_new_profile">CREATE</string>
     <string name="create_profile_title">Creating new profile</string>
     <string name="new_profile_name">Profile name</string>
+    <string name="created_new_profile">Created new profile</string>
 
 
 </resources>
