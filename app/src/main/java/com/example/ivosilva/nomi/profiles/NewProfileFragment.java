@@ -97,6 +97,19 @@ public class NewProfileFragment extends Fragment {
             final EditText name = (EditText) getActivity().findViewById(R.id.new_profile_name);
             final Spinner color = (Spinner) getActivity().findViewById(R.id.new_profile_listColors);
 
+            boolean valid = true;
+
+            if (name.getText().toString().trim().equals("")) {
+                name.setError(getResources().getString(R.string.empty_profile_name));
+                valid = false;
+            } else
+                name.setError(null);
+
+            if (!valid) {
+                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                return;
+            }
+
             try {
                 JSONObject jsonBody = new JSONObject("{" +
                         "\"name\":" + "\"" + name.getText().toString() + "\"," +
@@ -117,7 +130,6 @@ public class NewProfileFragment extends Fragment {
 
                             Toast.makeText(getActivity(), R.string.created_new_profile,
                                     Toast.LENGTH_LONG).show();
-//                                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
 
                             Intent profilelist_intent = new Intent(getActivity(),
                                     ProfileListActivity.class);

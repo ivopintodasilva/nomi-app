@@ -36,10 +36,4 @@ public class ProfileDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void profile_add_phone(View view) {
-        Log.d("FLOTINGACTION", "profile_add_phone");
-
-
-    }
-
 }

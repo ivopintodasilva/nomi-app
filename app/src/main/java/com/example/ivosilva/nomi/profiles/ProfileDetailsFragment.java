@@ -15,20 +15,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.login.LoginFragment;
+import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
+import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import fr.tkeunebr.gravatar.Gravatar;
 
 /**
@@ -36,7 +46,12 @@ import fr.tkeunebr.gravatar.Gravatar;
  */
 public class ProfileDetailsFragment extends Fragment {
 
+    public static final String REQUEST_TAG = "ProfileDetailsFragment";
+
+    private RequestQueue mQueue;
+
     TextView profile_name;
+    private int profile_id;
     private IconTextView number;
     private IconTextView email;
     private IconTextView facebook;
@@ -94,6 +109,8 @@ public class ProfileDetailsFragment extends Fragment {
             JSONObject profile = new JSONObject(getArguments().getString("PROFILE", ""));
             profile_name = (TextView) view.findViewById(R.id.profile_name);
             profile_name.setText(profile.getString("name"));
+
+            profile_id = profile.getInt("id");
 
             JSONObject contacts = new JSONObject(getArguments().getString("ATTRIBUTES", ""));
 
@@ -269,7 +286,7 @@ public class ProfileDetailsFragment extends Fragment {
     };
 
 
-    private void showEditDialog(int dialog_layout, int editText, final String icon, String attrType) {
+    private void showEditDialog(int dialog_layout, int editText, final String icon, final String attrType) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //builder.setTitle(getContext().getString(R.string.attribute_dialog_title));
 
@@ -318,6 +335,21 @@ public class ProfileDetailsFragment extends Fragment {
                     Log.i("DIALOG", newValue.getText().toString());
                     Log.i("DIALOG",oldValue.getText().toString());
 
+                    boolean valid = true;
+
+                    if (newValue.getText().toString().trim().equals("")) {
+                        newValue.setError(getResources().getString(R.string.empty_attribute_detail));
+                        valid = false;
+                    } else
+                        newValue.setError(null);
+
+                    if (!valid) {
+                        Crouton.makeText(getActivity(), R.string.empty_attribute_detail, Style.ALERT).show();
+                        return;
+                    }
+
+                    editAttribute(newValue, attrType);
+
                     oldValue.setText(icon + newValue.getText());
                 }
             })
@@ -332,13 +364,137 @@ public class ProfileDetailsFragment extends Fragment {
         builder.show();
     }
 
+    private void editAttribute(EditText newValue, String attrType) {
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
+        int userId = shared_preferences.getInt(LoginFragment.USERID, -1);
+
+        try {
+            JSONObject jsonBody = new JSONObject("{" +
+                    "\"name\":" + "\"" + attrType.toUpperCase() + "\"," +
+                    "\"value\":" + "\"" + newValue.getText().toString() + "\"" +
+                    "}");
+            Log.d("EDITATTRIBUTE", jsonBody.toString());
+
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://"+serverIp+"/api/attribute/"+ userId +"/";
+
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                    Request.Method.PUT, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
+
+                            Toast.makeText(getActivity(), R.string.edited_attribute,
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            NetworkResponse networkResponse = volleyError.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Crouton.makeText(getActivity(), R.string.edit_attribute_error, Style.ALERT).show();
+                            }else{
+                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                            }
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
+
+            mQueue.add(jsonRequest);
+
+        } catch (JSONException e) {
+            Log.e("EDITATTREXCEPTION", e.toString());
+        }
+    }
+
 
     View.OnClickListener newPhoneHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d("FLOATINGACTION","Add new number");
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            // Get the layout inflater
+            LayoutInflater linf = LayoutInflater.from(getActivity());
+
+            // Pass null as the parent view because its going in the dialog layout
+            final View inflator = linf.inflate(R.layout.dialog_add_attr_phone, null);
+
+            final EditText newValue = (EditText) inflator.findViewById(R.id.add_attribute_number);
+
+            // Inflate and set the layout for the dialog
+            builder.setView(inflator)
+                // Add action buttons
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        addAttribute(newValue, "NUMBER");
+                    }
+                })
+                .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.i("DIALOG", "CANCEL");
+                        dialog.cancel();
+                    }
+                });
+
+            builder.create();
+            builder.show();
         }
     };
+
+    private void addAttribute(EditText newValue, String attrType) {
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+        try {
+            JSONObject jsonBody = new JSONObject("{" +
+                    "\"name\":" + "\"" + attrType.toUpperCase() + "\"," +
+                    "\"value\":" + "\"" + newValue.getText().toString() + "\"," +
+                    "\"profile\":" + "\"" + String.valueOf(profile_id) + "\"" +
+                    "}");
+            Log.d("ADDATTRIBUTE", jsonBody.toString());
+
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://"+serverIp+"/api/attribute/profile/";
+
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                    Request.Method.POST, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
+
+                            Toast.makeText(getActivity(), R.string.added_attribute,
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            NetworkResponse networkResponse = volleyError.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Crouton.makeText(getActivity(), R.string.add_attribute_error, Style.ALERT).show();
+                            }else{
+                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                            }
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
+
+            mQueue.add(jsonRequest);
+
+        } catch (JSONException e) {
+            Log.e("ADDATTREXCEPTION", e.toString());
+        }
+    }
+
 
     View.OnLongClickListener numberLongHandler = new View.OnLongClickListener() {
         public boolean onLongClick(View v) {
