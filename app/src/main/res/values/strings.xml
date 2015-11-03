@@ -64,6 +64,9 @@
     <string name="create_profile_title">Create profile</string>
     <string name="new_profile_name">Profile name</string>
     <string name="gcm_defaultSenderId">989010463284</string>
+    <string name="updated_info">updated his/her contacts</string>
+    <string name="get_in_touch">Take the opportunity to get in touch</string>
+
 
 
 </resources>

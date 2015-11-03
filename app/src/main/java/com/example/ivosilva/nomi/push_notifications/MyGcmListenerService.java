@@ -20,6 +20,9 @@ import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
 import com.google.android.gms.gcm.GcmListenerService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
@@ -30,19 +33,29 @@ public class MyGcmListenerService extends GcmListenerService {
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
 
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.gito)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.gito))
-                        .setContentTitle("My Notification Title")
-                        .setContentText("Something interesting happened");
-        int NOTIFICATION_ID = 12345;
+        try {
+            JSONObject jsonObj = new JSONObject(message);
+            JSONObject user = jsonObj.getJSONObject("user");
 
-        Intent targetIntent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(contentIntent);
-        NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nManager.notify(NOTIFICATION_ID, builder.build());
+            String user_name = user.getString("first_name") + " " + user.getString("last_name");
+
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.drawable.nomi_push_smooth)
+                            .setContentTitle(user_name + " " + getResources().getString(R.string.updated_info))
+                            .setContentText(getResources().getString(R.string.get_in_touch));
+            int NOTIFICATION_ID = 12345;
+
+            Intent targetIntent = new Intent(this, MainActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(contentIntent);
+            NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            nManager.notify(NOTIFICATION_ID, builder.build());
+
+        }
+        catch (JSONException e){
+            Log.d("JSONException", e.toString());
+        }
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
