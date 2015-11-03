@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,13 +27,18 @@ import com.example.ivosilva.nomi.login.LoginFragment;
 import com.example.ivosilva.nomi.menu.MenuActivity;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import mehdi.sakout.fancybuttons.FancyButton;
+
+
 
 public class RegisterFragment extends Fragment {
     // UA
@@ -48,11 +55,21 @@ public class RegisterFragment extends Fragment {
     private EditText password1;
     private EditText password2;
 
+    private String email_str;
+
+    private Activity activity;
+    private Context context;
+
+
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
     }
 
     @Override
@@ -150,6 +167,8 @@ public class RegisterFragment extends Fragment {
 
             try {
 
+                email_str = email.getText().toString();
+
                 JSONObject jsonBody = new JSONObject("{" +
                         "\"email\": \"" + email.getText().toString() + "\"," +
                         "\"password\": \"" + password1.getText().toString() + "\"," +
@@ -174,7 +193,6 @@ public class RegisterFragment extends Fragment {
 
                                 Toast.makeText(getActivity(), R.string.user_registered,
                                         Toast.LENGTH_LONG).show();
-//                                Crouton.makeText(getActivity(), "User registered!", Style.CONFIRM).show();
 
                                 Intent register_intent = new Intent(getActivity(),
                                         MainActivity.class);
@@ -205,4 +223,6 @@ public class RegisterFragment extends Fragment {
         }
     };
 
+
 }
+

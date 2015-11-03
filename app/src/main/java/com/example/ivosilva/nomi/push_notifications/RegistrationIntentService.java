@@ -4,16 +4,19 @@ package com.example.ivosilva.nomi.push_notifications;
  * Created by ivosilva on 03/11/15.
  */
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.login.LoginFragment;
 import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
@@ -36,6 +39,13 @@ public class RegistrationIntentService extends IntentService {
     private static final String[] TOPICS = {"global"};
     private RequestQueue mQueue;
 
+    private GoogleCloudMessaging gcm =null;
+
+    private String device_id;
+    TelephonyManager tm;
+    SharedPreferences shared_preferences;
+
+
     public RegistrationIntentService() {
         super(TAG);
     }
@@ -51,9 +61,13 @@ public class RegistrationIntentService extends IntentService {
             // R.string.gcm_defaultSenderId (the Sender ID) is typically derived from google-services.json.
             // See https://developers.google.com/cloud-messaging/android/start for details on this file.
             // [START get_token]
-            InstanceID instanceID = InstanceID.getInstance(this);
-            String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+            //InstanceID instanceID = InstanceID.getInstance(this);
+            //String token = instanceID.getToken(getResources().getString(R.string.gcm_defaultSenderId),
+            //        GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+
+            gcm = GoogleCloudMessaging.getInstance(this);
+            String token = gcm.register(getResources().getString(R.string.gcm_defaultSenderId));
+
             // [END get_token]
             Log.i(TAG, "GCM Registration Token: " + token);
 
@@ -86,46 +100,67 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        Log.d("TOKEN", token.split(":")[1]);
-
-        mQueue = CustomVolleyRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
         String url = "http://"+"192.168.160.56:8000"+"/api/device/gcm/";
 
+        shared_preferences = getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
 
-        try {
+        if (shared_preferences.getInt(LoginFragment.USERID, -1) != -1){
 
-            JSONObject jsonBody = new JSONObject("{" +
-                    "\"name\": \"\"," +
-                    "\"registration_id\": \"" + token.split(":")[1] + "\"," +
-                    "\"device_id\": null," +
-                    "\"active\": true" +
-                    "}");
+            mQueue = CustomVolleyRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
 
-            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, jsonBody,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject jsonObject) {
+            try {
+                JSONObject jsonBody = new JSONObject("{" +
+                        "\"name\": \"" + Integer.toString(shared_preferences.getInt(LoginFragment.USERID, -1)) + "\"," +
+                        "\"registration_id\": \"" + token + "\"," +
+                        "\"device_id\": \"" + device_id + "\"," +
+                        "\"active\": true," +
+                        "\"user\": \"" + Integer.toString(shared_preferences.getInt(LoginFragment.USERID, -1)) + "\"," +
+                        "}");
 
+                Log.d("JSONREG", jsonBody.toString());
 
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Log.d("error", volleyError.toString());
-                        }
-                    });
+                final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject jsonObject) {
 
-            jsonRequest.setTag(TAG);
-            mQueue.add(jsonRequest);
-        }catch (JSONException e){
-            Log.d("JSONException", e.toString());
+                                Log.d("jsonObject", jsonObject.toString());
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                VolleyLog.e("error", volleyError.getMessage());
+                            }
+                        });
+
+                jsonRequest.setTag("REG_PUSH");
+                mQueue.add(jsonRequest);
+            }catch (JSONException e){
+                Log.d("JSONException", e.toString());
+            }
         }
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        android.os.Debug.waitForDebugger();
+
+        tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        device_id = tm.getDeviceId();
+//        gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+//        try {
+//            Log.d("SENDERID", getResources().getString(R.string.gcm_defaultSenderId));
+//            regid = gcm.register(getResources().getString(R.string.gcm_defaultSenderId));
+//        }catch (IOException e){
+//            Log.d("REGID", e.toString());
+//        }
+
     }
+
+
+
 }
+
+
