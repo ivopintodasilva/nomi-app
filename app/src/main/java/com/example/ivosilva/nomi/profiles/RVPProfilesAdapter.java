@@ -114,6 +114,7 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
                 profile_details.putExtra("PROFILE", profile_json);
                 profile_details.putExtra("ATTRIBUTES", attributes_json);
                 v.getContext().startActivity(profile_details);
+                activity.finish();
             }
 
             public void deleteProfile(final View v, final int position) {
