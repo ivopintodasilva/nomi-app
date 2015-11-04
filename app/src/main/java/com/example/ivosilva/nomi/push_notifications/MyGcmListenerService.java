@@ -72,7 +72,8 @@ public class MyGcmListenerService extends GcmListenerService {
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.nomi_push_smooth)
                             .setContentTitle(user_name + " " + getResources().getString(R.string.updated_info))
-                            .setContentText(getResources().getString(R.string.get_in_touch));
+                            .setContentText(getResources().getString(R.string.get_in_touch))
+                            .setAutoCancel(true);
             int NOTIFICATION_ID = 12345;
 
 
