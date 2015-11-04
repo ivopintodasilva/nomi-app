@@ -66,7 +66,19 @@
     <string name="gcm_defaultSenderId">989010463284</string>
     <string name="updated_info">updated his/her contacts</string>
     <string name="get_in_touch">Take the opportunity to get in touch</string>
-
+    <string name="created_new_profile">Created new profile</string>
+    <string name="empty_profile_name">Profile name cannot be empty</string>
+    <string name="empty_attribute_detail">Attribute value cannot be empty</string>
+    <string name="edit_attribute_error">Error editing attribute</string>
+    <string name="delete_attribute_error">Error deleting attribute</string>
+    <string name="add_attribute_error">Error adding new attribute</string>
+    <string name="edited_attribute">Edited attribute with success</string>
+    <string name="add_attr_number">Add a number</string>
+    <string name="added_attribute">Added new attribute</string>
+    <string name="add_attr_text">Write a value</string>
+    <string name="deleted_attribute">Attribute deleted with success</string>
+    <string name="deleted_profile">Deleted profile with success</string>
+    <string name="deleted_profile_error">Error deleting profile</string>
 
 
 </resources>

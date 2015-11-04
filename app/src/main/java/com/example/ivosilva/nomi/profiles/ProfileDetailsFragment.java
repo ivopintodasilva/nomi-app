@@ -13,21 +13,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.example.ivosilva.nomi.MainActivity;
 import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.login.LoginFragment;
+import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
+import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import fr.tkeunebr.gravatar.Gravatar;
 
 /**
@@ -35,7 +46,12 @@ import fr.tkeunebr.gravatar.Gravatar;
  */
 public class ProfileDetailsFragment extends Fragment {
 
+    public static final String REQUEST_TAG = "ProfileDetailsFragment";
+
+    private RequestQueue mQueue;
+
     TextView profile_name;
+    private int profile_id;
     private IconTextView number;
     private IconTextView email;
     private IconTextView facebook;
@@ -80,9 +96,13 @@ public class ProfileDetailsFragment extends Fragment {
         Log.d("ProfileDetailsFragmentA", getArguments().getString("ATTRIBUTES", ""));
 
         /****** code for floating button ******/
-        FloatingActionButton multipleActions = new FloatingActionButton(getActivity().getBaseContext());
-//        multipleActions.setTitle(getContext().getString(R.string.add_profile));
-        multipleActions.setOnClickListener(multipleActionsHandler);
+        view.findViewById(R.id.action_phone).setOnClickListener(newPhoneHandler);
+        view.findViewById(R.id.action_email).setOnClickListener(newEmailHandler);
+        view.findViewById(R.id.action_facebook).setOnClickListener(newFacebookHandler);
+        view.findViewById(R.id.action_instagram).setOnClickListener(newInstagramHandler);
+        view.findViewById(R.id.action_linkedin).setOnClickListener(newLinkedinHandler);
+        view.findViewById(R.id.action_googleplus).setOnClickListener(newGoogleplusHandler);
+        view.findViewById(R.id.action_twitter).setOnClickListener(newTwitterHandler);
         /****** end of code for floating button ******/
 
         try {
@@ -90,14 +110,15 @@ public class ProfileDetailsFragment extends Fragment {
             profile_name = (TextView) view.findViewById(R.id.profile_name);
             profile_name.setText(profile.getString("name"));
 
+            profile_id = profile.getInt("id");
+
             JSONObject contacts = new JSONObject(getArguments().getString("ATTRIBUTES", ""));
-
-
+//            Log.d("PROFILEDETAILS", contacts.toString());
 
             /*  to organize the profile contacts in the view  */
             int i = 0;
-            int padding = 50;
-            int amountPadding = 0;
+            int padding = 60;
+            int countAttributes = 0;
             String key;
             Iterator<String> it = contacts.keys();
             while(it.hasNext()){
@@ -112,10 +133,13 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) number.getLayoutParams();
-                            params.topMargin = i*60; //i*padding;
+                            params.topMargin = i*padding; //i*padding;
                             number.setLayoutParams(params);
                         }
                         number.setOnClickListener(numberHandler);
+                        number.setOnLongClickListener(numberLongHandler);
+                        view.findViewById(R.id.action_phone).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "EMAIL":
                         email = (IconTextView) view.findViewById(R.id.profile_email);
@@ -124,10 +148,13 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) email.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             email.setLayoutParams(params);
                         }
                         email.setOnClickListener(emailHandler);
+                        email.setOnLongClickListener(emailLongHandler);
+                        view.findViewById(R.id.action_email).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "FACEBOOK":
                         facebook = (IconTextView) view.findViewById(R.id.profile_facebook);
@@ -136,10 +163,13 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) facebook.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             facebook.setLayoutParams(params);
                         }
                         facebook.setOnClickListener(facebookHandler);
+                        facebook.setOnLongClickListener(facebookLongHandler);
+                        view.findViewById(R.id.action_facebook).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "INSTAGRAM":
                         instagram = (IconTextView) view.findViewById(R.id.profile_instagram);
@@ -148,10 +178,13 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) instagram.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             instagram.setLayoutParams(params);
                         }
                         instagram.setOnClickListener(instagramHandler);
+                        instagram.setOnLongClickListener(instagramLongHandler);
+                        view.findViewById(R.id.action_instagram).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "LINKEDIN":
                         linkedin = (IconTextView) view.findViewById(R.id.profile_linkedin);
@@ -160,10 +193,13 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linkedin.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             linkedin.setLayoutParams(params);
                         }
                         linkedin.setOnClickListener(linkedinHandler);
+                        linkedin.setOnLongClickListener(linkedinLongHandler);
+                        view.findViewById(R.id.action_linkedin).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "GOOGLE":
                         googleplus = (IconTextView) view.findViewById(R.id.profile_googleplus);
@@ -172,10 +208,13 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) googleplus.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             googleplus.setLayoutParams(params);
                         }
                         googleplus.setOnClickListener(googleplusHandler);
+                        googleplus.setOnLongClickListener(googleplusLongHandler);
+                        view.findViewById(R.id.action_googleplus).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                     case "TWITTER":
                         twitter = (IconTextView) view.findViewById(R.id.profile_twitter);
@@ -184,13 +223,17 @@ public class ProfileDetailsFragment extends Fragment {
                         i++;
                         if(i!=0){
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) twitter.getLayoutParams();
-                            params.topMargin = i*60;
+                            params.topMargin = i*padding;
                             twitter.setLayoutParams(params);
                         }
                         twitter.setOnClickListener(twitterHandler);
+                        twitter.setOnLongClickListener(twitterLongHandler);
+                        view.findViewById(R.id.action_twitter).setVisibility(View.GONE);
+                        countAttributes++;
                         break;
                 }
-                amountPadding += padding;
+                if (countAttributes == 7)
+                    view.findViewById(R.id.multiple_actions).setVisibility(View.GONE);
             }
         }
         catch (org.json.JSONException e){
@@ -250,7 +293,7 @@ public class ProfileDetailsFragment extends Fragment {
     };
 
 
-    private void showEditDialog(int dialog_layout, int editText, final String icon, String attrType) {
+    private void showEditDialog(int dialog_layout, int editText, final String icon, final String attrType) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //builder.setTitle(getContext().getString(R.string.attribute_dialog_title));
 
@@ -296,9 +339,23 @@ public class ProfileDetailsFragment extends Fragment {
             .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    Log.i("DIALOG", "YES");
                     Log.i("DIALOG", newValue.getText().toString());
                     Log.i("DIALOG",oldValue.getText().toString());
+
+                    boolean valid = true;
+
+                    if (newValue.getText().toString().trim().equals("")) {
+                        newValue.setError(getResources().getString(R.string.empty_attribute_detail));
+                        valid = false;
+                    } else
+                        newValue.setError(null);
+
+                    if (!valid) {
+                        Crouton.makeText(getActivity(), R.string.empty_attribute_detail, Style.ALERT).show();
+                        return;
+                    }
+
+                    editAttribute(newValue, attrType);
 
                     oldValue.setText(icon + newValue.getText());
                 }
@@ -314,18 +371,287 @@ public class ProfileDetailsFragment extends Fragment {
         builder.show();
     }
 
-    View.OnClickListener multipleActionsHandler = new View.OnClickListener() {
+    private void editAttribute(EditText newValue, String attrType) {
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+        try {
+            JSONObject jsonBody = new JSONObject("{" +
+                    "\"name\":" + "\"" + attrType.toUpperCase() + "\"," +
+                    "\"value\":" + "\"" + newValue.getText().toString() + "\"" +
+                    "}");
+            Log.d("EDITATTRIBUTE", jsonBody.toString());
+
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://"+serverIp+"/api/attribute/profile/"+ String.valueOf(profile_id) +"/";
+
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                    Request.Method.PUT, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
+
+                            Toast.makeText(getActivity(), R.string.edited_attribute,
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            NetworkResponse networkResponse = volleyError.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Crouton.makeText(getActivity(), R.string.edit_attribute_error, Style.ALERT).show();
+                            }else{
+                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                            }
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
+
+            mQueue.add(jsonRequest);
+
+        } catch (JSONException e) {
+            Log.e("EDITATTREXCEPTION", e.toString());
+        }
+    }
+
+
+
+
+    View.OnClickListener newPhoneHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            final View action_phone = getActivity().findViewById(R.id.action_phone);
-            action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-
-            Log.d("FLOTINGACTION","action_phone");
-
-            ///TODO change the target of the intent. Just for testing
-            Intent new_profile_intent = new Intent(getActivity(), MainActivity.class);
-            getActivity().startActivity(new_profile_intent);
+            showAddDialog(R.layout.dialog_add_attr_phone, R.id.add_attribute_number, "NUMBER", "{fa-phone}");
         }
     };
+
+    View.OnClickListener newEmailHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_email, R.id.add_attribute_email, "EMAIL", "{fa-envelope-o}");
+        }
+    };
+
+    View.OnClickListener newFacebookHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "FACEBOOK", "{fa-facebook}");
+        }
+    };
+
+    View.OnClickListener newInstagramHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "INSTAGRAM", "{fa-instagram}");
+        }
+    };
+
+    View.OnClickListener newLinkedinHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "LINKEDIN", "{fa-linkedin}");
+        }
+    };
+
+    View.OnClickListener newGoogleplusHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_email, R.id.add_attribute_email, "GOOGLE", "{fa-google-plus}");
+        }
+    };
+
+    View.OnClickListener newTwitterHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showAddDialog(R.layout.dialog_add_attr_generalist, R.id.add_attribute_text, "TWITTER", "{fa-twitter}");
+        }
+    };
+
+    private void showAddDialog(int dialog_layout, int editText, final String attrType, String iconText) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        // Get the layout inflater
+        LayoutInflater linf = LayoutInflater.from(getActivity());
+
+        // Pass null as the parent view because its going in the dialog layout
+        final View inflator = linf.inflate(dialog_layout, null);
+
+        final IconTextView dialogText = (IconTextView) inflator.findViewById(R.id.dialog_image);
+        dialogText.setText(iconText);
+
+        final EditText newValue = (EditText) inflator.findViewById(editText);
+
+        // Inflate and set the layout for the dialog
+        builder.setView(inflator)
+                // Add action buttons
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        addAttribute(newValue, attrType);
+
+                        Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
+                        getActivity().startActivity(profilelist_intent);
+                        getActivity().finish();
+                    }
+                })
+                .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.i("DIALOG", "CANCEL");
+                        dialog.cancel();
+                    }
+                });
+
+        builder.create();
+        builder.show();
+    }
+
+    private void addAttribute(EditText newValue, String attrType) {
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+        try {
+            JSONObject jsonBody = new JSONObject("{" +
+                    "\"name\":" + "\"" + attrType.toUpperCase() + "\"," +
+                    "\"value\":" + "\"" + newValue.getText().toString() + "\"," +
+                    "\"profile\":" + "\"" + String.valueOf(profile_id) + "\"" +
+                    "}");
+            Log.d("ADDATTRIBUTE", jsonBody.toString());
+
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://"+serverIp+"/api/attribute/profile/";
+
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                    Request.Method.POST, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
+
+                            Toast.makeText(getActivity(), R.string.added_attribute,
+                                    Toast.LENGTH_LONG).show();
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            NetworkResponse networkResponse = volleyError.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Crouton.makeText(getActivity(), R.string.add_attribute_error, Style.ALERT).show();
+                            }else{
+                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                            }
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
+
+            mQueue.add(jsonRequest);
+
+        } catch (JSONException e) {
+            Log.e("ADDATTREXCEPTION", e.toString());
+        }
+    }
+
+
+
+
+    View.OnLongClickListener numberLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("NUMBER");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener emailLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("EMAIL");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener facebookLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("FACEBOOK");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener instagramLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("INSTAGRAM");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener linkedinLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("LINKEDIN");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener googleplusLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("GOOGLE");
+            return true;
+        }
+    };
+
+    View.OnLongClickListener twitterLongHandler = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            deleteAttribute("TWITTER");
+            return true;
+        }
+    };
+
+    private void deleteAttribute(String attrType) {
+        shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+        String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+        try {
+            JSONObject jsonBody = new JSONObject("{" +
+                    "\"name\":" + "\"" + attrType + "\"" +
+                    "}");
+            Log.d("DELETEATTRIBUTE", jsonBody.toString());
+
+            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+            String url = "http://"+serverIp+"/api/attribute/profile/"+ String.valueOf(profile_id) +"/";
+
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                    Request.Method.DELETE, url, jsonBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("onResponse", jsonObject.toString());
+
+                            Toast.makeText(getActivity(), R.string.deleted_attribute,
+                                    Toast.LENGTH_LONG).show();
+
+                            Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
+                            getActivity().startActivity(profilelist_intent);
+                            getActivity().finish();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            NetworkResponse networkResponse = volleyError.networkResponse;
+                            if (networkResponse != null && networkResponse.statusCode == 401) {
+                                Crouton.makeText(getActivity(), R.string.delete_attribute_error, Style.ALERT).show();
+                            }else{
+                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                            }
+                        }
+                    });
+            jsonRequest.setTag(REQUEST_TAG);
+
+            mQueue.add(jsonRequest);
+
+        } catch (JSONException e) {
+            Log.e("DELETEATTREXCEPTION", e.toString());
+        }
+    }
 
 }

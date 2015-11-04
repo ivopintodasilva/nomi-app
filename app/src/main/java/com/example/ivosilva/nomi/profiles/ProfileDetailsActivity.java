@@ -36,12 +36,4 @@ public class ProfileDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void profile_add_phone(View view) {
-        final View action_phone = (View) findViewById(R.id.action_phone);
-        action_phone.setVisibility(action_phone.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-
-        Log.d("FLOTINGACTION", "profile_add_phone");
-        Intent new_profile_intent = new Intent(this, MainActivity.class);
-        this.startActivity(new_profile_intent);
-    }
 }
