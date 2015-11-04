@@ -1,5 +1,6 @@
 package com.example.ivosilva.nomi.profiles;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,7 +37,10 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -63,10 +68,14 @@ public class ProfileDetailsFragment extends Fragment {
     SharedPreferences shared_preferences;
     String gravatar_url;
 
+    Activity activity;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        activity = getActivity();
 
         shared_preferences = getActivity().getSharedPreferences(LoginFragment.LOGINPREFS, Context.MODE_PRIVATE);
         String user_email = shared_preferences.getString(LoginFragment.USEREMAIL, "");
@@ -351,7 +360,7 @@ public class ProfileDetailsFragment extends Fragment {
                         newValue.setError(null);
 
                     if (!valid) {
-                        Crouton.makeText(getActivity(), R.string.empty_attribute_detail, Style.ALERT).show();
+                        Crouton.makeText(activity, R.string.empty_attribute_detail, Style.ALERT).show();
                         return;
                     }
 
@@ -402,9 +411,9 @@ public class ProfileDetailsFragment extends Fragment {
                         public void onErrorResponse(VolleyError volleyError) {
                             NetworkResponse networkResponse = volleyError.networkResponse;
                             if (networkResponse != null && networkResponse.statusCode == 401) {
-                                Crouton.makeText(getActivity(), R.string.edit_attribute_error, Style.ALERT).show();
+                                Crouton.makeText(activity, R.string.edit_attribute_error, Style.ALERT).show();
                             }else{
-                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                                Crouton.makeText(activity, R.string.you_shall_not_pass, Style.ALERT).show();
                             }
                         }
                     });
@@ -539,9 +548,9 @@ public class ProfileDetailsFragment extends Fragment {
                         public void onErrorResponse(VolleyError volleyError) {
                             NetworkResponse networkResponse = volleyError.networkResponse;
                             if (networkResponse != null && networkResponse.statusCode == 401) {
-                                Crouton.makeText(getActivity(), R.string.add_attribute_error, Style.ALERT).show();
+                                Crouton.makeText(activity, R.string.add_attribute_error, Style.ALERT).show();
                             }else{
-                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                                Crouton.makeText(activity, R.string.you_shall_not_pass, Style.ALERT).show();
                             }
                         }
                     });
@@ -610,48 +619,42 @@ public class ProfileDetailsFragment extends Fragment {
         shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
         String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
 
-        try {
-            JSONObject jsonBody = new JSONObject("{" +
-                    "\"name\":" + "\"" + attrType + "\"" +
-                    "}");
-            Log.d("DELETEATTRIBUTE", jsonBody.toString());
 
-            mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
-            String url = "http://"+serverIp+"/api/attribute/profile/"+ String.valueOf(profile_id) +"/";
+        mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+        String url = "http://" + serverIp + "/api/attribute/profile/" + String.valueOf(profile_id) + "/" + attrType + "/";
 
-            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
-                    Request.Method.DELETE, url, jsonBody,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject jsonObject) {
-                            Log.d("onResponse", jsonObject.toString());
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                Request.Method.DELETE, url, new JSONObject(),
+                new Response.Listener<JSONObject>() {
 
-                            Toast.makeText(getActivity(), R.string.deleted_attribute,
-                                    Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Log.d("onResponse", jsonObject.toString());
 
-                            Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
-                            getActivity().startActivity(profilelist_intent);
-                            getActivity().finish();
+                        Toast.makeText(getActivity(), R.string.deleted_attribute,
+                                Toast.LENGTH_LONG).show();
+
+                        Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
+                        getActivity().startActivity(profilelist_intent);
+                        getActivity().finish();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        NetworkResponse networkResponse = volleyError.networkResponse;
+                        if (networkResponse != null && networkResponse.statusCode == 401) {
+                            Crouton.makeText(activity, R.string.delete_attribute_error, Style.ALERT).show();
+                        } else {
+                            Crouton.makeText(activity, R.string.you_shall_not_pass, Style.ALERT).show();
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            NetworkResponse networkResponse = volleyError.networkResponse;
-                            if (networkResponse != null && networkResponse.statusCode == 401) {
-                                Crouton.makeText(getActivity(), R.string.delete_attribute_error, Style.ALERT).show();
-                            }else{
-                                Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
-                            }
-                        }
-                    });
-            jsonRequest.setTag(REQUEST_TAG);
+                    }
+                });
+        jsonRequest.setTag(REQUEST_TAG);
 
-            mQueue.add(jsonRequest);
+        mQueue.add(jsonRequest);
 
-        } catch (JSONException e) {
-            Log.e("DELETEATTREXCEPTION", e.toString());
-        }
+
     }
 
     @Override
