@@ -161,7 +161,7 @@ public class ProfileListFragment extends Fragment {
             }
 
 
-            RVPProfilesAdapter adapter = new RVPProfilesAdapter(profiles_list);
+            RVPProfilesAdapter adapter = new RVPProfilesAdapter(profiles_list, getActivity());
             recycler_view.setAdapter(adapter);
             recycler_view.setOnLongClickListener(recycler_viewHandler);
 
@@ -247,4 +247,9 @@ public class ProfileListFragment extends Fragment {
         }
     };
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Crouton.cancelAllCroutons();
+    }
 }

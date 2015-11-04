@@ -131,6 +131,7 @@ public class NewProfileFragment extends Fragment {
                             Toast.makeText(getActivity(), R.string.created_new_profile,
                                     Toast.LENGTH_LONG).show();
 
+
                             Intent profilelist_intent = new Intent(getActivity(),
                                     ProfileListActivity.class);
                             profilelist_intent.putExtra("event","newProfileCreated");
@@ -159,4 +160,10 @@ public class NewProfileFragment extends Fragment {
 
         }
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Crouton.cancelAllCroutons();
+    }
 }

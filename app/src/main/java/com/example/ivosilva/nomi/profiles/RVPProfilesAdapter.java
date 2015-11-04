@@ -1,5 +1,6 @@
 package com.example.ivosilva.nomi.profiles;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,7 +40,8 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  * Created by silva on 24/10/15.
  */
 public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.ProfileViewHolder> {
-
+    public Activity activity;
+    public Context context;
     public static final String REQUEST_TAG = "ProfileListAdapter";
 
     public static class ProfileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
@@ -69,8 +71,10 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
 
         @Override
         public boolean onLongClick(View v) {
-//            Log.d("VIEWHOLDER", new Integer(this.getLayoutPosition()).toString());
+//          Log.d("VIEWHOLDER", new Integer(this.getLayoutPosition()).toString());
             mListener.deleteProfile(v, this.getLayoutPosition());
+            //v.setVisibility(View.INVISIBLE);
+
             return true;
         }
 
@@ -83,13 +87,15 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
 
     List<Profile> user_profiles;
 
-    RVPProfilesAdapter(List<Profile> user_profiles){
+    RVPProfilesAdapter(List<Profile> user_profiles, Activity activity){
         this.user_profiles = user_profiles;
+        this.activity = activity;
     }
 
 
     @Override
     public ProfileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.profiles_card, parent, false);
         //ProfileViewHolder pvh = new ProfileViewHolder(v);
 
@@ -110,9 +116,10 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
                 v.getContext().startActivity(profile_details);
             }
 
-            public void deleteProfile(final View v, int position) {
+            public void deleteProfile(final View v, final int position) {
                 SharedPreferences shared_preferences = v.getContext().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
                 String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
 
                 Log.d("DELETEPROFILE", String.valueOf(position));
 
@@ -129,11 +136,16 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
                                 public void onResponse(JSONObject jsonObject) {
                                     Log.d("onResponse", jsonObject.toString());
 
-                                    Toast.makeText(v.getContext(), R.string.deleted_profile,
-                                            Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(v.getContext(), R.string.deleted_profile,
+                                    //        Toast.LENGTH_LONG).show();
 
-                                    Intent profilelist_intent = new Intent(v.getContext(), MenuActivity.class);
-                                    v.getContext().startActivity(profilelist_intent);
+                                    Crouton.makeText(activity, R.string.deleted_profile, Style.INFO).show();
+                                    user_profiles.remove(position);
+                                    notifyDataSetChanged();
+
+
+                                    //Intent profilelist_intent = new Intent(v.getContext(), MenuActivity.class);
+                                    //v.getContext().startActivity(profilelist_intent);
                                 }
                             },
                             new Response.ErrorListener() {
@@ -144,10 +156,11 @@ public class RVPProfilesAdapter extends RecyclerView.Adapter<RVPProfilesAdapter.
 //                                        Crouton.makeText(v.getContext(), R.string.delete_attribute_error, Style.ALERT).show();
                                         Toast.makeText(v.getContext(), R.string.deleted_profile_error,
                                                 Toast.LENGTH_LONG).show();
+                                        //Crouton.makeText(activity, R.string.delete_attribute_error, Style.ALERT).show();
                                     }else{
                                         Toast.makeText(v.getContext(), R.string.you_shall_not_pass,
                                                 Toast.LENGTH_LONG).show();
-//                                        Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                                        //Crouton.makeText(activity, R.string.you_shall_not_pass, Style.ALERT).show();
                                     }
                                 }
                             });
