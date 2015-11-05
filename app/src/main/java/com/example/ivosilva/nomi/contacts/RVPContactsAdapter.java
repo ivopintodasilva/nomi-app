@@ -101,6 +101,9 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
                 String profile_json = gson.toJson(user_profiles.get(position));
                 String contacts_json = gson.toJson(user_profiles.get(position).getAllContacts());
 
+                Log.d("profile_json", profile_json);
+                Log.d("contacts_json", contacts_json);
+
                 Intent contact_details = new Intent(v.getContext(), ContactDetailsActivity.class);
                 contact_details.putExtra("PROFILE", profile_json);
                 contact_details.putExtra("CONTACTS", contacts_json);
@@ -162,7 +165,8 @@ public class RVPContactsAdapter extends RecyclerView.Adapter<RVPContactsAdapter.
         gravatarUrl = Gravatar.init().with(user_profiles.get(position).getEmail()).force404().size(60).build();
         Log.d("gravatarUrl", gravatarUrl);
         // substitute by real user image url
-        Glide.with(holder.context).load(gravatarUrl).into(holder.mPhoto);
+        Glide.with(holder.context).load(gravatarUrl)
+                .error(R.drawable.user_placeholder).into(holder.mPhoto);
     }
 
     @Override

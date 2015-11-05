@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,13 +44,19 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class ProfileListFragment extends Fragment {
 
+    public static final String REQUEST_TAG = "ProfileListFragment";
+
     private RequestQueue mQueue;
 
     SharedPreferences shared_preferences;
 
     private RotateLoading rotateLoading;
 
+    RecyclerView recycler_view;
+
     List<Profile> profiles_list;
+
+    private int[] profile_id;
 
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -90,7 +97,7 @@ public class ProfileListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Crouton.makeText(getActivity(), "Error fetching profiles data.", Style.ALERT).show();
+                        Crouton.makeText(getActivity(), "Error fetching profiles.", Style.ALERT).show();
                     }
                 });
 
@@ -112,15 +119,16 @@ public class ProfileListFragment extends Fragment {
                 JSONArray attributes;
 
                 profiles_list = new ArrayList<Profile>();
+                profile_id = new int[results.length()];
 
                 for(int i = 0; i < results.length(); i++){
                     profile = results.getJSONObject(i); // get profile
 
-                    int profile_id = profile.getInt("id");
+                    profile_id[i] = profile.getInt("id");
                     String name = profile.getString("name");
                     String color = profile.getString("color");
 
-                    profiles_list.add(new Profile(profile_id, name, color));
+                    profiles_list.add(new Profile(profile_id[i], name, color));
 
                     attributes = profile.getJSONArray("attributes"); // get attributes profile
                     for(int j=0; j<attributes.length(); j++) {
@@ -141,29 +149,26 @@ public class ProfileListFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            RecyclerView recycler_view = (RecyclerView) getView().findViewById(R.id.recycler_view);
+            recycler_view = (RecyclerView) getView().findViewById(R.id.recycler_view);
             recycler_view.setHasFixedSize(true);
 
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycler_view.setLayoutManager(mLayoutManager);
 
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    if (profiles_list.size() == 0) {
-                        TextView textView = (TextView) getActivity().findViewById(R.id.profiles_empty_label);
-                        textView.setVisibility(1);
-                    }
-                    if (rotateLoading.isStart()) {
-                        rotateLoading.stop();
-                    }
-                }
-            }, 2000);
+            if (profiles_list.size() == 0) {
+                TextView textView = (TextView) getActivity().findViewById(R.id.profiles_empty_label);
+                textView.setVisibility(View.VISIBLE);
+            }
 
 
-            RVPProfilesAdapter adapter = new RVPProfilesAdapter(profiles_list);
+            RVPProfilesAdapter adapter = new RVPProfilesAdapter(profiles_list, getActivity());
             recycler_view.setAdapter(adapter);
+            recycler_view.setOnLongClickListener(recycler_viewHandler);
+
+            if (rotateLoading.isStart()) {
+                rotateLoading.stop();
+            }
+
 
         }
 
@@ -185,15 +190,66 @@ public class ProfileListFragment extends Fragment {
         rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloading_profiles);
         rotateLoading.start();
 
-
-        /****** code for floating button ******/
-//        FloatingActionButton actionB = new FloatingActionButton(getActivity().getBaseContext());
-//        actionB.setTitle(getContext().getString(R.string.add_profile));
-        /****** end of code for floating button ******/
-
-
         return view;
     }
 
 
+    View.OnLongClickListener recycler_viewHandler = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            final int itemPosition = recycler_view.getChildAdapterPosition(v);
+            int id = profile_id[itemPosition];
+
+            shared_preferences = getActivity().getSharedPreferences(LoginFragment.SERVER, Context.MODE_PRIVATE);
+            String serverIp = shared_preferences.getString(LoginFragment.SERVERIP, "localhost:8000");
+
+            try {
+                JSONObject jsonBody = new JSONObject("{}");
+                Log.d("DELETEAPROFILE", "Apagar Profile com id: "+String.valueOf(id));
+
+                mQueue = CustomVolleyRequestQueue.getInstance(getContext()).getRequestQueue();
+                String url = "http://"+serverIp+"/api/profile/" + String.valueOf(id);
+
+                final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(
+                        Request.Method.DELETE, url, jsonBody,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject jsonObject) {
+                                Log.d("onResponse", jsonObject.toString());
+
+                                Toast.makeText(getActivity(), R.string.deleted_attribute,
+                                        Toast.LENGTH_LONG).show();
+
+                                Intent profilelist_intent = new Intent(getActivity(), ProfileListActivity.class);
+                                getActivity().startActivity(profilelist_intent);
+                                getActivity().finish();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                NetworkResponse networkResponse = volleyError.networkResponse;
+                                if (networkResponse != null && networkResponse.statusCode == 401) {
+                                    Crouton.makeText(getActivity(), R.string.delete_attribute_error, Style.ALERT).show();
+                                }else{
+                                    Crouton.makeText(getActivity(), R.string.you_shall_not_pass, Style.ALERT).show();
+                                }
+                            }
+                        });
+                jsonRequest.setTag(REQUEST_TAG);
+
+                mQueue.add(jsonRequest);
+
+            } catch (JSONException e) {
+                Log.e("DELETEATTREXCEPTION", e.toString());
+            }
+            return true;
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Crouton.cancelAllCroutons();
+    }
 }

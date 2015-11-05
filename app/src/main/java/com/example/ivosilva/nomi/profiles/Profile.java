@@ -36,6 +36,6 @@ public class Profile {
     public String getColor() { return color; }
 
     @Override
-    public String toString() { return this.id + " - " + this.name; }
+    public String toString() { return this.name; }
 
 }
