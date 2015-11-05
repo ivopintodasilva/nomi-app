@@ -13,7 +13,7 @@
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/dialog_image"
-        android:text="{fa-instagram}"
+        android:text="{fa-phone}"
         android:textSize="30dp"
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         android:textColor="#FFFFFF"/>
 
     <EditText
-        android:id="@+id/attribute_instagram"
+        android:id="@+id/add_attribute_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -32,11 +32,11 @@
         android:layout_marginBottom="16dp"
         android:layout_below="@+id/dialog_image"
         android:fontFamily="sans-serif-thin"
-        android:hint="@string/update_instagram"
+        android:hint="@string/add_attr_number"
         android:cursorVisible="true"
         android:textColor="#ffffff"
         android:textColorHighlight="#ffffff"
         android:textColorHint="#dcdcdc"
-        android:inputType="text" />
+        android:inputType="number" />
 
 </RelativeLayout>

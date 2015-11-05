@@ -45,4 +45,5 @@ dependencies {
     compile 'com.victor:lib:1.0.1'
     compile files('/Users/ivosilva/AndroidStudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
     compile files('/home/silva/StudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
+    compile "com.google.android.gms:play-services:8.1.0"
 }
