@@ -28,6 +28,7 @@
     android:layout_below="@id/fragment_menu_image"
     android:layout_centerVertical="true"    >
 
+
     <View
         android:layout_marginTop="50dp"
         android:id="@+id/separator2"
@@ -160,6 +161,5 @@
         android:layout_centerHorizontal="true"
         android:background="#40ffffff"
         android:layout_below="@id/btn_settings"/>
-
 </LinearLayout>
 </RelativeLayout>
