@@ -62,7 +62,7 @@ public class NFCUpFragment extends Fragment {
 
     SharedPreferences shared_preferences;
     private RequestQueue mQueue;
-    List<Profile> profiles_list = new ArrayList<Profile>();
+    List<Profile> profiles_list = new ArrayList<>();
     private RotateLoading rotateLoading;
     Spinner spinner;
     Context context;
@@ -114,6 +114,7 @@ public class NFCUpFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        Log.d("NFCUpError", "Error fetching profiles");
                         Crouton.makeText(activity, R.string.error_json_profiles, Style.ALERT).show();
                     }
                 });
@@ -135,7 +136,7 @@ public class NFCUpFragment extends Fragment {
                 JSONObject profile;
                 JSONArray attributes;
 
-                profiles_list = new ArrayList<Profile>();
+                profiles_list = new ArrayList<>();
 
                 for(int i = 0; i < results.length(); i++){
                     profile = results.getJSONObject(i); // get profile
@@ -165,10 +166,8 @@ public class NFCUpFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-
-
             if (profiles_list.size() == 0) {
-
+                Log.d("ProfilesList", profiles_list.toString());
 
             }else {
                 Log.d("ProfilesList", profiles_list.toString());
