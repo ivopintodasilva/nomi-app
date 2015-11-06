@@ -24,6 +24,8 @@ import com.example.ivosilva.nomi.volley.CustomJSONObjectRequest;
 import com.example.ivosilva.nomi.volley.CustomVolleyRequestQueue;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,10 +37,10 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LoginFragment extends Fragment{
     // UA
-    public static final String base_url = "192.168.160.56:8000";
+//    public static final String base_url = "192.168.160.56:8000";
 
     // CASA
-    //public static final String base_url = "192.168.0.24:8000";
+    public static final String base_url = "192.168.1.102:8000";
 
     FancyButton btn_login;
     FancyButton btn_register;
@@ -64,6 +66,8 @@ public class LoginFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Iconify.with(new FontAwesomeModule());
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.

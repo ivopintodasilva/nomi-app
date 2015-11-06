@@ -79,6 +79,7 @@
     <string name="deleted_attribute">Attribute deleted with success</string>
     <string name="deleted_profile">Deleted profile with success</string>
     <string name="deleted_profile_error">Error deleting profile</string>
+    <string name="nfc_share_profile_list">{fa-users} Profiles:</string>
 
 
 </resources>

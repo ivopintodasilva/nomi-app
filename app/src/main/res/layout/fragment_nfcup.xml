@@ -12,9 +12,9 @@
         android:src="@drawable/login_background" />
 
     <ImageView
+        android:id="@+id/nfc_share_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/gito_image"
         android:layout_centerVertical="true"
         android:src="@drawable/nfc_white_192x192"
         android:layout_marginTop="106dp"
@@ -33,25 +33,38 @@
         android:fontFamily="sans-serif-thin"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
-        android:layout_alignParentBottom="true"
-        />
+        android:layout_alignParentBottom="true" />
+
+
     <com.victor.loading.rotate.RotateLoading
         android:id="@+id/rotateloading_nfc"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_below="@+id/gito_image"
+        android:layout_below="@+id/nfc_share_image"
         app:loading_width="5dp"
         app:loading_color="#ffffff"
         android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"/>
 
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/nfc_profile_list"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/nfc_share_profile_list"
+        android:textSize="20dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-thin"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
     <Spinner
+        android:id="@+id/spinner_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner_profile"
-        android:layout_below="@+id/gito_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp" />
+        android:layout_alignTop="@+id/rotateloading_nfc"
+        android:textAlignment="center" />
 
 
 </RelativeLayout>
