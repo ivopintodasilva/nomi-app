@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment{
     public static final String base_url = "192.168.160.56:8000";
 
     // CASA
-    //public static final String base_url = "192.168.1.102:8000";
+//    public static final String base_url = "192.168.1.102:8000";
 
     FancyButton btn_login;
     FancyButton btn_register;

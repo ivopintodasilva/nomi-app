@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ivosilva.nomi.settings.SettingsFragment"
@@ -13,6 +14,67 @@
         android:layout_height="match_parent"
         android:src="@drawable/login_background" />
 
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/settings_photo_ivo"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:border="true"
+        app:border_color="#ffffff"
+        app:border_width="1dp"
+        app:shadow="true"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/settings_photo_daniel"
+        android:layout_toStartOf="@+id/settings_photo_daniel" />
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/settings_photo_daniel"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:border="true"
+        app:border_color="#ffffff"
+        app:border_width="1dp"
+        app:shadow="true"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btn_logout"
+        android:layout_alignEnd="@+id/btn_logout" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/settings_contact_ivo"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="ivosilva@ua.pt"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignTop="@+id/settings_contact_daniel"
+        android:layout_alignLeft="@+id/settings_photo_ivo"
+        android:layout_alignStart="@+id/settings_photo_ivo" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/settings_contact_daniel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="daniel.silva@ua.pt"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-thin"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/settings_photo_daniel"
+        android:layout_alignStart="@+id/settings_photo_daniel" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/settings_date_built"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="{fa-copyright} 2015 Universidade de Aveiro"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-thin"
+        android:layout_marginBottom="61dp"
+        android:layout_above="@+id/btn_logout"
+        android:layout_centerHorizontal="true" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btn_logout"
