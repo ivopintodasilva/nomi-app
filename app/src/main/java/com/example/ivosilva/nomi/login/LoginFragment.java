@@ -37,7 +37,10 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class LoginFragment extends Fragment{
     // UA
-    public static final String base_url = "192.168.160.56:8000";
+//    public static final String base_url = "192.168.160.56:8000";
+
+    // Public Server
+    public static final String base_url = "danifss.pythonanywhere.com";
 
     // CASA
 //    public static final String base_url = "192.168.1.102:8000";

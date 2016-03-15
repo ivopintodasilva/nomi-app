@@ -2,7 +2,8 @@
     <string name="app_name">nomi</string>
 
     <string name="contacts">CONTACTS</string>
-    <string name="share">SHARE</string>
+    <string name="share">SHARE w/ NFC</string>
+    <string name="shareQR">SHARE w/ QR</string>
     <string name="profiles">PROFILES</string>
     <string name="settings">SETTINGS</string>
 
@@ -80,6 +81,9 @@
     <string name="deleted_profile">Deleted profile with success</string>
     <string name="deleted_profile_error">Error deleting profile</string>
     <string name="nfc_share_profile_list">{fa-users} Profiles:</string>
+    <string name="title_activity_qr">QRActivity</string>
+    <string name="action_settings">Settings</string>
+
 
 
 </resources>

@@ -42,10 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="35dp"
+        android:paddingBottom="25dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="35dp"
+        android:paddingTop="25dp"
         fancy:fb_textSize="14dp"
         fancy:fb_borderColor="#ffffff"
         fancy:fb_borderWidth="0dp"
@@ -55,6 +55,35 @@
         fancy:fb_radius="5dp"
         fancy:fb_text="@string/share"
         fancy:fb_textColor="#FFFFFF" />
+
+    <View
+        android:id="@+id/separator0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:background="#40ffffff" />
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btn_shareQR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="25dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="25dp"
+        fancy:fb_textSize="14dp"
+        fancy:fb_borderColor="#ffffff"
+        fancy:fb_borderWidth="0dp"
+        fancy:fb_defaultColor="#00000000"
+        fancy:fb_textFont="ProductSans-Regular.ttf"
+        fancy:fb_focusColor="#20ffffff"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="@string/shareQR"
+        fancy:fb_textColor="#FFFFFF" />
+
+
 
     <View
         android:id="@+id/separator1"
@@ -70,10 +99,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="35dp"
+        android:paddingBottom="25dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="35dp"
+        android:paddingTop="25dp"
         android:layout_above="@+id/separator2"
         fancy:fb_textSize="14dp"
         fancy:fb_borderColor="#ffffff"
@@ -115,10 +144,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="35dp"
+        android:paddingBottom="25dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="35dp"
+        android:paddingTop="25dp"
         android:layout_below="@+id/separator2"
         fancy:fb_textSize="14dp"
         fancy:fb_borderColor="#ffffff"
@@ -143,10 +172,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="35dp"
+        android:paddingBottom="25dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="35dp"
+        android:paddingTop="25dp"
         android:layout_below="@+id/separator3"
         fancy:fb_textSize="14dp"
         fancy:fb_borderColor="#ffffff"

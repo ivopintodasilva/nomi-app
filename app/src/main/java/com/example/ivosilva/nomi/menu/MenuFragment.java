@@ -11,12 +11,14 @@ import com.example.ivosilva.nomi.R;
 import com.example.ivosilva.nomi.nfc.NFCShareActivity;
 import com.example.ivosilva.nomi.contacts.ContactActivity;
 import com.example.ivosilva.nomi.profiles.ProfileListActivity;
+import com.example.ivosilva.nomi.qr.QRActivity;
 import com.example.ivosilva.nomi.settings.SettingsActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class MenuFragment extends Fragment {
     FancyButton btn_share;
+    FancyButton btn_shareQR;
     FancyButton btn_contacts;
     FancyButton btn_profiles;
     FancyButton btn_settings;
@@ -33,11 +35,13 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         btn_share = (FancyButton) view.findViewById(R.id.btn_share);
+        btn_shareQR = (FancyButton) view.findViewById(R.id.btn_shareQR);
         btn_contacts = (FancyButton) view.findViewById(R.id.btn_contacts);
         btn_profiles = (FancyButton) view.findViewById(R.id.btn_profiles);
         btn_settings = (FancyButton) view.findViewById(R.id.btn_settings);
 
         btn_share.setOnClickListener(shareHandler);
+        btn_shareQR.setOnClickListener(shareQRHandler);
         btn_contacts.setOnClickListener(contactsHandler);
         btn_profiles.setOnClickListener(profilesHandler);
         btn_settings.setOnClickListener(settingsHandler);
@@ -59,6 +63,22 @@ public class MenuFragment extends Fragment {
 
             Intent NFCIntent = new Intent(getActivity(), NFCShareActivity.class);
             getActivity().startActivity(NFCIntent);
+        }
+    };
+
+    View.OnClickListener shareQRHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+
+
+            /*
+            *
+            *   Insert login logic!
+            *
+            */
+
+
+            Intent QRIntent = new Intent(getActivity(), QRActivity.class);
+            getActivity().startActivity(QRIntent);
         }
     };
 
