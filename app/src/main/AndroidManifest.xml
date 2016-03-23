@@ -64,7 +64,7 @@
         </service>
         <service
             android:name=".push_notifications.RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false"/>
 
         <activity
             android:name=".MainActivity"
@@ -93,15 +93,15 @@
         <activity
             android:name=".menu.MenuActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".registration.RegisterActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".nfc.NFCConnectedActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".contacts.ContactActivity"
             android:configChanges="orientation"
@@ -114,27 +114,27 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_contact_details"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".profiles.ProfileListActivity"
             android:label="@string/title_activity_profiles"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".profiles.ProfileDetailsActivity"
             android:label="@string/title_activity_profiles_detail"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".profiles.NewProfileActivity"
             android:label="@string/title_activity_profiles_new"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".qr.QRActivity"
             android:label="@string/title_activity_qr"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

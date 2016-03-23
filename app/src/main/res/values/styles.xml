@@ -6,10 +6,12 @@
         <item name="colorPrimaryDark">#01446c</item>
         <item name="colorAccent">#ffffff</item>
         <item name="colorControlNormal">#ffffff</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="menu_labels_style">

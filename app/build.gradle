@@ -32,7 +32,7 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:2.0.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.0'
     compile files('/Users/ivosilva/AndroidStudioProjects/nomi-app/libs/gson-2.4.jar')
-    compile files('/media/silva/UbuntuData/StudioProjects/nomi-app/libs/gson-2.4.jar')
+    compile files('/home/silva/StudioProjects/nomi-app/libs/gson-2.4.jar')
     compile files('libs/gson-2.4.jar')
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
@@ -44,6 +44,6 @@ dependencies {
     compile 'org.buraktamturk:loadingview:1.0.0@aar'
     compile 'com.victor:lib:1.0.1'
     compile files('/Users/ivosilva/AndroidStudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
-    compile files('/media/silva/UbuntuData/StudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
+    compile files('/home/silva/StudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
     compile "com.google.android.gms:play-services:8.1.0"
 }

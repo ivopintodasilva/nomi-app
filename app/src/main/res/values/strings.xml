@@ -83,7 +83,9 @@
     <string name="nfc_share_profile_list">{fa-users} Profiles:</string>
     <string name="title_activity_qr">QRActivity</string>
     <string name="action_settings">Settings</string>
-
+    <string name="tmpTextView">Hello World from section: %1$d</string>
+    <string name="QRSharingTab">QR Sharing</string>
+    <string name="QRScanTab">QR Scan</string>
 
 
 </resources>
