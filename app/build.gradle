@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.example.ivosilva.nomi"
@@ -45,5 +45,9 @@ dependencies {
     compile 'com.victor:lib:1.0.1'
     compile files('/Users/ivosilva/AndroidStudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
     compile files('/home/silva/StudioProjects/nomi-app/libs/gravatar-android-1.0.jar')
-    compile "com.google.android.gms:play-services:8.1.0"
+    compile 'com.google.android.gms:play-services:8.1.0'
+//    compile 'com.github.kenglxn.QRGen:android:2.1.0'
+    compile ("net.glxn:qrgen:1.4")
+    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    compile 'com.google.zxing:core:3.2.1'
 }
